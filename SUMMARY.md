@@ -1,4 +1,6 @@
 # Table of contents
 
+## Docs In Progress
+
 * [Optimism Baremetal Guide](README.md)
-* [Bitcoin Firehose Baremetal Guide](bitcoin-firehose-baremetal-guide.md)
+* [Bitcoin Firehose Baremetal Guide](docs-in-progress/bitcoin-firehose-baremetal-guide.md)
