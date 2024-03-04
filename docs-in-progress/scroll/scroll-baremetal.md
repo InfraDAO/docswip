@@ -49,7 +49,7 @@ cd /root/l2geth-source && make nccc_geth
 mkdir /root/scroll-datadir
 ```
 
-#### Create service to run Linea Node
+#### Create service to run Scroll Node
 
 If possible replace '--l1.endpoint "https://eth.llamarpc.com"'  with your own l1 ethereum endpoint.
 
