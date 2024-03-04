@@ -1,5 +1,5 @@
 ---
-description: '- as of 29.02.2024 -'
+description: '- as of 29.02.2024 - Archive chain size is ~300G -'
 ---
 
 # 🐳 Scroll - Docker
@@ -36,7 +36,11 @@ Unoffical Docs:&#x20;
 
 #### Create docker-compose.yml
 
-`nano docker-compose.yml`
+If possible replace '--l1.endpoint "https://eth.llamarpc.com"'  with your own l1 ethereum endpoint.
+
+```
+nano docker-compose.yml
+```
 
 {% tabs %}
 {% tab title="JavaScript" %}
@@ -97,21 +101,33 @@ puts message
 
 #### Start the container
 
-docker compose up -d&#x20;
-
-
+```
+docker compose up -d 
+```
 
 #### Userful tips
 
 View Logs via
 
-`docker logs -f scroll`
+```
+docker logs -f scroll
+```
 
-Get Sync status via (replace $YOURIP$ with the IP of your server)
+#### Get Sync status via curl (replace $YOURIP$ with the IP of your server)
 
-`curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' $YOURIP$:8545`
+```
+curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' $YOURIP$:8545
+curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"scroll_syncStatus","params":[],"id":1}' $YOURIP$:8545
+```
 
-`curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"scroll_syncStatus","params":[],"id":1}' $YOURIP$:8545`
+#### References
+
+Discord Server: [https://discord.gg/99ERMfPC](https://discord.gg/99ERMfPC)\
+Github: [https://github.com/scroll-tech/](https://github.com/scroll-tech/)\
+Unoffical Docs:&#x20;
+
+* Running a [Node](https://scrollzkp.notion.site/Running-a-Scroll-L2geth-Node-Scroll-Mainnet-9d7b8aa810fc4cc4ae4add8b707a392d#6d5d8f157b6243128dbe2742a2bc272c)
+* [Namespace](https://scrollzkp.notion.site/Scroll-RPCs-scroll-namespace-e756b0df98fe42cda8a707083486f9e8)
 
 
 
