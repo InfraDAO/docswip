@@ -1,4 +1,4 @@
-# 🔗 Linea Baremetal
+# Linea Baremetal
 
 _Note: The Linea archive node was 524 GB on February 27.2024_
 
@@ -16,21 +16,57 @@ _Note: The Linea archive node was 524 GB on February 27.2024_
 </strong>
 </code></pre>
 
-### Install Go
+### Setting up Firewall
+
+Set explicit default UFW rules
 
 ```bash
-wget https://golang.org/dl/go1.21.6.linux-amd64.tar.gz
+sudo ufw default deny incoming
+sudo ufw default allow outgoin5
+```
+
+Allow SSH
+
+```bash
+sudo ufw allow 22/tcp
+```
+
+Allow remote RPC connections with Linea Node
+
+```bash
+sudo ufw allow from ${REMOTE.HOST.IP} to any port 85465
+```
+
+{% hint style="warning" %}
+Not advised to allow all or unknown IP address to RPC port
+{% endhint %}
+
+Enable Firewall
+
+```bash
+sudo ufw enable
+```
+
+### Install Go
+
+<pre class="language-bash"><code class="lang-bash">#Download the Go programming language distribution archive
+
+<strong>wget https://golang.org/dl/go1.21.6.linux-amd64.tar.gz
+</strong><strong>
+</strong>#Extract it to the /usr/local directory and install Go v1.21.6 on the system
 
 sudo tar -C /usr/local -xzf go1.21.6.linux-amd64.tar.gz
-
-echo 'export PATH=/usr/local/go/bin:$PATH' >> ~/.bashrc
-
+<strong>
+</strong><strong>#add the Go executable path to your system's PATH environment variable, 
+</strong><strong>
+</strong><strong>echo 'export PATH=/usr/local/go/bin:$PATH' >> ~/.bashrc
+</strong>
 source ~/.bashrc
 
-#check Go version
+#test to ensure that Go is working correctly
 
 go version
-```
+</code></pre>
 
 ### Setup the Geth client to run Linea
 
@@ -91,8 +127,8 @@ ExecStart=/root/go-ethereum/build/bin/geth \
 --txpool.pricelimit 1000000 \
 --txpool.pricebump 1 \
 --txpool.nolocals \
---http --http.addr '127.0.0.1' --http.port 8545 --http.corsdomain '*' --http.api 'web3,eth,txpool,net' --http.vhosts='*' \
---ws --ws.addr '127.0.0.1' --ws.port 8546 --ws.origins '*' --ws.api 'web3,eth,txpool,net' \
+--http --http.addr '0.0.0.0' --http.port 8545 --http.corsdomain '*' --http.api 'web3,eth,txpool,net' --http.vhosts='*' \
+--ws --ws.addr '0.0.0.0' --ws.port 8546 --ws.origins '*' --ws.api 'web3,eth,txpool,net' \
 --bootnodes "enode://ca2f06aa93728e2883ff02b0c2076329e475fe667a48035b4f77711ea41a73cf6cb2ff232804c49538ad77794185d83295b57ddd2be79eefc50a9dd5c48bbb2e@3.23.106.165:30303,enode://eef91d714494a1ceb6e06e5ce96fe5d7d25d3701b2d2e68c042b33d5fa0e4bf134116e06947b3f40b0f22db08f104504dd2e5c790d8bcbb6bfb1b7f4f85313ec@3.133.179.213:30303,enode://cfd472842582c422c7c98b0f2d04c6bf21d1afb2c767f72b032f7ea89c03a7abdaf4855b7cb2dc9ae7509836064ba8d817572cf7421ba106ac87857836fa1d1b@3.145.12.13:30303" \
 --syncmode full \
 --metrics \
@@ -118,9 +154,6 @@ sudo systemctl enable linea-node
 sudo journalctl -fu linea-node
 ```
 
-
-
 ## References
 
 {% embed url="https://docs.linea.build/build-on-linea/run-a-node#step-3-1" %}
-
