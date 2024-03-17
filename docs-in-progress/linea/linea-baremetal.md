@@ -22,7 +22,7 @@ Set explicit default UFW rules
 
 ```bash
 sudo ufw default deny incoming
-sudo ufw default allow outgoin5
+sudo ufw default allow outgoing
 ```
 
 Allow SSH
