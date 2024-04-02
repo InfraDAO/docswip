@@ -1,6 +1,10 @@
+---
+description: 'Authors: [man4ela | catapulta.eth]'
+---
+
 # Linea Baremetal
 
-_Note: The Linea archive node was 524 GB on February 27.2024_
+_Note: The Linea archive node was 1.2 TB on April 02.2024_
 
 ## System Requirements
 
@@ -141,6 +145,14 @@ KillSignal=SIGHUP
 WantedBy=multi-user.target" >> /etc/systemd/system/linea-node.service
 </code></pre>
 
+{% hint style="info" %}
+To check or modify linea-node.service parameters simply run&#x20;
+
+`sudo nano /etc/systemd/system/linea-node.service`
+
+Ctrl+X and Y to save changes
+{% endhint %}
+
 ### Run Linea
 
 ```bash
@@ -158,3 +170,4 @@ sudo journalctl -fu linea-node
 ## References
 
 {% embed url="https://docs.linea.build/build-on-linea/run-a-node#step-3-1" %}
+
