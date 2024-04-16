@@ -34,13 +34,6 @@ go version
 
 ## Setup scroll client
 
-#### Preamble
-
-* Scroll does not provide official documentation on running a node.
-* Scroll does not encourage to run a node:\
-  ![](../../.gitbook/assets/image.png)\
-  But don't worry. Keep reading.
-
 #### Compile Binaries
 
 ```

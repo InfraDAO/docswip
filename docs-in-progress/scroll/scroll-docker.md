@@ -16,15 +16,6 @@ Only tested with Debian 12 but should run on every OS that can run Docker
 
 If not already installed. Install docker ([LINK](https://docs.docker.com/engine/install/debian/)).&#x20;
 
-## Scroll
-
-#### Preamble
-
-* Scroll does not provide official documentation on running a node.
-* Scroll does not encourage to run a node:\
-  ![](../../.gitbook/assets/image.png)\
-  But don't worry. Keep reading.
-
 #### Useful Links
 
 Discord Server: [https://discord.gg/99ERMfPC](https://discord.gg/99ERMfPC)\
