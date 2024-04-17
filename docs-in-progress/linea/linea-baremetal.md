@@ -38,7 +38,7 @@ sudo ufw allow 22/tcp
 Allow remote RPC connections with Linea Node
 
 ```bash
-sudo ufw allow from ${REMOTE.HOST.IP} to any port 85465
+sudo ufw allow from ${REMOTE.HOST.IP} to any port 8545
 ```
 
 {% hint style="warning" %}
