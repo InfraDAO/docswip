@@ -12,6 +12,8 @@
 * [Linea](docs-in-progress/linea/README.md)
   * [Linea - Docker](docs-in-progress/linea/linea-docker.md)
   * [Linea Baremetal](docs-in-progress/linea/linea-baremetal.md)
+* [Base](docs-in-progress/base/README.md)
+  * [Base Baremetal](docs-in-progress/base/base-baremetal.md)
 
 ## Templates
 
