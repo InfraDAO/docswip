@@ -2,7 +2,7 @@
 description: '[Author: Dood]'
 ---
 
-# 📜 Baremetal
+# 💻 Baremetal
 
 ### System Requirements
 
@@ -14,7 +14,7 @@ description: '[Author: Dood]'
 The archive node size is 300G as of 04.03.2024&#x20;
 {% endhint %}
 
-{% hint style="info" %}
+{% hint style="warning" %}
 All commands in this guide are supposed to be executed as `root`
 {% endhint %}
 
