@@ -7,7 +7,7 @@
 * [Bitcoin Firehose Baremetal Guide](docs-in-progress/bitcoin-firehose-baremetal-guide.md)
 * [Optimism Baremetal Guide](docs-in-progress/optimism-baremetal-guide.md)
 * [Scroll](docs-in-progress/scroll/README.md)
-  * [🐳 Scroll - Docker](docs-in-progress/scroll/scroll-docker.md)
+  * [📜 Docker](docs-in-progress/scroll/scroll-docker.md)
   * [👣 Scroll - Baremetal](docs-in-progress/scroll/scroll-baremetal.md)
 * [Linea](docs-in-progress/linea/README.md)
   * [Linea - Docker](docs-in-progress/linea/linea-docker.md)
