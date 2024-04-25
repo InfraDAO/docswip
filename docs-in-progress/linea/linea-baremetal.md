@@ -2,15 +2,21 @@
 description: 'Authors: [man4ela | catapulta.eth]'
 ---
 
-# Linea Baremetal
+# 🔲 Baremetal
 
-_Note: The Linea archive node was 1.2 TB on April 02.2024_
-
-## System Requirements
+### System Requirements
 
 | CPU                      | OS           | RAM       | DISK |
 | ------------------------ | ------------ | --------- | ---- |
 | A fast CPU with 4+ cores | Ubuntu 22.04 | 16GB+ RAM | 1TB+ |
+
+{% hint style="info" %}
+The Linea archive node was 1.2 TB on April 02.2024
+{% endhint %}
+
+## 🔲 Linea
+
+* [Official Docs](https://docs.linea.build/build-on-linea/run-a-node#step-3-1)
 
 ## Pre-Requisites
 
