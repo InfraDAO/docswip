@@ -1,5 +1,5 @@
 ---
-description: '[Author: Dood}'
+description: '[Author: Dood]'
 ---
 
 # 📜 Docker
