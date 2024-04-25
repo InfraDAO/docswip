@@ -8,7 +8,7 @@
 * [Optimism Baremetal Guide](docs-in-progress/optimism-baremetal-guide.md)
 * [Scroll](docs-in-progress/scroll/README.md)
   * [🐳 Docker](docs-in-progress/scroll/scroll-docker.md)
-  * [📜 Baremetal](docs-in-progress/scroll/scroll-baremetal.md)
+  * [💻 Baremetal](docs-in-progress/scroll/scroll-baremetal.md)
 * [Linea](docs-in-progress/linea/README.md)
   * [🐳 Docker](docs-in-progress/linea/linea-docker.md)
   * [🔲 Baremetal](docs-in-progress/linea/linea-baremetal.md)
