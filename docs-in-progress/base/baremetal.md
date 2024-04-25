@@ -2,9 +2,7 @@
 description: 'Authors: [man4ela | catapulta.eth]'
 ---
 
-# Base Baremetal
-
-_Note: The Base archive node_ reached a size of 3.1TB by April 17, 2024
+# 🔵 Baremetal
 
 ## System Requirements
 
@@ -14,14 +12,18 @@ _Note: The Base archive node_ reached a size of 3.1TB by April 17, 2024
 | :----------: | :--------------------: | :----------: | :---------------------: |
 | 8+ cores CPU | Debian 12/Ubuntu 22.04 | => 16 GB RAM | 3.5TB+ (NVME preffered) |
 
-## Base <mark style="color:blue;">🔵</mark>
+{% hint style="info" %}
+_The Base archive node reached a size of 3.1TB by April 17, 2024_
+{% endhint %}
+
+## <mark style="color:blue;">🔵</mark> Base&#x20;
 
 {% hint style="success" %}
-Base is a secure, low-cost Ethereum L2 built on Optimism’s open-source [OP Stack](https://stack.optimism.io/). In this guide Optimism's `op-geth` and `op-node` binaries are built from source to facilitate the node's installation. This method has proved to sync an archive node successfully in \~48 hours using the official snapshot provided by Base team.
+Base is a secure, low-cost Ethereum L2 built on Optimism’s open-source [OP Stack](https://stack.optimism.io/). In this guide, Optimism's `op-geth` and `op-node`binaries are built from source to facilitate the node's installation. This method has proved to sync an archive node successfully in \~48 hours using the official snapshot provided by the Base team.
 {% endhint %}
 
 {% hint style="warning" %}
-Before you start make sure you have your own synced Ethereum L1 RPC URL (e.g. Erigon) and L1 Consensus Layer Beacon endpoint (e.g. Lighthouse) ready.
+Before you start, make sure that you have your own synced Ethereum L1 RPC URL (e.g. Erigon) and L1 Consensus Layer Beacon endpoint (e.g. Lighthouse) ready.
 {% endhint %}
 
 ## Pre-Requisites
@@ -321,7 +323,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/op-geth.service
 ```
 
 {% hint style="info" %}
-If you wish to sync from scratch consider bootstraping the node first by running
+If you wish to sync from scratch, consider bootstraping the node first by running
 
 `/root/github/op-geth/build/bin/geth --datadir /root/data/base/geth/op-geth init /root/data/base/geth/op-geth/genesis-l2.json`
 {% endhint %}

@@ -1,4 +1,4 @@
-# 🔗 CIP Docker Guide Template
+# CIP Docker Guide Template
 
 {% hint style="info" %}
 **Overview Notes:** this is optional ... please use it for any special overview notes or simply delete
