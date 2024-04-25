@@ -12,7 +12,7 @@
 * [🔲 Linea](docs-in-progress/linea/README.md)
   * [🐳 Docker](docs-in-progress/linea/linea-docker.md)
   * [💻 Baremetal](docs-in-progress/linea/linea-baremetal.md)
-* [Base](docs-in-progress/base/README.md)
+* [🔵 Base](docs-in-progress/base/README.md)
   * [💻 Baremetal](docs-in-progress/base/baremetal.md)
 
 ## Templates
