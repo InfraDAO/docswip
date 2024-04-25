@@ -2,7 +2,7 @@
 description: 'Authors: [man4ela | catapulta.eth]'
 ---
 
-# 🔵 Baremetal
+# 💻 Baremetal
 
 ## System Requirements
 
@@ -16,7 +16,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 _The Base archive node reached a size of 3.1TB by April 17, 2024_
 {% endhint %}
 
-## <mark style="color:blue;">🔵</mark> Base&#x20;
+## Base <mark style="color:blue;">🔵</mark>
 
 {% hint style="success" %}
 Base is a secure, low-cost Ethereum L2 built on Optimism’s open-source [OP Stack](https://stack.optimism.io/). In this guide, Optimism's `op-geth` and `op-node`binaries are built from source to facilitate the node's installation. This method has proved to sync an archive node successfully in \~48 hours using the official snapshot provided by the Base team.
