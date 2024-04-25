@@ -1,16 +1,31 @@
 ---
-description: '- as of 04.03.2024 - Archive chain size is ~300G -'
+description: '[Author: Dood]'
 ---
 
-# 👣 Scroll - Baremetal
+# 📜 Baremetal
 
-All commands in this guide are supposed to be executed as root
-
-## System Requirements
+### System Requirements
 
 | CPU   | OS        | RAM    | DISK            |
 | ----- | --------- | ------ | --------------- |
 | 4c/8t | Debian 12 | >=16GB | >= 1TB SSD/NVME |
+
+{% hint style="info" %}
+The archive node size is 300G as of 04.03.2024&#x20;
+{% endhint %}
+
+{% hint style="info" %}
+All commands in this guide are supposed to be executed as `root`
+{% endhint %}
+
+## 📜 Scroll
+
+**Unofficial Docs & Support**: &#x20;
+
+* [Running a Node](https://scrollzkp.notion.site/Running-a-Scroll-L2geth-Node-Scroll-Mainnet-9d7b8aa810fc4cc4ae4add8b707a392d#6d5d8f157b6243128dbe2742a2bc272c)&#x20;
+* [Namespace](https://scrollzkp.notion.site/Scroll-RPCs-scroll-namespace-e756b0df98fe42cda8a707083486f9e8)
+* [Discord Server](https://discord.gg/99ERMfPC)
+* [Github](https://github.com/scroll-tech/)
 
 ## Pre-Requisites
 
@@ -44,7 +59,7 @@ mkdir /root/scroll-datadir
 
 #### Create service to run Scroll Node
 
-If possible replace '--l1.endpoint "https://eth.llamarpc.com"'  with your own l1 ethereum endpoint.
+If possible, replace '--l1.endpoint "https://eth.llamarpc.com"'  with your own L1 ethereum endpoint.
 
 ```
 echo "[Unit]
@@ -110,9 +125,7 @@ curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","metho
 
 #### References
 
-Discord Server: [https://discord.gg/99ERMfPC](https://discord.gg/99ERMfPC)\
-Github: [https://github.com/scroll-tech/](https://github.com/scroll-tech/)\
-Unoffical Docs:&#x20;
-
-* Running a [Node](https://scrollzkp.notion.site/Running-a-Scroll-L2geth-Node-Scroll-Mainnet-9d7b8aa810fc4cc4ae4add8b707a392d#6d5d8f157b6243128dbe2742a2bc272c)
+* [Running a Node](https://scrollzkp.notion.site/Running-a-Scroll-L2geth-Node-Scroll-Mainnet-9d7b8aa810fc4cc4ae4add8b707a392d#6d5d8f157b6243128dbe2742a2bc272c)&#x20;
 * [Namespace](https://scrollzkp.notion.site/Scroll-RPCs-scroll-namespace-e756b0df98fe42cda8a707083486f9e8)
+* [Discord Server](https://discord.gg/99ERMfPC)
+* [Github](https://github.com/scroll-tech/)
