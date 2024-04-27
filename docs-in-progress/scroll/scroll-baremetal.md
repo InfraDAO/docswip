@@ -34,6 +34,39 @@ apt update -y && apt upgrade -y && apt autoremove -y
 apt install -y build-essential make gcc musl-dev git curl
 ```
 
+## Setting up Firewall
+
+Set explicit default UFW rules
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+Allow SSH
+
+```bash
+sudo ufw allow 22/tcp
+```
+
+Allow remote RPC connections with Linea Node
+
+```bash
+sudo ufw allow from ${REMOTE.HOST.IP} to any port 8546
+```
+
+{% hint style="warning" %}
+Not advised to allow all or unknown IP address to RPC port
+{% endhint %}
+
+Enable Firewall
+
+```bash
+sudo ufw enable
+```
+
+##
+
 ## Install go
 
 ```
