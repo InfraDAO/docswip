@@ -8,8 +8,6 @@
 * [Optimism Baremetal Guide](docs-in-progress/optimism-baremetal-guide.md)
 * [🔲 Linea](docs-in-progress/linea/README.md)
   * [🐳 Docker](docs-in-progress/linea/linea-docker.md)
-* [🔵 Base](docs-in-progress/base/README.md)
-  * [💻 Baremetal](docs-in-progress/base/baremetal.md)
 * [🌄 Moonbeam](docs-in-progress/moonbeam/README.md)
   * [💻 Baremetal](docs-in-progress/moonbeam/baremetal.md)
 
