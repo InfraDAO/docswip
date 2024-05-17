@@ -2,7 +2,7 @@
 description: 'Author: [man4ela | catapulta.eth]'
 ---
 
-# 🐳 Linea Docker
+# 🐳 Docker
 
 _Last updated at date: 15 May 2024_
 
@@ -69,7 +69,7 @@ Paste the following into the file.
 
 <pre class="language-bash"><code class="lang-bash"><strong>EMAIL={YOUR_EMAIL} #Your email to receive SSL renewal emails
 </strong>DOMAIN={YOUR_DOMAIN} #Quickly register and query your free domain by entering curl -X PUT bash-st.art
-WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's IP itself and comma separated IP's allowed to connect to RPC (e.g. Indexer)
+WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's IP itself and comma separated list of IP's allowed to connect to RPC (e.g. Indexer)
 </code></pre>
 
 ```wasm
@@ -80,67 +80,47 @@ WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's IP itself and comma separated I
 ctrl + x and y to save file
 {% endhint %}
 
-### Make configuration directory
+#### Make configuration directory
 
-```
+```bash
 mkdir config
+
 cd config
 ```
 
-### Download genesis.json and rollup.json
+#### Download genesis.json
 
 ```bash
 curl -LO https://docs.linea.build/files/geth/mainnet/genesis.json
 ```
 
-Create `linea-mainnet` docker volume
-
-```
-docker volume create linea-mainnet
-```
-
-### Initialize Geth
-
-This command runs a Docker container using the`geth` image. It mounts two volumes: `linea-mainnet` to `/data` inside the container and `/root/linea/config` to `/config`. The container then initializes the Ethereum client with a genesis file located at `/config/genesis.json` using the `--datadir` option to specify the data directory as `/data`
-
-```bash
-docker run -v linea-mainnet:/data -v /root/linea/config:/config ethereum/client-go:v1.13.4 --datadir=/data init /config/genesis.json
-```
-
-
-
-{% hint style="success" %}
-You should receive a quick output that your genesis file has been initialized.&#x20;
-
-`INFO [05-15|01:03:37.079] Successfully wrote genesis state database=lightchaindata hash=b6762a..0ffbc6`
-{% endhint %}
-
 ### Create docker-compose.yml
+
+_Return to Linea directory_
 
 ```bash
 cd ~/linea
+```
 
+_Create and paste the following into the docker-compose.yml_
+
+```bash
 sudo nano docker-compose.yml
 ```
 
-Paste the following into the docker-compose.yml
-
 ```bash
-version: '3.8'
+version: '3.9'
 
 networks:
   monitor-net:
     driver: bridge
 
 volumes:
-    linea-mainnet: {}
-    traefik_letsencrypt: {}
+  traefik_letsencrypt: {}
+  linea-mainnet:
+    name: "linea-mainnet"
 
 services:
-
-######################################################################################
-#####################         TRAEFIK PROXY CONTAINER          #######################
-######################################################################################     
 
   traefik:
     image: traefik:latest
@@ -159,38 +139,36 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=$EMAIL"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     volumes:
       - "traefik_letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.middlewares.ipwhitelist.ipwhitelist.sourcerange=$WHITELIST"
+      - "traefik.http.middlewares.ipwhitelist.ipwhitelist.sourcerange=${WHITELIST}"
 
-######################################################################################
-##################            LINEA GETH CONTAINER         ###########################
-######################################################################################
+  init:
+    image: ethereum/client-go:v1.13.4
+    container_name: linea-init
+    command:
+      - init
+      - /genesis.json
+    volumes:
+      - ./config/genesis.json:/genesis.json:ro
+      - linea-mainnet:/root/.ethereum
 
-  linea-mainnet:
+  node:
     image: ethereum/client-go:v1.13.4
     container_name: linea-mainnet
     restart: unless-stopped
-    networks:
-      - monitor-net
-    expose:
-      - "8545"
-      - "8546"
-      - "7300"
-    ports:
-      - "30303:30303" # Peers
-      - "30303:30303/udp" # Peers
-    volumes:
-      - ./config/genesis-l2.json:/mainnet/genesis-l2.json
-      - linea-mainnet:/data
+    depends_on:
+      init:
+        condition: service_completed_successfully
     command:
-      - --datadir=/data
       - --networkid=59144
+      - --gcmode=archive
+      - --syncmode=full
       - --rpc.allow-unprotected-txs
       - --txpool.accountqueue=50000
       - --txpool.globalqueue=50000
@@ -202,37 +180,50 @@ services:
       - --http.addr=0.0.0.0
       - --http.port=8545
       - --http.corsdomain=*
-      - --http.api=web3,eth,txpool,net
+      - --http.api=admin,web3,eth,txpool,net
       - --http.vhosts=*
       - --ws
       - --ws.addr=0.0.0.0
       - --ws.port=8546
       - --ws.origins=*
       - --ws.api=web3,eth,txpool,net
-      - --bootnodes=enode://ca2f06aa93728e2883ff02b0c2076329e475fe667a48035b4f77711ea41a73cf6cb2ff232804c49538ad77794185d83295b57ddd2be79eefc50a9dd5c48bbb2e@3.23.106.165:30303,enode://eef91d714494a1ceb6e06e5ce96fe5d7d25d3701b2d2e68c042b33d5fa0e4bf134116e06947b3f40b0f22db08f104504dd2e5c790d8bcbb6bfb1b7f4f85313ec@3.133.179.213:30303,enode://cfd472842582c422c7c98b0f2d04c6bf21d1afb2c767f72b032f7ea89c03a7abdaf4855b7cb2dc9ae7509836064ba8d817572cf7421ba106ac87857836fa1d1b@3.145.12.13:30303
-      - --syncmode=full
       - --metrics
       - --metrics.addr=0.0.0.0
+      - --metrics.port=6060
+      - --bootnodes=enode://ca2f06aa93728e2883ff02b0c2076329e475fe667a48035b4f77711ea41a73cf6cb2ff232804c49538ad77794185d83295b57ddd2be79eefc50a9dd5c48bbb2e@3.23.106.165:30303,enode://eef91d714494a1ceb6e06e5ce96fe5d7d25d3701b2d2e68c042b33d5fa0e4bf134116e06947b3f40b0f22db08f104504dd2e5c790d8bcbb6bfb1b7f4f85313ec@3.133.179.213:30303,enode://cfd472842582c422c7c98b0f2d04c6bf21d1afb2c767f72b032f7ea89c03a7abdaf4855b7cb2dc9ae7509836064ba8d817572cf7421ba106ac87857836fa1d1b@3.145.12.13:30303
       - --verbosity=3
-      - --gcmode=archive
-
+    ports:
+      - "30303:30303"
+      - "30303:30303/udp"
+      - "8545:8545"
+      - "8546:8546"
+      - "6060:6060"
+    volumes:
+      - ./config/genesis.json:/genesis.json:ro
+      - linea-mainnet:/root/.ethereum
+    networks:
+      - monitor-net
     labels:
       - "traefik.enable=true"
       - "traefik.http.middlewares.linea-stripprefix.stripprefix.prefixes=/linea-mainnet"
-      - "traefik.http.routers.linea.service=linea" #https
+      - "traefik.http.routers.linea.service=linea"
       - "traefik.http.services.linea.loadbalancer.server.port=8545"
       - "traefik.http.routers.linea.entrypoints=websecure"
       - "traefik.http.routers.linea.tls.certresolver=myresolver"
-      - "traefik.http.routers.linea.rule=Host(`$DOMAIN`) && PathPrefix(`/linea-mainnet`)"
-      - "traefik.http.routers.linea.middlewares=linea-stripprefix, ipwhitelist"
+      - "traefik.http.routers.linea.rule=Host(`${DOMAIN}`) && PathPrefix(`/linea-mainnet`)"
+      - "traefik.http.routers.linea.middlewares=linea-stripprefix,ipwhitelist"
+
 ```
+
+{% hint style="info" %}
+ctrl + x and y to save file
+{% endhint %}
 
 ### Run Linea Node
 
-<pre class="language-bash"><code class="lang-bash">cd ~/linea
-
-<strong>docker-compose up -d
-</strong></code></pre>
+```bash
+docker-compose up -d
+```
 
 ### Monitor Logs
 
@@ -244,10 +235,14 @@ docker logs linea-mainnet -f --tail 100
 
 ## Test Linea RPC
 
+You can call the JSON-RPC API methods to confirm the node is running. For example, call [`eth_syncing`](https://besu.hyperledger.org/public-networks/reference/api#eth\_syncing) to return the synchronization status. For example the starting, current, and highest block, or `false` if not synchronizing (or if the head of the chain has been reached)
+
 {% code overflow="wrap" %}
 ```bash
-curl --data '{"method":"eth_syncing","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST https://{YOUR_DOMAIN}/linea-mainnet
+
+curl https://{YOUR_DOMAIN}/linea-mainnet \
+        -X POST \
+        -H "Content-Type: application/json" \
+        -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
 ```
 {% endcode %}
-
-The result will return `false` if a node is syncing
