@@ -10,6 +10,8 @@
   * [🐳 Docker](docs-in-progress/linea/linea-docker.md)
 * [🌄 Moonbeam](docs-in-progress/moonbeam/README.md)
   * [💻 Baremetal](docs-in-progress/moonbeam/baremetal.md)
+* [⚡ Blast](docs-in-progress/blast/README.md)
+  * [💻 Baremetal](docs-in-progress/blast/baremetal.md)
 
 ## Templates
 
