@@ -227,7 +227,7 @@ docker-compose up -d
 
 ### Monitor Logs
 
-Use `docker logs` to monitor your geth and op nodes. The `-f` flag ensures you are following the log output
+Use `docker logs` to monitor your Linea node. The `-f` flag ensures you are following the log output
 
 ```bash
 docker logs linea-mainnet -f --tail 100
