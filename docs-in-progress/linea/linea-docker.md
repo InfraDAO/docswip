@@ -233,6 +233,16 @@ Use `docker logs` to monitor your Linea node. The `-f` flag ensures you are foll
 docker logs linea-mainnet -f --tail 100
 ```
 
+Allow a few minutes for the Linea node to connect with peers. Once it starts syncing, the logs should look like this:
+
+{% code fullWidth="false" %}
+```bash
+Feb 26 01:14:36 tiberian-infradao geth[118326]: INFO [02-26|01:14:36.231] Looking for peers                        peercount=0 tried=131 static=0
+Feb 26 01:14:40 tiberian-infradao geth[118326]: INFO [02-26|01:14:40.661] Imported new chain segment               number=1 hash=78df32..d51eac blocks=1 txs=1 mgas=0.021 elapsed=1.487ms     mgasps=14.115 age=7mo3w3d snapdiffs=133.00B triedirty=0.00B
+Feb 26 01:14:40 tiberian-infradao geth[118326]: INFO [02-26|01:14:40.776] Imported new chain segment               number=118 hash=9d4545..f40fa6 blocks=117 txs=128 mgas=42.794 elapsed=82.126ms    mgasps=521.076 age=7mo2w3d snapdiffs=26.73KiB triedirty=0.00B
+```
+{% endcode %}
+
 ## Test Linea RPC
 
 You can call the JSON-RPC API methods to confirm the node is running. For example, call [`eth_syncing`](https://besu.hyperledger.org/public-networks/reference/api#eth\_syncing) to return the synchronization status. For example the starting, current, and highest block, or `false` if not synchronizing (or if the head of the chain has been reached)
