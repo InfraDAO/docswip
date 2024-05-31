@@ -208,7 +208,7 @@ journalctl -f -u moonbeam.service  #follow logs of moonbeam service
 {% hint style="success" %}
 {% code overflow="wrap" %}
 ```
-The logs should look like below and indicate that your node syncs and is expeccted to reach chainhead in 3-4 days
+The logs should look like below and indicate that your node syncs and is expected to reach chainhead in 3-4 days
 
 Syncing 27.0 bps, target=#6051603 (30 peers), best: #3053702 (0xe669…1876), finalized #918931 (0x6587…f763), ⬇ 484.9kiB/s ⬆ 0.5kiB/s
 ```
