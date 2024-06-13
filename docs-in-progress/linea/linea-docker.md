@@ -50,6 +50,20 @@ Enable Firewall
 sudo ufw enable
 ```
 
+## Setting up a domain name to access RPC
+
+Get the IP address of the host machine, you can use the following command in a terminal or command prompt
+
+```bash
+curl ifconfig.me
+```
+
+Set an A record for a domain, you need to access the domain's DNS settings and create an A record that points to the IP address of the host machine. This configuration allows users to reach your domain by resolving the domain name to the specific IP address associated with your host machine.
+
+
+
+{% embed url="https://youtu.be/QcNBLSSn8Vg" %}
+
 ### Create Linea directory
 
 The first command, `mkdir Linea`, will create a new directory named Linea in the current location. The second command, `cd Linea`, will change your current working directory to the newly created base directory. Now you are inside the base directory and can start storing docker-compose and related files in it.
@@ -68,13 +82,9 @@ sudo nano .env
 Paste the following into the file.
 
 <pre class="language-bash"><code class="lang-bash"><strong>EMAIL={YOUR_EMAIL} #Your email to receive SSL renewal emails
-</strong>DOMAIN={YOUR_DOMAIN} #Quickly register and query your free domain by entering curl -X PUT bash-st.art
+</strong>DOMAIN={YOUR_DOMAIN} #Domain should be something like rpc.mywebsite.com, e.g. linea.infradao.org
 WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's IP itself and comma separated list of IP's allowed to connect to RPC (e.g. Indexer)
 </code></pre>
-
-```wasm
-{YOUR_DOMAIN} should look something like 117-230-108-65.bash-st.art
-```
 
 {% hint style="info" %}
 ctrl + x and y to save file
@@ -108,8 +118,7 @@ _Create and paste the following into the docker-compose.yml_
 sudo nano docker-compose.yml
 ```
 
-```bash
-version: '3.9'
+<pre class="language-bash"><code class="lang-bash">version: '3.9'
 
 networks:
   monitor-net:
@@ -117,8 +126,7 @@ networks:
 
 volumes:
   traefik_letsencrypt: {}
-  linea-mainnet:
-    name: "linea-mainnet"
+  linea-mainnet: {}
 
 services:
 
@@ -210,10 +218,10 @@ services:
       - "traefik.http.services.linea.loadbalancer.server.port=8545"
       - "traefik.http.routers.linea.entrypoints=websecure"
       - "traefik.http.routers.linea.tls.certresolver=myresolver"
-      - "traefik.http.routers.linea.rule=Host(`${DOMAIN}`) && PathPrefix(`/linea-mainnet`)"
-      - "traefik.http.routers.linea.middlewares=linea-stripprefix,ipwhitelist"
+<strong>      - "traefik.http.routers.linea.rule=Host(`${DOMAIN}`)"
+</strong>      - "traefik.http.routers.linea.middlewares=ipwhitelist"
 
-```
+</code></pre>
 
 {% hint style="info" %}
 ctrl + x and y to save file
@@ -250,7 +258,7 @@ You can call the JSON-RPC API methods to confirm the node is running. For exampl
 {% code overflow="wrap" %}
 ```bash
 
-curl https://{YOUR_DOMAIN}/linea-mainnet \
+curl https://{YOUR_DOMAIN} \
         -X POST \
         -H "Content-Type: application/json" \
         -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
