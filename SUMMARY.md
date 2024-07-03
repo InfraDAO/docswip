@@ -12,6 +12,8 @@
   * [💻 Baremetal](docs-in-progress/moonbeam/baremetal.md)
 * [⚡ Blast](docs-in-progress/blast/README.md)
   * [💻 Baremetal](docs-in-progress/blast/baremetal.md)
+* [♻️ Fuse](docs-in-progress/fuse/README.md)
+  * [Baremetal](docs-in-progress/fuse/baremetal.md)
 
 ## Templates
 
