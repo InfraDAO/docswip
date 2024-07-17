@@ -6,9 +6,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 
 ## System Requirements
 
-|   CPU  |           OS           |                  RAM                  |     DISK     |
-| :----: | :--------------------: | :-----------------------------------: | :----------: |
-| 4 vCPU | Debian 12/Ubuntu 22.04 | <p>8GB min</p><p>16GB Recommended</p> | 2.5TB+ (SSD) |
+<table><thead><tr><th align="center">CPU</th><th width="165" align="center">OS</th><th align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">4 vCPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center"><p>8GB min</p><p>16GB Recommended</p></td><td align="center">2.5TB+ (SSD)</td></tr></tbody></table>
 
 {% hint style="info" %}
 _The Fuse archival node has a size of 2.4TB on July 3rd, 2024_
