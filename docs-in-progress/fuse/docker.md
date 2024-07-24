@@ -12,7 +12,7 @@ description: 'Authors: [jLeopoldA]'
 The Fuse archival node has a size of 2.4TB on July 3rd, 2024
 {% endhint %}
 
-### Pre-Requisties
+### Pre-Requisites
 
 ```sh
 sudo apt update -y
