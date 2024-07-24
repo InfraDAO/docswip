@@ -6,7 +6,7 @@ description: 'Authors: [jLeopoldA]'
 
 ## System Requirements
 
-<table><thead><tr><th width="235">CPU</th><th width="218">OS</th><th>Ram</th><th>Disk</th></tr></thead><tbody><tr><td>Recommended: 4vCPU</td><td>Used: Debian/Ubuntu 22.04</td><td>Min: 8GB </td><td>2.5TB+ (SSD)</td></tr><tr><td>Min: 2vCPU</td><td>Recommended: Ubuntu 18.04</td><td>Recommended: 16GB</td><td></td></tr></tbody></table>
+<table><thead><tr><th width="235">CPU</th><th width="181">OS</th><th width="152">Ram</th><th>Disk</th></tr></thead><tbody><tr><td>Recommended: 4vCPU</td><td>Recommended: Ubuntu 18.04</td><td>Recommended: 16GB</td><td>2.5TB+ (SSD)</td></tr><tr><td>Min: 2vCPU</td><td>Used: Debian/Ubuntu 22.04</td><td>Min: 8GB</td><td></td></tr></tbody></table>
 
 {% hint style="info" %}
 The Fuse archival node has a size of 2.4TB on July 3rd, 2024
