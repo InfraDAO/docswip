@@ -15,6 +15,8 @@
 * [♻️ Fuse](docs-in-progress/fuse/README.md)
   * [Docker](docs-in-progress/fuse/docker.md)
   * [Baremetal](docs-in-progress/fuse/baremetal.md)
+* [🔆 Boba-Ethereum](docs-in-progress/boba-ethereum/README.md)
+  * [💻 Baremetal](docs-in-progress/boba-ethereum/baremetal.md)
 
 ## Templates
 
