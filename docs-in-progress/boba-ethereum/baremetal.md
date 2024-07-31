@@ -26,6 +26,8 @@ Boba Network, a Layer 2 scaling solution for Ethereum, provides enhanced transac
 
 {% hint style="warning" %}
 Before you start, make sure that you have your own synced Ethereum L1 RPC URL (e.g. Erigon) and L1 Consensus Layer Beacon endpoint with **`all historical blobs data`** (e.g. Lighthouse) ready.
+
+<mark style="color:orange;">**Hint:**</mark> [https://console.chainstack.com/user/account/create](https://console.chainstack.com/user/account/create) has a free plan enough to sync a node
 {% endhint %}
 
 ## Pre-Requisites
@@ -151,7 +153,7 @@ Check out the required release branch
 Release branches are created when new versions of the `op-node` are created. Read through the [Releases page](https://github.com/bobanetwork/boba/tags) to determine the correct branch to check out.
 
 ```bash
-git checkout v1.1.6
+git checkout v1.6.6
 ```
 
 ### Build op-node
@@ -222,11 +224,10 @@ cd op-erigon
 
 Release branches are created when new versions of the `erigon` are created. Read through the [Releases page](https://github.com/bobanetwork/op-erigon/releases) to determine the correct branch to check out.
 
-```bash
-git checkout v1.1.5
-
+<pre class="language-bash"><code class="lang-bash"><strong>git checkout v1.1.5
+</strong>
 make erigon
-```
+</code></pre>
 
 #### Create database directory, download and extract the most recent snapshot
 
@@ -241,7 +242,13 @@ cd /root/data/boba/op-erigon
 
 aria2c --file-allocation=none -c -x 10 -s 10 "https://boba-db.s3.us-east-2.amazonaws.com/mainnet/boba-mainnet-erigon-db-1149019.tgz"
 
-tar -xzvf boba-mainnet-erigon-db-1149019.tgz
+tar -xzvf boba-mainnet-erigon-db-1149019.tgz #extract archive
+
+rm -rf boba-mainnet-erigon-db-1149019.tgz #remove archive
+
+mv /root/data/boba/op-erigon/boba-mainnet-erigon-db-1149019/* /root/data/boba/op-erigon/ #Move database files into our database directory path
+
+rm -rf boba-mainnet-erigon-db-1149019 #remove empty folder
 ```
 
 ### Create systemd service for op-erigon
