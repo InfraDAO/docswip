@@ -1,6 +1,6 @@
 ---
-description: 'Authors: [man4ela | catapulta.eth]'
 icon: laptop
+description: 'Authors: [man4ela | catapulta.eth]'
 ---
 
 # Baremetal
@@ -390,3 +390,62 @@ set -o allexport; source /root/bobabnb/boba_legacy/packages/data-transport-layer
 
 ## Launch BobaBNB
 
+#### Start DTL
+
+```bash
+sudo systemctl daemon-reload #refresh systemd configuration when changes made
+
+sudo systemctl enable dtl.service #enable dtl service at system startup
+
+sudo systemctl start dtl.service #start dtl
+
+sudo nano /etc/systemd/system/dtl.service #make changes in dtl.service file
+```
+
+#### Start l2geth
+
+```bash
+sudo systemctl daemon-reload #refresh systemd configuration when changes made
+
+sudo systemctl enable l2geth.service #enable l2geth service at system startup
+
+sudo systemctl start l2geth.service #start l2geth
+
+sudo nano /etc/systemd/system/l2geth.service #make changes in l2geth.service file
+```
+
+### Run _`curl`_ command in the terminal to check the status of your node
+
+<pre class="language-bash"><code class="lang-bash"><strong>curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' http://localhost:8545
+</strong></code></pre>
+
+When it returns `false` then your node is fully synchronized with the network
+
+### Monitor the logs for errors
+
+```bash
+sudo journalctl -fu dtl.service #follow logs of dtl.service
+
+sudo journalctl -fu l2geth.service #follow logs of l2geth.service
+```
+
+During the synchonization, you are expected to get following log messages from `DTL`:
+
+```bash
+{"level":30,"time":1722479386601,"method":"GET","url":"/transaction/latest?backend=l2","elapsed":0,"msg":"Served HTTP Request"}
+{"level":30,"time":1722479393551,"fromBlock":39649105,"toBlock":39649106,"msg":"Synchronizing unconfirmed transactions from Layer 2 (Optimism)"}
+```
+
+and `l2geth`:
+
+```bash
+INFO [08-01|04:29:56.601] Syncing transaction range                start=39649105 end=39649105 backend=l2
+INFO [08-01|04:29:56.609] New block                                index=39649105 l1-timestamp=1722479389 l1-blocknumber=40970591 tx-hash=0x0256f7a95b88f10495ae3a67642009b7ee681c730aac249df16472a90e7be>
+INFO [08-01|04:30:07.488] Deep froze chain segment                 blocks=3   elapsed=119.358ms number=39559105 hash=256255…ce8334
+```
+
+### References
+
+{% embed url="https://docs.boba.network/" %}
+
+{% embed url="https://github.com/bobanetwork/boba_legacy/blob/develop/boba_community/boba-node/docker-compose-bobabnb.yml" %}
