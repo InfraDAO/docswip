@@ -17,6 +17,8 @@
   * [Baremetal](docs-in-progress/fuse/baremetal.md)
 * [🔆 Boba-Ethereum](docs-in-progress/boba-ethereum/README.md)
   * [💻 Baremetal](docs-in-progress/boba-ethereum/baremetal.md)
+* [💠 BobaBNB](docs-in-progress/bobabnb/README.md)
+  * [Baremetal](docs-in-progress/bobabnb/baremetal.md)
 
 ## Templates
 
