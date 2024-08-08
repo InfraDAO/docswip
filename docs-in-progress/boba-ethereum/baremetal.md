@@ -6,7 +6,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 
 ## System Requirements
 
-<table><thead><tr><th width="40" align="center">CPU</th><th align="center">OS</th><th width="166" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8+ cores CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center">15GB+ (SSD or NVMe)</td></tr></tbody></table>
+<table><thead><tr><th width="157" align="center">CPU</th><th align="center">OS</th><th width="166" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8+ cores CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center">15GB+ (SSD or NVMe)</td></tr></tbody></table>
 
 {% hint style="info" %}
 _The Boba Mainnet archive node has a size of 12GB on July 29, 2024_
@@ -356,7 +356,7 @@ INFO [08-04|16:36:01.265] inserted block                           hash=ee61ee..
 curl -H "Content-type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' http://localhost:9545
 ```
 
-If it returns `false` then your node is up and running and catching up to a chainhead
+If it returns `false` then your node is fully synchronized with the network
 
 ### References
 
