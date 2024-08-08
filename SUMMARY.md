@@ -19,6 +19,9 @@
   * [💻 Baremetal](docs-in-progress/boba-ethereum/baremetal.md)
 * [💠 BobaBNB](docs-in-progress/bobabnb/README.md)
   * [Baremetal](docs-in-progress/bobabnb/baremetal.md)
+* [✖️ X Layer](docs-in-progress/x-layer/README.md)
+  * [🐳 Docker](docs-in-progress/x-layer/docker.md)
+  * [💻 Baremetal](docs-in-progress/x-layer/baremetal.md)
 
 ## Templates
 
