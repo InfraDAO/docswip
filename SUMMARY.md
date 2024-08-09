@@ -21,7 +21,8 @@
   * [Baremetal](docs-in-progress/bobabnb/baremetal.md)
 * [✖️ X Layer](docs-in-progress/x-layer/README.md)
   * [🐳 Docker](docs-in-progress/x-layer/docker.md)
-  * [💻 Baremetal](docs-in-progress/x-layer/baremetal.md)
+  * [💻 Baremetal](docs-in-progress/x-layer/baremetal/README.md)
+    * [💻 Erigon](docs-in-progress/x-layer/baremetal/erigon.md)
 
 ## Templates
 
