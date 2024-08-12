@@ -287,6 +287,7 @@ ExecStart=/root/op-erigon/build/bin/erigon \
   --http.api=eth,erigon,debug,net,trace,engine,web3 \
   --txpool.gossip.disable=true \
   --rollup.sequencerhttp=https://mainnet.boba.network \
+  --rollup.historicalrpc=https://mainnet.boba.network \
   --db.size.limit=8TB
 KillSignal=SIGTERM
 
