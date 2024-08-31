@@ -134,3 +134,5 @@ docker logs blast-geth -f --tail 100
 ```
 
 ### References
+
+[https://docs.blast.io/building/guides/node/basic](https://docs.blast.io/building/guides/node/basic)
