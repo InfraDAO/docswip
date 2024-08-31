@@ -12,6 +12,7 @@
   * [💻 Baremetal](docs-in-progress/moonbeam/baremetal.md)
 * [⚡ Blast](docs-in-progress/blast/README.md)
   * [💻 Baremetal](docs-in-progress/blast/baremetal.md)
+  * [Docker](docs-in-progress/blast/docker.md)
 * [♻️ Fuse](docs-in-progress/fuse/README.md)
   * [Docker](docs-in-progress/fuse/docker.md)
   * [Baremetal](docs-in-progress/fuse/baremetal.md)
