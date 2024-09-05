@@ -53,7 +53,7 @@ Allow SSH
 sudo ufw allow 22/tcp
 ```
 
-Allow remote RPC connections with Blast Node
+Allow remote RPC connections with Boba Node
 
 ```bash
 sudo ufw allow from ${REMOTE.HOST.IP} to any port 9545 8545
