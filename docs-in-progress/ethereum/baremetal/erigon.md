@@ -17,7 +17,7 @@ _The Ethereum Mainnet archive node has a size of 3.3TB on September 6th, 2024_
 ## Setup production Erigon
 
 {% hint style="success" %}
-This guide covers the installation of`Erigon`, an implementation of Ethereum (execution layer), on the efficiency frontier, **Archive Node** by default, and `Lighthouse`(with historical blobs), as a Consensus Layer.
+This guide covers the installation of`Erigon`, an implementation of Ethereum (execution layer), on the efficiency frontier, **Archive Node** by default, and `Lighthouse`(with historical blobs required for most L2 chains), as a Consensus Layer.
 {% endhint %}
 
 ## Pre-Requisites
