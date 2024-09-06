@@ -171,6 +171,8 @@ sudo nano /etc/systemd/system/erigon.service #make changes in erigon.service fil
 
 ### Build Lighthouse
 
+Go to the [Releases](https://github.com/sigp/lighthouse/releases) page and select the latest release:
+
 ```bash
 cd /root/
 
