@@ -24,6 +24,9 @@
   * [🐳 Docker](docs-in-progress/x-layer/docker.md)
   * [💻 Baremetal](docs-in-progress/x-layer/baremetal/README.md)
     * [💻 Erigon](docs-in-progress/x-layer/baremetal/erigon.md)
+* [🔹 Ethereum](docs-in-progress/ethereum/README.md)
+  * [Baremetal](docs-in-progress/ethereum/baremetal/README.md)
+    * [Erigon](docs-in-progress/ethereum/baremetal/erigon.md)
 
 ## Templates
 
