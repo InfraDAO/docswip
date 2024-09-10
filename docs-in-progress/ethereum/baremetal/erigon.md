@@ -11,7 +11,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 | 16+ cores CPU | Debian 12/Ubuntu 22.04 | => 16 GB RAM | <p>=3.5TB</p><p> (SSD or NVMe)</p> |
 
 {% hint style="info" %}
-_The Ethereum Mainnet archive node has a size of 3.3TB on September 6th, 2024_
+_The Ethereum Mainnet archive node has a size of 3.1TB on September 11th, 2024_
 {% endhint %}
 
 ## Setup production Erigon
