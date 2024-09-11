@@ -20,8 +20,8 @@ _The Erigon XLayer archive node has a size of 36GB on August 9th, 2024_
 This guide covers the installation of `CDK-Erigon`, a fork of Erigon, optimized for syncing with the XLayer network.
 {% endhint %}
 
-{% hint style="warning" %}
-Before you start, make sure that you have your own synced Ethereum L1 RPC URL ready.
+{% hint style="danger" %}
+CAUTION: During the Chain Integration Process, InfraDAO noticed some POI divergencies when using `CDK-Erigon`. Consider following the the **ZKEVM** guide instead.
 {% endhint %}
 
 ## Pre-Requisites
@@ -87,6 +87,10 @@ go version
 ```
 
 ### Build Erigon RPC Node
+
+{% hint style="warning" %}
+Before you start, make sure that you have your own synced Ethereum L1 RPC URL ready.
+{% endhint %}
 
 #### Clone the Erigon repository and build cdk-erigon. Check the latest version at [releases](https://github.com/0xPolygonHermez/cdk-erigon/releases) page.
 
