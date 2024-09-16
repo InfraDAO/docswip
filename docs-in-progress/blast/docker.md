@@ -2,7 +2,7 @@
 description: 'Authors: [ JleopoldA ]'
 ---
 
-# Docker
+# 🐳 Docker
 
 ## System Requirements
 
