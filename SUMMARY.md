@@ -21,6 +21,7 @@
   * [🐳 Docker](docs-in-progress/boba-ethereum/docker.md)
 * [💠 BobaBNB](docs-in-progress/bobabnb/README.md)
   * [💻 Baremetal](docs-in-progress/bobabnb/baremetal.md)
+  * [🐳 Docker](docs-in-progress/bobabnb/docker.md)
 * [✖️ X Layer](docs-in-progress/x-layer/README.md)
   * [🐳 Docker](docs-in-progress/x-layer/docker.md)
   * [💻 Baremetal](docs-in-progress/x-layer/baremetal/README.md)
