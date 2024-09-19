@@ -1,12 +1,14 @@
 # 🐳 Docker
 
-Written by: Vikash Choubey of Dapplooker
+Authors: \[Vikash Choubey | Dapplooker]
 
 ### **System Requirements**
 
 | CPU    | OS        | RAM  | DISK   |
 | ------ | --------- | ---- | ------ |
 | 8 vCPU | Ubuntu 22 | 16GB | 500GB+ |
+
+_The Boba BNB archival node has a size of 508GB on September 19th, 2024_
 
 ### Pre-requisite
 
@@ -20,6 +22,21 @@ Before starting, clean the setup then update and upgrade. Install following:
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt auto-remove -y
 sudo apt install docker.io docker-compose git ufw -y
+```
+
+### Set explicit default UFW rules
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+### Allow SSH, HTTP and HTTPS
+
+```bash
+sudo ufw allow 22/tcp
+sudo ufw allow 80
+sudo ufw allow 443
 ```
 
 ### **Setup**
@@ -95,7 +112,7 @@ TARGET_GAS_LIMIT=11000000
 USING_OVM=true
 ```
 
-#### Example docker compose file:
+### Example docker compose file:
 
 ```yaml
 x-l1_rpc_dtl: &l1_rpc_dtl
@@ -201,7 +218,7 @@ curl --data '{"method":"eth_blockNumber","params":[],"id":1,"jsonrpc":"2.0"}'
 -H "Content-Type: application/json" -X POST https://{DOMAIN}
 ```
 
-#### **You should receive a result, after the node is synced:**
+#### **You should receive a result after the node is synced:**
 
 ```bash
 {
