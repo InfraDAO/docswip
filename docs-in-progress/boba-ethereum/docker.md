@@ -1,12 +1,14 @@
 # 🐳 Docker
 
-Written By: Vikash Choubey of Dapplooker
+Authors: \[Vikash Choubey | Dapplooker]
 
 ### System Requirements
 
 | CPU    | OS        | RAM  | DISK  |
 | ------ | --------- | ---- | ----- |
 | 8 vCPU | Ubuntu 22 | 16GB | 15GB+ |
+
+&#x20;_The Boba Mainnet archival node has a size of 15GB on September 19th, 2024_
 
 ## Pre-requisite
 
@@ -15,11 +17,26 @@ Before starting, clean the setup then update and upgrade. Install following:
 * Docker & Docker Compose
 * Git
 
-**Commands:**
+### **Commands:**
 
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt auto-remove -y
 sudo apt install docker.io docker-compose git ufw -y
+```
+
+### Set explicit default UFW rules
+
+```
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+### Allow SSH, HTTP and HTTPS
+
+```
+sudo ufw allow 22/tcp
+sudo ufw allow 80
+sudo ufw allow 443
 ```
 
 ### Setup process:
@@ -31,7 +48,7 @@ mkdir boba
 cd boba
 ```
 
-#### Clone boba network
+### Clone boba network
 
 ```bash
 git clone <https://github.com/bobanetwork/boba.git>
@@ -39,7 +56,7 @@ cd boba
 cd boba-community
 ```
 
-#### **Create an .env file**
+### **Create an .env file**
 
 The repository includes a sample environment variable file located at `.env.example` that you can copy and modify to get started. Make a copy of this file and name it `.env`.
 
@@ -47,7 +64,7 @@ The repository includes a sample environment variable file located at `.env.exam
 cp .env.example .env
 ```
 
-#### **Configuration**
+### **Configuration**
 
 *   Download boba mainnet snapshot and extract
 
@@ -72,7 +89,7 @@ cp .env.example .env
       - ./jwt-secret.txt:/config/jwt-secret.txt
     ```
 
-#### Example docker compose file:
+### Example docker compose file:
 
 ```yaml
 # cat /mnt/boba/boba-community/docker-compose-boba-mainnet.yml
@@ -146,11 +163,11 @@ services:
     restart: always
 ```
 
-#### **Start The Node**
+### **Start The Node**
 
 `docker-compose -f [docker-compose-file] up -d`
 
-#### **Monitor Logs**
+### **Monitor Logs**
 
 Use `docker logs` to monitor your boba node. The `-f` flag ensures you are following the log output
 
@@ -159,7 +176,7 @@ docker logs boba-community-l2-1 -f
 docker logs boba-community-op-node-1 -f
 ```
 
-#### **Test RPC:**
+### **Test RPC:**
 
 ```bash
 curl --data '{"method":"eth_syncing","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST https://{DOMAIN}
