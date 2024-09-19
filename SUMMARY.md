@@ -29,6 +29,8 @@
 * [🔹 Ethereum](docs-in-progress/ethereum/README.md)
   * [Baremetal](docs-in-progress/ethereum/baremetal/README.md)
     * [Erigon](docs-in-progress/ethereum/baremetal/erigon.md)
+* [🍄 Rootstock](docs-in-progress/rootstock/README.md)
+  * [🐳 Docker](docs-in-progress/rootstock/cip-docker-guide-template.md)
 
 ## Templates
 
