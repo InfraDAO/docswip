@@ -113,15 +113,19 @@ sudo bash -c 'echo "nethermind soft nofile 100000" > /etc/security/limits.d/neth
 sudo bash -c 'echo "nethermind hard nofile 100000" >> /etc/security/limits.d/nethermind.conf'
 ```
 
-#### Create chainspec file for Fuse
+#### Download chainspec file for Fuse
 
 ```bash
 mkdir -p /root/fuse-archive/chainspec
 
-nano /root/fuse-archive/chainspec/fuse.json
+wget https://raw.githubusercontent.com/fuseio/nethermind-client/refs/heads/production/src/Nethermind/Chains/fuse.json
 ```
 
-Copy/Paste the following contents into the file:
+The contents of the fuse.json file should be like this:
+
+<details>
+
+<summary>fuse.json</summary>
 
 ```bash
 {
@@ -150,7 +154,7 @@ Copy/Paste the following contents into the file:
     "gasLimitBoundDivisor": "0x400",
     "maximumExtraDataSize": "0x20",
     "minGasLimit": "0x1388",
-    "networkID" : "0x07a",
+    "networkID": "0x07a",
     "eip155Transition": 0,
     "validateChainIdTransition": 0,
     "eip140Transition": 0,
@@ -172,6 +176,22 @@ Copy/Paste the following contents into the file:
     "eip2028Transition": "0xd29240",
     "eip2929Transition": "0xd29240",
     "eip2930Transition": "0xd29240",
+    "eip1559Transition": "0x1D653E8",
+    "eip2565Transition": "0x1D653E8",
+    "eip3198Transition": "0x1D653E8",
+    "eip3529Transition": "0x1D653E8",
+    "eip3541Transition": "0x1D653E8",
+    "eip1559BaseFeeMinValueTransition": "0x1D653E8",
+    "eip3651TransitionTimestamp": "0x66A78440",
+    "eip3855TransitionTimestamp": "0x66A78440",
+    "eip3860TransitionTimestamp": "0x66A78440",
+    "eip1153TransitionTimestamp": "0x66A78440",
+    "eip5656TransitionTimestamp": "0x66A78440",
+    "eip6780TransitionTimestamp": "0x66A78440",
+    "eip1559BaseFeeMaxChangeDenominator": "0x8",
+    "eip1559ElasticityMultiplier": "0x2",
+    "eip1559BaseFeeInitialValue": "0x3b9aca00",
+    "eip1559BaseFeeMinValue": "0x2540be400",
     "maxCodeSize": 24576,
     "maxCodeSizeTransition": "0x0"
   },
@@ -183,6 +203,7 @@ Copy/Paste the following contents into the file:
       }
     },
     "difficulty": "0x20000",
+    "baseFeePerGas": "0x2540BE400",
     "gasLimit": "0x989680"
   },
   "nodes": [
@@ -190,21 +211,165 @@ Copy/Paste the following contents into the file:
     "enode://550041c1883866ee537ddf220c0ea84b614bce27e9adb8de85b3b86bd745d7ed9575043a78fabe192f1f0ceee71a343f1d5b35f09e6bb41f24ac69bfe214f414@34.76.228.61:30303"
   ],
   "accounts": {
-    "0x0000000000000000000000000000000000000001": { "balance": "1", "builtin": { "name": "ecrecover", "pricing": { "linear": { "base": 3000, "word": 0 } } } },
-    "0x0000000000000000000000000000000000000002": { "balance": "1", "builtin": { "name": "sha256", "pricing": { "linear": { "base": 60, "word": 12 } } } },
-    "0x0000000000000000000000000000000000000003": { "balance": "1", "builtin": { "name": "ripemd160", "pricing": { "linear": { "base": 600, "word": 120 } } } },
-    "0x0000000000000000000000000000000000000004": { "balance": "1", "builtin": { "name": "identity", "pricing": { "linear": { "base": 15, "word": 3 } } } },
-    "0x0000000000000000000000000000000000000005": { "builtin": { "name": "modexp", "pricing": { "0": { "price": { "modexp": { "divisor": 20 } } }, "0xd29240": { "info": "EIP-2565: ModExp Gas Cost.", "price": { "modexp2565": {} } } } } },
-    "0x0000000000000000000000000000000000000006": { "builtin": { "name": "alt_bn128_add", "pricing": { "0": { "price": { "alt_bn128_const_operations": { "price": 500 } } }, "0xd29240": { "info": "EIP-1108 Istanbul HF", "price": { "alt_bn128_const_operations": { "price": 150 } } } } } },
-    "0x0000000000000000000000000000000000000007": { "builtin": { "name": "alt_bn128_mul", "pricing": { "0": { "price": { "alt_bn128_const_operations": { "price": 4000 } } }, "0xd29240": { "info": "EIP-1108 Istanbul HF", "price": { "alt_bn128_const_operations": { "price": 6000 } } } } } },
-    "0x0000000000000000000000000000000000000008": { "builtin": { "name": "alt_bn128_pairing", "pricing": { "0": { "price": { "alt_bn128_pairing": { "base": 100000, "pair": 80000 } } }, "0xd29240": { "info": "EIP-1108 Istanbul HF", "price": { "alt_bn128_pairing": { "base": 45000, "pair": 34000 } } } } } },
-    "0x0000000000000000000000000000000000000009": { "builtin": { "name": "blake2_f", "pricing": { "0xd29240": { "info": "EIP-152 Istanbul HF", "price": { "blake2_f": { "gas_per_round": 1 } } } } } },
-    "0xd9176e84898a0054680aec3f7c056b200c3d96c3": { "balance": "300000000000000000000000000" }
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "linear": {
+            "base": 3000,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "linear": {
+            "base": 60,
+            "word": 12
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "linear": {
+            "base": 600,
+            "word": 120
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "linear": {
+            "base": 15,
+            "word": 3
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000005": {
+      "builtin": {
+        "name": "modexp",
+        "pricing": {
+          "0": {
+            "price": {
+              "modexp": {
+                "divisor": 20
+              }
+            }
+          },
+          "0xd29240": {
+            "info": "EIP-2565: ModExp Gas Cost.",
+            "price": {
+              "modexp2565": {}
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000006": {
+      "builtin": {
+        "name": "alt_bn128_add",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 500
+              }
+            }
+          },
+          "0xd29240": {
+            "info": "EIP-1108 Istanbul HF",
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 150
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000007": {
+      "builtin": {
+        "name": "alt_bn128_mul",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 4000
+              }
+            }
+          },
+          "0xd29240": {
+            "info": "EIP-1108 Istanbul HF",
+            "price": {
+              "alt_bn128_const_operations": {
+                "price": 6000
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000008": {
+      "builtin": {
+        "name": "alt_bn128_pairing",
+        "pricing": {
+          "0": {
+            "price": {
+              "alt_bn128_pairing": {
+                "base": 100000,
+                "pair": 80000
+              }
+            }
+          },
+          "0xd29240": {
+            "info": "EIP-1108 Istanbul HF",
+            "price": {
+              "alt_bn128_pairing": {
+                "base": 45000,
+                "pair": 34000
+              }
+            }
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000009": {
+      "builtin": {
+        "name": "blake2_f",
+        "pricing": {
+          "0xd29240": {
+            "info": "EIP-152 Istanbul HF",
+            "price": {
+              "blake2_f": {
+                "gas_per_round": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "0xd9176e84898a0054680aec3f7c056b200c3d96c3": {
+      "balance": "300000000000000000000000000"
+    }
   }
 }
 ```
 
-`Ctrl + X and Y` to exit and confirm saving changes to a file
+</details>
 
 #### Create the Configuration File (`fuse_archive.cfg`)
 
