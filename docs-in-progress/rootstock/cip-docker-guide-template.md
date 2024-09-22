@@ -14,7 +14,7 @@ description: Author [abstractCube]
 _The Rootstock Mainnet archive node has a size of 132GB on September 22nd, 2024_
 {% endhint %}
 
-Last updated at: 22nd Sept 2024
+Last updated at: 18th Sept 2024
 
 Official docs - [https://dev.rootstock.io/node-operators/](https://dev.rootstock.io/node-operators/)
 
