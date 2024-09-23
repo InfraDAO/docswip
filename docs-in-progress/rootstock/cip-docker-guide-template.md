@@ -14,7 +14,7 @@ description: Author [abstractCube]
 _The Rootstock Mainnet archive node has a size of 132GB on September 22nd, 2024_
 {% endhint %}
 
-Last updated at: 18th Sept 2024
+Last updated at: 22nd Sept 2024
 
 Official docs - [https://dev.rootstock.io/node-operators/](https://dev.rootstock.io/node-operators/)
 
@@ -36,6 +36,7 @@ sudo ufw default allow outgoing
 sudo ufw allow 22/tcp
 sudo ufw allow 80
 sudo ufw allow 443
+sudo ufw allow 4444
 ```
 
 ## Install Docker
@@ -191,11 +192,13 @@ services:
     container_name: rsk-node
     ports:
       - 5050:5050
-      - 127.0.0.1:4444:4444
+      - 4444:4444
     volumes:
-      - ./data:/var/lib/rsk/.rsk
+      - rsk-data:/var/lib/rsk/.rsk
       - ./node.conf:/etc/rsk/node.conf
     restart: unless-stopped
+volumes:
+  rsk-data:
 ```
 This section mounts the host's data directory for blockchain storage and the node.conf file for configuration into the container,
 ```bash
