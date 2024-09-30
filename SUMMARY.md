@@ -31,6 +31,7 @@
     * [Erigon](docs-in-progress/ethereum/baremetal/erigon.md)
 * [🍄 Rootstock](docs-in-progress/rootstock/README.md)
   * [🐳 Docker](docs-in-progress/rootstock/cip-docker-guide-template.md)
+  * [Bare Metal](docs-in-progress/rootstock/bare-metal.md)
 
 ## Templates
 

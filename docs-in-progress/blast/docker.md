@@ -6,9 +6,13 @@ description: 'Authors: [ JleopoldA ]'
 
 ## System Requirements
 
-| CPU    | OS             | RAM      | DISK |
-| ------ | -------------- | -------- | ---- |
-| 4 Core | Ubuntu 22.04.4 | 16GB RAM | 1TB  |
+| CPU    | OS             | RAM      | DISK  |
+| ------ | -------------- | -------- | ----- |
+| 4 Core | Ubuntu 22.04.4 | 16GB RAM | 1.5TB |
+
+{% hint style="info" %}
+Blast Archival node has a size of 1.5TB
+{% endhint %}
 
 ## Blast
 
@@ -125,7 +129,13 @@ OP_NODE_L1_BEACON={YOUR_L1_BEACON_API} # Your L1 Beacon api endpoint
 docker compose up -d
 ```
 
-This pulls the latests version of the pre-built Docker images and starts the necessary containers.&#x20;
+This pulls the latest version of the pre-built Docker images and starts the necessary containers.&#x20;
+
+### Query Blast Node
+
+```bash
+curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
+```
 
 ### View Docker Logs
 
