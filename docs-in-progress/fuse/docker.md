@@ -48,6 +48,29 @@ sudo apt-get update
 sudo docker run hello-world
 ```
 
+### Set Firewall Rules
+
+#### Set explicit default UFW rules
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+```
+
+#### Allow SSH
+
+```bash
+sudo ufw allow 22/tcp
+```
+
+#### Allow remote RPC connections
+
+```bash
+sudo ufw allow 8545
+```
+
+
+
 ## Building a Node on Fuse with Nethermind client
 
 {% hint style="success" %}
@@ -81,13 +104,16 @@ chmod 755 quickstart.sh
 ./quickstart.sh -r explorer -n fuse -k [your_node_key_here]
 ```
 
+### Query Fuse Node
+
 ```sh
 # To ensure your archival node has been correctly started, run the below
 curl -X POST -H "Content-type: application/json" --data \
 '{"jsonrpc":"2.0", "method":"eth_blockNumber", "params":[], "id":1}' \
 http://localhost:8545
 
-# Your result should include a block number
+# Your result should resemble the following:
+{"jsonrpc":"2.0","id":1,"result":"0xcab5ab"}
 ```
 
 
