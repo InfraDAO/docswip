@@ -11,7 +11,7 @@ description: 'Authors: [jLeopoldA]'
 | vCpu 4 min | Used: Debian / Ubuntu 22.04 | 16GB minimum | 13.5 TB (SSD) |
 
 {% hint style="info" %}
-ARCHIVAL SIZE HERE of xlayer here
+Archival Node size is 792GB
 {% endhint %}
 
 ## Required Installations
@@ -25,6 +25,10 @@ Requirements to create an xLayer node that acts as an Archive node are Docker, D
 ```bash
 sudo apt update -y
 ```
+
+### Setting up Firewall
+
+#### Set explicit default&#x20;
 
 ### Install Docker and Docker-Compose
 
@@ -175,6 +179,9 @@ docker compose --env-file $ZKEVM_CONFIG_DIR/.env -f $ZKEVM_DIR/$ZKEVM_NET/docker
 
 ```bash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' http://localhost:8545
+
+# The response should resemble the follow
+{"jsonrpc":"2.0","id":1,"result":"0xcab5ab"}
 ```
 
 ## Access Logs
