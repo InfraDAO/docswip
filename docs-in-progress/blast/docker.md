@@ -135,6 +135,10 @@ This pulls the latest version of the pre-built Docker images and starts the nece
 
 ```bash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
+
+# The response should resemble the following:
+{"jsonrpc":"2.0","id":1,"result":"0xcab5ab"}
+
 ```
 
 ### View Docker Logs
