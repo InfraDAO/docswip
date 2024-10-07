@@ -17,18 +17,37 @@ Archival Node size is 792GB
 ## Required Installations
 
 {% hint style="info" %}
-Requirements to create an xLayer node that acts as an Archive node are Docker, Docker-Compose, Geth, Prysm and zkEVM.
+Requirements to create an X Layer node are Docker, Docker-Compose and an Ethereum L1  node.
 {% endhint %}
+
+## Pre-Requisites
 
 ### Update
 
 ```bash
-sudo apt update -y
+sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
 ```
 
 ### Setting up Firewall
 
-#### Set explicit default&#x20;
+#### Set explicit default UFW rules
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+
+#### Allow SSH
+
+```bash
+sudo ufw allow 22/tcp
+```
+
+#### Allow remote RPC connections with X Layer node
+
+```bash
+sudo ufw allow 8545
+```
 
 ### Install Docker and Docker-Compose
 
@@ -64,118 +83,71 @@ docker compose version
 Docker Compose version vN.N.N
 ```
 
-### Install Geth
+## Set up X Layer Node
+
+<pre class="language-bash"><code class="lang-bash"># Make a directory
+mkdir -p /root/xlayer-node &#x26;&#x26; cd /root/xlayer-node
+
+# Download mainnet X-Layer script
+curl -fsSL https://raw.githubusercontent.com/okx/Deploy/main/setup/zknode/run_xlayer_mainnet.sh | bash -s init &#x26;&#x26; cp ./mainnet/example.env ./mainnet/.env
+<strong>
+</strong><strong># Alternatively: Download testnet X-Layer script
+</strong>curl -fsSL https://raw.githubusercontent.com/okx/Deploy/main/setup/zknode/run_xlayer_testnet.sh | bash -s init &#x26;&#x26; cp ./testnet/example.env ./testnet/.env
+
+# Edit mainnet .env
+nano ./mainnet/.env
+
+# Alternatively: Edit testnet .env
+nano ./testnet/.env
+</code></pre>
+
+### Values for .env file
+
+```bash
+# URL of a JSON RPC for Ethereum mainnet or Sepolia testnet
+XLAYER_NODE_ETHERMAN_URL = "http://your.L1node.url"
+
+# PATH WHERE THE STATEDB POSTGRES CONTAINER WILL STORE PERSISTENT DATA
+XLAYER_NODE_STATEDB_DATA_DIR = "./xlayer_mainnet_data/statedb" # OR ./xlayer_testnet_datastatedb/ for testnet
+
+# PATH WHERE THE POOLDB POSTGRES CONTAINER WILL STORE PERSISTENT DATA #
+XLAYER_NODE_POOLDB_DATA_DIR = "./xlayer_mainnet_data/pooldb" # OR ./xlayer_testnet_data/pooldb/ for testnet
+```
+
+### Restore latest Layer 2 snapshot
 
 {% hint style="info" %}
-Geth acts as a L1 node to utilize Ethereum mainnet for zkEVM mainnet
+Restoring the Layer 2 snapshot database locally will allow synchronizing of Layer 2 data quickly.&#x20;
 {% endhint %}
 
 ```bash
-# Enable the launchpad repository
-sudo add-apt-repository -y ppa:ethereum/ethereum
+# mainnet
+./run_xlayer_mainnet.sh restore
 
-# Install the stable version of go-ethereum
-sudo apt-get update
-sudo apt-get install ethereum
-
-# To upgrade an exisiting Geth installation, stop the node and run the following
-sudo apt-get update
-sudo apt-get install etthereum
-sudo apt-get upgrade geth
+# If using testnet
+./run_xlayer_testnet.sh restore
 ```
 
-## Set up Execution Client (Geth) and Beacon Client (Prysm)
-
-{% hint style="warning" %}
-Depending on the speed of your device, syncing between Geth and Prysm may take a few hours.
-{% endhint %}
-
-### Set up Prysm
+## Start X Layer Node
 
 ```bash
-# Set up Prysm
-# Create a folder called "ethereum" on your SSD
-# Within the "ethereum" folder - create two sub folders: "consensus" and "execution"
+# mainnet
+./run_xlayer_mainnet.sh start
 
-# Navigate to "consensus" directory and run the following: 
-curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh && chmod +x prysm.sh
+# If using testnet
+./run_xlayer_testnet.sh start
 
-# The HTTP connection between your beacon node and execution node needs to be
-# authenticated using a JWT token
-./prysm.sh beacon-chain generate-auth-secret
+docker ps -a
 
-# Move your generated "jwt.hex" file to the "ethereum" directory
-mv jwt.hex ../
+# The following containers should be available: 
+xlayer-rpc
+xlayer-sync
+xlayer-state-db
+xlayer-pool-db
+xlayer-prover
 ```
 
-### Set up Geth
-
-```bash
-# Move the "geth" executable into your "execution" directory
-# To check where your "geth" executable is located
-whereis geth
-
-# The output may resemble the below
-geth: /usr/bin/geth # note returned location
-
-# Move geth from returned location to your current "execution" directory
-sudo mv /usr/bin/geth [location of execution directory]
-
-# Navigate to your "execution" directory and run "geth"
-./geth --mainnet --http --http.api eth,net,engine,admin --http.port 8546 --authrpc.jwtsecret=../jwt.hex --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.api eth,net,web3
-```
-
-### Run a Beacon Node using Prysm
-
-```bash
-# Navigate to your "consensus" directory and run the following to start
-# your beacon node that connects to your local execution node
-./prysm.sh beacon-chain --execution-endpoint=http://localhost:8551 --mainnet --jwt-secret=../jwt.hex --checkpoint-sync-url=https://beaconstate.info --genesis-beacon-api-url=https://beaconstate.info
-```
-
-{% hint style="warning" %}
-As noted above, syncing between Prysm and Geth may take hours.
-{% endhint %}
-
-## Set up a zkEVM Node
-
-```bash
-# Make a directory
-mkdir ZKEVM && cd ZKEVM
-
-# DOWNLOAD ARTIFACTS
-ZKEVM_NET=mainnet && ZKEVM_DIR=zkevm && ZKEVM_CONFIG_DIR=zkevm/config
-
-curl -L https://github.com/0xPolygonHermez/zkevm-node/releases/latest/download/$ZKEVM_NET.zip > $ZKEVM_NET.zip && unzip -o $ZKEVM_NET.zip -d $ZKEVM_DIR && rm $ZKEVM_NET.zip
-mkdir -p $ZKEVM_CONFIG_DIR && cp $ZKEVM_DIR/$ZKEVM_NET/example.env $ZKEVM_CONFIG_DIR/.env
-
-# Create data folders
-mkdir data && cd data
-mkdir pool-db && mkdir state-db
-
-# EDIT THIS env file with the following information:
-cd ..
-nano ./config/.env
-
-# Provide the follow values to the .env keys
-ZKEVM_NODE_ETHERMAN_URL = "http://[server name]:8546" # we avoid using localhost here
-ZKEVM_NODE_STATEDB_DATA_DIR = "../data/state-db"
-ZKEVM_NODE_POOLDB_DATA_DIR = "../data/pool-db"
-
-# Run your zkEVM node
-docker compose --env-file $ZKEVM_CONFIG_DIR/.env -f $ZKEVM_DIR/$ZKEVM_NET/docker-compose.yml up -d
-
-# Check that all components are running
-docker compose --env-file $ZKEVM_CONFIG_DIR/.env -f $ZKEVM_DIR/$ZKEVM_NET/docker-compose.yml ps
-# The following containers should be viewable
-# zkevm-rpc
-# zkevm-sync
-# zkevm-state-db
-# zkevm-pool-db
-# zkevm-power
-```
-
-### Query zkEVM Node
+### Query X Layer Node
 
 ```bash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' http://localhost:8545
@@ -184,14 +156,25 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","metho
 {"jsonrpc":"2.0","id":1,"result":"0xcab5ab"}
 ```
 
+### Additional Commands
+
+```bash
+# Stop X Layer Node
+./run_xlayer_mainnet.sh stop
+
+# Restart
+./run_xlayer_mainnet.sh restart
+
+# Updating
+./run_xlayer_mainnet.sh update
+```
+
 ## Access Logs
 
 ```bash
 # TO VIEW LOGS
 docker logs [container id OR container name]
 ```
-
-##
 
 
 
