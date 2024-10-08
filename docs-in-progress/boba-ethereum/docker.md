@@ -6,9 +6,9 @@ Authors: \[Vikash Choubey | Dapplooker]
 
 | CPU    | OS        | RAM  | DISK  |
 | ------ | --------- | ---- | ----- |
-| 8 vCPU | Ubuntu 22 | 16GB | 15GB+ |
+| 8 vCPU | Ubuntu 22 | 16GB | 52GB+ |
 
-&#x20;_The Boba Mainnet archival node has a size of 15GB on September 19th, 2024_
+&#x20;_The Boba Mainnet archival node has a size of_ 52GB _on September 19th, 2024_
 
 ## Pre-requisite
 
@@ -66,48 +66,47 @@ cp .env.example .env
 
 ### **Configuration**
 
-*   Download boba mainnet snapshot and extract
+Download **boba mainnet** snapshot and extract
 
-    ```bash
-    curl -o boba-mainnet-erigon-db-1149019.tgz -sL <https://boba-db.s3.us-east-2.amazonaws.com/mainnet/boba-mainnet-erigon-db-1149019.tgz>
-    tar xvf boba-mainnet-erigon-db-1149019.tgz
-    ```
-*   Create a Shared Secret (JWT Token) using:
+```bash
+curl -o boba-mainnet-erigon-db-1149019.tgz -sL <https://boba-db.s3.us-east-2.amazonaws.com/mainnet/boba-mainnet-erigon-db-1149019.tgz>
+tar xvf boba-mainnet-erigon-db-1149019.tgz
+```
 
-    ```bash
-    openssl rand -hex 32 > jwt-secret.txt
-    ```
-*   Modify Volume Locations
+Download **boba l2Geth** snapshot and extract
 
-    ```yaml
-    l2:
-      volumes:
-      - ./jwt-secret.txt:/config/jwt-secret.txt
-      - DATA_DIR:/db
-    op-node:
-      volumes:
-      - ./jwt-secret.txt:/config/jwt-secret.txt
-    ```
+```bash
+curl -o boba-mainnet-geth-db-114909.tgz -sL https://boba-db.s3.us-east-2.amazonaws.com/mainnet/boba-mainnet-geth-db-114909.tgz
+tar xvf boba-mainnet-geth-db-114909.tgz// Some code
+```
+
+Create a Shared Secret (JWT Token) using:
+
+```bash
+openssl rand -hex 32 > jwt-secret.txt
+```
+
+Modify Volume Locations
+
+```yaml
+l2:
+  volumes:
+  - ./jwt-secret.txt:/config/jwt-secret.txt
+  - DATA_DIR:/db
+op-node:
+  volumes:
+  - ./jwt-secret.txt:/config/jwt-secret.txt
+```
 
 ### Example docker compose file:
 
 ```yaml
-# cat /mnt/boba/boba-community/docker-compose-boba-mainnet.yml
 version: '3.4'
 
-# The erigon db can be downloaded from
-# <https://boba-db.s3.us-east-2.amazonaws.com/mainnet/boba-mainnet-erigon-db-1149019.tgz>
-# and extracted to the DATA_DIR
-
-# The jwt-secret.txt file should be a random string of32 characters and should be kept secret.
-
-# The p2p-node-key.txt is the private key used for the node to identify itself.
-
-# The discovery and peerstore directories are used to store the peerstore and discovery data.
-
 services:
-  l2:
+  op-erigon:
     image:  us-docker.pkg.dev/boba-392114/bobanetwork-tools-artifacts/images/op-erigon:v1.1.5
+    container_name: op-erigon
     command: |
       --datadir=/db
       --chain=boba-mainnet
@@ -131,13 +130,41 @@ services:
     volumes:
       - /mnt/boba-data/config:/config
       - /mnt/boba-data/boba-mainnet-erigon-db-1149019:/db
+  boba-legacy:
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-geth:latest
+    container_name: boba-legacy
+    command: >
+      --datadir=/db
+      --networkid=288
+      --http
+      --http.addr=0.0.0.0
+      --http.port=9545
+      --http.corsdomain=*
+      --http.vhosts=*
+      --authrpc.addr=0.0.0.0
+      --authrpc.port=8551
+      --authrpc.vhosts=*
+      --authrpc.jwtsecret=/config/jwt-secret.txt
+      --rollup.disabletxpoolgossip=true
+      --http.api=eth,debug,net,web3
+      --nodiscover
+      --syncmode=full
+      --maxpeers=0
+      --rollup.sequencerhttp=https://mainnet.boba.network
+    ports:
+      - "7545:9545"
+      - "7551:8551"
+    volumes:
+      - /mnt/boba-data/config-l2geth:/config
+      - /mnt/boba-data/geth-1149019:/db
   op-node:
     depends_on:
-      - l2
+      - op-erigon
+    container_name: op-node
     image: us-docker.pkg.dev/boba-392114/bobanetwork-tools-artifacts/images/op-node:v1.6.3
     command: >
       op-node
-      --l1=${ETH1_HTTP:-<https://mainnet.gateway.tenderly.co>}
+      --l1=${ETH1_HTTP:-https://mainnet.gateway.tenderly.co}
       --l1.beacon=${ETH2_HTTP}
       --l2=http://l2:8551
       --l2.jwt-secret=/config/jwt-secret.txt
@@ -145,21 +172,10 @@ services:
       --rpc.addr=0.0.0.0
       --rpc.port=8545
       --plasma.enabled=false
-    # Optional flags
-    # These flags are optional and can be used to identify the node and store the peerstore and discovery data.
-    # We recommend adding these flags to your configuration to help identify your node and store the peerstore and discovery data.
-    #  --p2p.ban.peers=false
-    #  --p2p.priv.path=/config/p2p-node-key.txt
-    #  --p2p.discovery.path=/p2p_discovery_db
-    #  --p2p.peerstore.path=/p2p_peerstore_db
     ports:
       - "8545:8545"
     volumes:
       - /mnt/boba-data/config:/config
-    # - ./jwt-secret.txt:/config/jwt-secret.txt
-    #  - ./p2p-node-key.txt:/config/p2p-node-key.txt
-    #  - ./discovery:/p2p_discovery_db
-    #  - ./peerstore:/p2p_peerstore_db
     restart: always
 ```
 
@@ -172,8 +188,9 @@ services:
 Use `docker logs` to monitor your boba node. The `-f` flag ensures you are following the log output
 
 ```bash
-docker logs boba-community-l2-1 -f
-docker logs boba-community-op-node-1 -f
+docker logs op-erigon -f
+docker logs op-node -f
+docker logs boba-legacy -f
 ```
 
 ### **Test RPC:**
