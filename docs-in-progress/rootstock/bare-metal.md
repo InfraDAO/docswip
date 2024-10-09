@@ -11,7 +11,7 @@ description: 'Author: [ jleopoldA ]'
 | 2 Cores | Debian / Ubuntu 22.04 | 8Gb RAM | 128GB |
 
 {% hint style="info" %}
-Rootstock has a size of 118GB
+Rootstock has a size of 118GB on October 9, 2024.
 {% endhint %}
 
 ## Pre-Requisites
@@ -161,10 +161,8 @@ git checkout tags/ARROWHEAD-6.0.0 -b ARROWHEAD-6.0.0
 #### Ensure the Security Chain
 
 {% hint style="info" %}
-It is advised to ensure the security - the steps of the below link will do so.
+Rootstock advises to ensure the security chain. Follow the verification steps provided here: [**Verify security chain of RSKj source code**](https://dev.rootstock.io/node-operators/setup/security-chain/)
 {% endhint %}
-
-[https://dev.rootstock.io/node-operators/setup/security-chain/](https://dev.rootstock.io/node-operators/setup/security-chain/)
 
 #### Get External Dependencies
 
@@ -239,8 +237,9 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","metho
 
 ### References
 
-* [https://dev.rootstock.io/node-operators/setup/node-runner/linux/](https://dev.rootstock.io/node-operators/setup/node-runner/linux/)
-*   [https://dev.rootstock.io/node-operators/setup/configuration/preferences/](https://dev.rootstock.io/node-operators/setup/configuration/preferences/)
+{% embed url="https://dev.rootstock.io/node-operators/setup/node-runner/linux/" %}
+
+{% embed url="https://dev.rootstock.io/node-operators/setup/configuration/preferences/" %}
 
 
 
