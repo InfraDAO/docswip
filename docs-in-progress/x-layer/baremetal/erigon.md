@@ -99,7 +99,7 @@ git clone https://github.com/0xPolygonHermez/cdk-erigon.git
 
 cd cdk-erigon
 
-git checkout v1.2.15.3 #[checkout the latest release version]
+git checkout v1.2.24 #[checkout the latest release version]
 
 make cdk-erigon
 ```
@@ -140,7 +140,7 @@ zkevm.l1-first-block: 19218658
 zkevm.l1-block-range: 2000
 zkevm.l1-query-delay: 1000
 zkevm.rpc-ratelimit: 250
-zkevm.datastream-version: 2
+zkevm.datastream-version: 3
 
 externalcl: true
 http.api: [eth, debug, net, trace, web3, erigon, zkevm]
@@ -189,15 +189,14 @@ WantedBy=multi-user.target
 
 #### Start cdk-erigon
 
-```bash
-sudo systemctl daemon-reload #refresh systemd configuration when changes made
+<pre class="language-bash"><code class="lang-bash">sudo systemctl daemon-reload #refresh systemd configuration when changes made
 
 sudo systemctl enable cdk-erigon.service #enable cdk-erigon service at system startup
 
 sudo systemctl start cdk-erigon.service #start cdk-erigon
-
-sudo nano /etc/systemd/system/cdk-erigon.service #make changes in cdk-erigon.service file
-```
+<strong>
+</strong>sudo nano /etc/systemd/system/cdk-erigon.service #make changes in cdk-erigon.service file
+</code></pre>
 
 ### Run _`curl`_ command in the terminal to check the status of your node
 
