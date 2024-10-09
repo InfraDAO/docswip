@@ -232,6 +232,9 @@ journalctl -fu rootstock.service
 
 ```bash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:4444
+
+# The response should resemble the follow
+{"jsonrpc":"2.0","id":1,"result":"0xcab5ab"}
 ```
 
 ### References
