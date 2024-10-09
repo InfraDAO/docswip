@@ -17,7 +17,7 @@ _The Zora Mainnet archive node has a size of 693GB on October 10th, 2024_
 {% hint style="success" %}
 Zora operates within Optimism _Superchain_ ecosystem and is built using the OP stack, leveraging the scalability and security of Optimism's Layer 2 infrastructure.
 
-In this guide, we are walking through the process of setting up a Zora Mainnet archive node using Optimism's `op-geth``and op-node`.
+In this guide, we are walking through the process of setting up a Zora Mainnet archive node using Optimism's `op-gethand op-node`.
 {% endhint %}
 
 {% hint style="warning" %}
@@ -117,9 +117,9 @@ curl -L https://foundry.paradigm.xyz | bash
 ### Install foundry
 
 ```bash
-foundryup
-
 source /root/.bashrc
+
+foundryup
 ```
 
 ### Install node and yarn
