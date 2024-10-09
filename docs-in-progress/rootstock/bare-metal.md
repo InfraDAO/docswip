@@ -11,7 +11,7 @@ description: 'Author: [ jleopoldA ]'
 | 2 Cores | Debian / Ubuntu 22.04 | 8Gb RAM | 128GB |
 
 {% hint style="info" %}
-Awaiting sync to check size
+Rootstock has a size of 118GB
 {% endhint %}
 
 ## Pre-Requisites
