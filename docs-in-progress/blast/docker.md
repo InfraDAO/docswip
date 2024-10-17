@@ -11,13 +11,13 @@ description: 'Authors: [ JleopoldA ]'
 | 4 Core | Ubuntu 22.04.4 | 16GB RAM | 1.5TB |
 
 {% hint style="info" %}
-Blast Archival node has a size of 1.5TB
+Blast Archival node has a size of 1.5TB on September 30, 2024.
 {% endhint %}
 
 ## Blast
 
 {% hint style="info" %}
-In order to run Blast you need to utilize an L1 node for Blast to interact with. Instructions to do so can be found here.\
+To run Blast you need to utilize an L1 node for Blast to interact with. Instructions on how to do so can be found here.\
 [https://docs.prylabs.network/docs/install/install-with-script](https://docs.prylabs.network/docs/install/install-with-script)
 {% endhint %}
 
