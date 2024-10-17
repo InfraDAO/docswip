@@ -108,7 +108,7 @@ nano /root/rootstock/config/node.conf
 ```bash
 blockchain.config.name = "main"
 
-database.dir = /root/data/rootstock/database/mainnet
+database.dir = /root/rootstock/database/mainnet
 rpc {
     providers: {
         web: {
