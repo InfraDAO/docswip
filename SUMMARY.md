@@ -34,6 +34,7 @@
   * [Docker](docs-in-progress/zora/docker.md)
 * [Ⓜ️ Mode](docs-in-progress/mode/README.md)
   * [Baremetal](docs-in-progress/mode/baremetal.md)
+  * [Docker](docs-in-progress/mode/docker.md)
 
 ## Templates
 
