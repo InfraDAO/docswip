@@ -4,7 +4,9 @@ icon: docker
 
 # Docker
 
-System Requirements
+Authors: \[Vikash Choubey | Dapplooker]
+
+### System Requirements
 
 | **CPU** | **OS**    | **RAM** | **DISK**   |
 | ------- | --------- | ------- | ---------- |
