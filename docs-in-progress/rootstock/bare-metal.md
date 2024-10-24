@@ -14,6 +14,10 @@ description: 'Author: [ jleopoldA ]'
 Rootstock has a size of 118GB on October 9, 2024.
 {% endhint %}
 
+{% hint style="danger" %}
+Using a version of Rootstock that is below 6.3.1 will result in issues that prevent successful syncing.
+{% endhint %}
+
 ## Pre-Requisites
 
 ```bash
@@ -155,7 +159,7 @@ mkdir /root/rootstock/database/mainnet/
 cd ./root/rootstock/
 git clone --recursive https://github.com/rsksmart/rskj.git
 cd rskj
-git checkout tags/ARROWHEAD-6.0.0 -b ARROWHEAD-6.0.0
+git checkout tags/ARROWHEAD-6.3.1 -b ARROWHEAD-6.3.1
 ```
 
 #### Ensure the Security Chain
@@ -198,7 +202,7 @@ User=root
 Nice=0
 LimitNOFILE=200000
 WorkingDirectory=/root/rootstock/rskj/rskj-core/build/libs/
-ExecStart=/usr/bin/java -Drsk.conf.file=/root/rootstock/config/node.conf -jar /root/rootstock/rskj/rskj-core/build/libs/rskj-core-6.0.0-ARROWHEAD-all.jar co.rsk.Start
+ExecStart=/usr/bin/java -Drsk.conf.file=/root/rootstock/config/node.conf -jar /root/rootstock/rskj/rskj-core/build/libs/rskj-core-6.3.1-ARROWHEAD-all.jar co.rsk.Start
 
 KillSignal=SIGTERM
 
