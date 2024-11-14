@@ -29,6 +29,8 @@
 * [🍄 Rootstock](docs-in-progress/rootstock/README.md)
   * [🐳 Docker](docs-in-progress/rootstock/cip-docker-guide-template.md)
   * [Bare Metal](docs-in-progress/rootstock/bare-metal.md)
+* [Ronin](docs-in-progress/ronin/README.md)
+  * [🐳 Docker](docs-in-progress/ronin/cip-docker-guide-template.md)
 * [🟣 Zora](docs-in-progress/zora/README.md)
   * [💻 Baremetal](docs-in-progress/zora/baremetal.md)
   * [Docker](docs-in-progress/zora/docker.md)
