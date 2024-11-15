@@ -87,7 +87,7 @@ sudo apt-get install docker-compose-plugin
 docker compose version
 ```
 
-## Setup Rootstock Node
+## Setup Ronin Node
 
 Make and switch to the working directory for the ronin node
 
