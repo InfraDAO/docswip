@@ -37,6 +37,11 @@
 * [Ⓜ️ Mode](docs-in-progress/mode/README.md)
   * [Baremetal](docs-in-progress/mode/baremetal.md)
   * [Docker](docs-in-progress/mode/docker.md)
+* [Sepolia](docs-in-progress/sepolia/README.md)
+  * [Ethereum Sepolia](docs-in-progress/sepolia/ethereum-sepolia/README.md)
+    * [💻 Baremetal](docs-in-progress/sepolia/ethereum-sepolia/baremetal.md)
+  * [Arbitrum Sepolia](docs-in-progress/sepolia/arbitrum-sepolia/README.md)
+    * [💻 Baremetal](docs-in-progress/sepolia/arbitrum-sepolia/baremetal.md)
 
 ## Templates
 
