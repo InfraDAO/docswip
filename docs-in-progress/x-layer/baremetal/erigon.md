@@ -6,9 +6,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 
 ## System Requirements
 
-|      CPU     |           OS           |      RAM     |         DISK        |
-| :----------: | :--------------------: | :----------: | :-----------------: |
-| 8+ cores CPU | Debian 12/Ubuntu 22.04 | => 16 GB RAM | 500GB (SSD or NVMe) |
+<table><thead><tr><th width="150" align="center">CPU</th><th align="center">OS</th><th width="192" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8+ cores CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center">500GB (SSD or NVMe)</td></tr></tbody></table>
 
 {% hint style="info" %}
 _The Erigon XLayer archive node has a size of 36GB on August 9th, 2024_

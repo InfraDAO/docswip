@@ -26,6 +26,7 @@
   * [🐳 Docker](docs-in-progress/x-layer/docker.md)
   * [💻 Baremetal](docs-in-progress/x-layer/baremetal/README.md)
     * [💻 Erigon](docs-in-progress/x-layer/baremetal/erigon.md)
+    * [ZK-node](docs-in-progress/x-layer/baremetal/zk-node.md)
 * [🍄 Rootstock](docs-in-progress/rootstock/README.md)
   * [🐳 Docker](docs-in-progress/rootstock/cip-docker-guide-template.md)
   * [Bare Metal](docs-in-progress/rootstock/bare-metal.md)
