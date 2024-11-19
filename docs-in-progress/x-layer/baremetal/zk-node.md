@@ -25,3 +25,11 @@ This guide covers the installation of X Layer Node (referred to as ZKNode), Sync
 NOTE: You will need Ethereum L1 RPC endpoint in order to sync X Layer node
 {% endhint %}
 
+## Pre-Requisties
+
+```bash
+sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y
+
+sudo apt install -y libgtest-dev libomp-dev libgmp-dev git make wget aria2 gcc pkg-config libusb-1.0-0-dev libudev-dev jq g++ curl libssl-dev screen apache2-utils build-essential
+```
+
