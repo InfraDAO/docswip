@@ -19,7 +19,7 @@ This guide covers the installation of `CDK-Erigon`, a fork of Erigon, optimized 
 {% endhint %}
 
 {% hint style="danger" %}
-CAUTION: During the Chain Integration Process, InfraDAO noticed some POI divergencies when using `CDK-Erigon`. Consider following the the **ZKEVM** guide instead.
+CAUTION: During the Chain Integration Process, InfraDAO noticed some POI divergencies when using `CDK-Erigon`. Consider following the the [**ZKNODE**](zk-node.md) **(clickable)** guide instead.
 {% endhint %}
 
 ## Pre-Requisites

@@ -1,6 +1,6 @@
 ---
-description: 'Authors: [man4ela | catapulta.eth]'
 icon: arrows-to-dot
+description: 'Authors: [man4ela | catapulta.eth]'
 ---
 
 # ZK-node
@@ -22,5 +22,6 @@ This guide covers the installation of X Layer Node (referred to as ZKNode), Sync
 
 
 
-You will need Ethereum L1 RPC endpoint in order to sync X Layer node
+NOTE: You will need Ethereum L1 RPC endpoint in order to sync X Layer node
 {% endhint %}
+
