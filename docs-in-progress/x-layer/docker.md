@@ -11,7 +11,7 @@ description: 'Authors: [jLeopoldA]'
 | vCpu 4 min | Used: Debian / Ubuntu 22.04 | 16GB minimum | 13.5 TB (SSD) |
 
 {% hint style="info" %}
-Archival Node size is 792GB
+Archival Node size is 973GB as of 11/20/2024
 {% endhint %}
 
 ## Required Installations
