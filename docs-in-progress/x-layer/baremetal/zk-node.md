@@ -133,26 +133,26 @@ wget https://raw.githubusercontent.com/okx/Deploy/refs/heads/main/mainnet/genesi
 Carefully change the following parameters inside configuration file:
 
 ```bash
- nano /root/zknode/node/config/node.config.toml
+ sudo nano /root/zknode/node/config/node.config.toml
 ```
 
 \[State.DB]&#x20;
 
 Host = "xlayer-mainnet-state-db"
 
-\#specify **Host = "127.0.0.1"**
+\#specify <mark style="background-color:blue;">**Host = "127.0.0.1"**</mark>
 
 \[Pool.DB]&#x20;
 
 Host = "xlayer-mainnet-pool-db"&#x20;
 
-\#specify **Host = "127.0.0.1"**
+\#specify <mark style="background-color:blue;">**Host = "127.0.0.1"**</mark>
 
 \[Etherman]&#x20;
 
-URL = ""&#x20;
+<mark style="background-color:blue;">URL = ""</mark>&#x20;
 
-\#specify your synced **L1 Ethereum RPC** endpoint
+\#input your synced **L1 Ethereum RPC** endpoint
 
 \[Synchronizer]&#x20;
 
@@ -160,31 +160,31 @@ SyncInterval = "1s"&#x20;
 
 SyncChunkSize = 100&#x20;
 
-\#add line **L1SynchronizationMode = "sequential"**
+\#add a line <mark style="background-color:blue;">**L1SynchronizationMode = "sequential"**</mark>
 
 \[MTClient]&#x20;
 
 URI = "xlayer-mainnet-prover:50061"&#x20;
 
-\#specify URI = **"127.0.0.1:50061"**
+\#specify <mark style="background-color:blue;">URI =</mark> <mark style="background-color:blue;"></mark><mark style="background-color:blue;">**"127.0.0.1:50061"**</mark>
 
 \[Executor]&#x20;
 
 URI = "xlayer-mainnet-prover:50071"&#x20;
 
-\#specify URI = **"127.0.0.1:50071"**
+\#specify <mark style="background-color:blue;">URI =</mark> <mark style="background-color:blue;"></mark><mark style="background-color:blue;">**"127.0.0.1:50071"**</mark>
 
 \[Metrics]&#x20;
 
 Host = "0.0.0.0"&#x20;
 
-\#specify Host = **"127.0.0.1"**
+\#specify <mark style="background-color:blue;">Host =</mark> <mark style="background-color:blue;"></mark><mark style="background-color:blue;">**"127.0.0.1"**</mark>
 
 \[HashDB]&#x20;
 
 Host = "xlayer-mainnet-state-db"&#x20;
 
-\#specify Host = **"127.0.0.1"**
+\#specify <mark style="background-color:blue;">Host =</mark> <mark style="background-color:blue;"></mark><mark style="background-color:blue;">**"127.0.0.1"**</mark>
 
 ```bash
 ctrl X + Y and enter #to save changes
@@ -226,7 +226,7 @@ make -j
 ```
 
 {% hint style="warning" %}
-The compilation process may appear to be stuck at some point, but please sit back, relax, and wait till it completes the building
+The compilation process may appear to be stuck at some point, but sit back, relax, and wait till it completes the building
 {% endhint %}
 
 Test Vectors
@@ -409,7 +409,7 @@ Example of connection string to use in the config.json file:
 sudo nano /etc/postgresql/14/main/postgresql.conf
 ```
 
-Set max\_connections = 5<mark style="background-color:orange;">00</mark>
+Set <mark style="background-color:orange;">max\_connections = 500</mark>
 
 Save, Quit and reload postgresql to apply changes by running:
 
