@@ -185,8 +185,7 @@ Paste the content into the compose file.
 
 In this Docker Compose file, we are utilizing the prebuilt Rootstock node image available on [dockerhub](https://hub.docker.com/r/rsksmart/rskj), where you can also find other prebuilt images.
 
-````bash
-services:
+<pre class="language-bash"><code class="lang-bash">services:
   rsk-node:
     image: rsksmart/rskj:ARROWHEAD-6.3.1
     container_name: rsk-node
@@ -198,14 +197,15 @@ services:
       - ./node.conf:/etc/rsk/node.conf
     restart: unless-stopped
 volumes:
-  rsk-data:
-```
-This section mounts the host's data directory for blockchain storage and the node.conf file for configuration into the container,
+<strong>  rsk-data:  
+</strong></code></pre>
+
 ```bash
+This section mounts the host's data directory for blockchain storage and the node.conf file for configuration into the container,
 volumes:
       - ./data:/var/lib/rsk/.rsk
       - ./node.conf:/etc/rsk/node.conf
-````
+```
 
 ## Run the node
 
@@ -256,6 +256,44 @@ Output
 {"jsonrpc":"2.0","id":1,"result":"0x14144a"}
 ```
 
+### Attach Geth to the local node
+
+#### Install Geth
+
+\
+The following command enables the launchpad repository:
+
+```sh
+sudo add-apt-repository -y ppa:ethereum/ethereum
+```
+
+Then, to install the stable version of go-ethereum:
+
+```sh
+sudo apt-get update
+sudo apt-get install ethereum
+```
+
+Once geth is installed and running, run the below command to attach geth to rsk node
+
+```bash
+geth attach http://127.0.0.1:4444
+```
+
+### Check if the node is running <a href="#check-if-the-node-is-running" id="check-if-the-node-is-running"></a>
+
+Check the blocknumber - the result should match the current rootstock block number
+
+```bash
+eth.blockNumber 
+```
+
+Output
+
+```
+6996674
+```
+
 ## References
 
 {% embed url="https://github.com/rsksmart/rskj" %}
@@ -263,3 +301,5 @@ Output
 {% embed url="https://hub.docker.com/r/rsksmart/rskj" %}
 
 {% embed url="https://dev.rootstock.io/node-operators/" %}
+
+{% embed url="https://devportal-git-docs-july-maintenance-iov-labs-mkt.vercel.app/kb/geth-attach-local-node/" %}
