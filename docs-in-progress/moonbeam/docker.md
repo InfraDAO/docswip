@@ -152,7 +152,7 @@ sudo chown -R $(id -u):$(id -g) /var/lib/moonbeam-data/moonbeam
 
 ### Create docker-compose.yml
 
-{% hint style="warning" %}
+{% hint style="info" %}
 Instead of the standard `moonbeamfoundation/moonbeam` docker image, you will use the `moonbeamfoundation/moonbeam-tracing` image.&#x20;
 
 The latest supported version can be found on the Docker Hub for the moonbeam-tracing image from these repos: [https://hub.docker.com/r/moonbeamfoundation/moonbeam-tracing/tags](https://hub.docker.com/r/moonbeamfoundation/moonbeam-tracing/tags)
@@ -164,7 +164,7 @@ _Create and paste the following into the docker-compose.yml_
 sudo nano docker-compose.yml
 ```
 
-{% hint style="info" %}
+{% hint style="warning" %}
 Note that you have to:
 
 * Replace `INSERT_YOUR_NODE_NAME` in two different places. This name can be whatever you want it to be named. For InfraDAO, you can use the name of the server
@@ -209,7 +209,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.middlewares.ipwhitelist.ipwhitelist.sourcerange=${WHITELIST}"
+      - "traefik.http.middlewares.moonbeam-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
 
   moonbeam:
     image: moonbeamfoundation/moonbeam-tracing:v0.42.1-3400-latest
@@ -221,17 +221,18 @@ services:
     command:
       - --base-path=/data
       - --chain=moonbeam
-      - --name="InfraDAO B"
-      - --rpc-cors="*"
+      - --name="INSERT_YOUR_NODE_NAME"
+      - --rpc-port=9944
+      - --rpc-cors=all
+      - --unsafe-rpc-external
       - --state-pruning=archive
       - --trie-cache-size=1073741824
-      - --db-cache=16000
+      - --db-cache=64000
       - --ethapi=debug,trace,txpool
       - --wasm-runtime-overrides=/moonbeam/moonbeam-substitutes-tracing
       - --runtime-cache-size=64
       - --
-      - --name="InfraDAO B (Embedded Relay)"
-      - --unsafe-rpc-external
+      - --name="INSERT_YOUR_NODE_NAME (Embedded Relay)"
     expose:
       - 9944 # rpc + ws parachain
       - 9945 # rpc + ws relay chain
@@ -240,18 +241,19 @@ services:
       - 9615 # prometheus parachain
       - 9616 # prometheus relay chain
     ports:
+      - "9944:9944" # rpc + ws parachain
+      - "9945:9945" # rpc + ws relay chain
       - "22057:22057"
       - "51555:51555"
     networks:
       - monitor-net
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.moonbeam.service=moonbeam"
-      - "traefik.http.services.moonbeam.loadbalancer.server.port=9945"
-      - "traefik.http.routers.moonbeam.entrypoints=websecure"
-      - "traefik.http.routers.moonbeam.tls.certresolver=myresolver"
-      - "traefik.http.routers.moonbeam.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.moonbeam.middlewares=ipwhitelist"
+    - "traefik.enable=true"
+    - "traefik.http.routers.moonbeam.middlewares=moonbeam-ipallowlist"
+    - "traefik.http.routers.moonbeam.rule=Host(`$DOMAIN`)"
+    - "traefik.http.routers.moonbeam.entrypoints=websecure"
+    - "traefik.http.routers.moonbeam.tls.certresolver=myresolver"
+    - "traefik.http.services.moonbeam.loadbalancer.server.port=9944"
 ```
 
 ### Monitor logs for errors
@@ -294,6 +296,12 @@ curl https://{YOUR_DOMAIN} \
         -X POST \
         -H "Content-Type: application/json" \
         -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
+```
+
+#### Expected out:
+
+```bash
+{"jsonrpc":"2.0","result":{"startingBlock":"0x0","currentBlock":"0x85a337","highestBlock":"0x876c87","warpChunksAmount":null,"warpChunksProcessed":null},"id":1}
 ```
 
 ## References
