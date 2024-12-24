@@ -1,5 +1,5 @@
 ---
-description: 'Author(s): BK and man4ela'
+description: 'Author(s): BK | E&N/Braindexer and man4ela | catapulta.eth'
 ---
 
 # 🐳 Docker
@@ -11,7 +11,7 @@ description: 'Author(s): BK and man4ela'
 | 8 Cores (Fastest per core speed) | Debian 12/Ubuntu 22.04 | 16 GB | 2TB+ (SSD or NVME preffered) |
 
 {% hint style="info" %}
-_The Moonbeam tracing node has a size of 2TB on December 23, 2024_
+_Moonbeam tracing node has a size of 2TB on December 23, 2024_
 {% endhint %}
 
 ## Run a tracing node
@@ -142,13 +142,35 @@ mkdir /var/lib/moonbeam-data/
 sudo chown -R $(id -u):$(id -g) /var/lib/moonbeam-data
 ```
 
+### Create a directory for WASM overrides:
+
+```bash
+mkdir /var/lib/moonbeam-data/moonbeam
+
+sudo chown -R $(id -u):$(id -g) /var/lib/moonbeam-data/moonbeam
+```
+
 ### Create docker-compose.yml
+
+{% hint style="warning" %}
+Instead of the standard `moonbeamfoundation/moonbeam` docker image, you will use the `moonbeamfoundation/moonbeam-tracing` image.&#x20;
+
+The latest supported version can be found on the Docker Hub for the moonbeam-tracing image from these repos: [https://hub.docker.com/r/moonbeamfoundation/moonbeam-tracing/tags](https://hub.docker.com/r/moonbeamfoundation/moonbeam-tracing/tags)
+{% endhint %}
 
 _Create and paste the following into the docker-compose.yml_
 
 ```bash
 sudo nano docker-compose.yml
 ```
+
+{% hint style="info" %}
+Note that you have to:
+
+* Replace `INSERT_YOUR_NODE_NAME` in two different places. This name can be whatever you want it to be named. For InfraDAO, you can use the name of the server
+* Replace `INSERT_RAM_IN_MB` for 50% of the actual RAM your server has. For example, for 32 GB RAM, the value must be set to `16000`. The minimum value is `2000`, but it is below the recommended specs
+* For an overview of the flags used in the following start-up commands, plus additional commonly used flags, please refer to the [Flags](https://docs.moonbeam.network/node-operators/networks/run-a-node/flags) page of our documentation
+{% endhint %}
 
 ```bash
 version: '3.9'
@@ -191,12 +213,13 @@ services:
 
   moonbeam:
     image: moonbeamfoundation/moonbeam-tracing:v0.42.1-3400-latest
+    user: root
     container_name: moonbeam
     volumes:
-      - moonbeam-data:/var/lib/moonbeam-data/
+      - "/var/lib/moonbeam-data:/data"
     restart: unless-stopped
     command:
-      - --base-path=/var/lib/moonbeam-data
+      - --base-path=/data
       - --chain=moonbeam
       - --name="InfraDAO B"
       - --rpc-cors="*"
@@ -208,7 +231,6 @@ services:
       - --runtime-cache-size=64
       - --
       - --name="InfraDAO B (Embedded Relay)"
-      - --unsafe-ws-external
       - --unsafe-rpc-external
     expose:
       - 9944 # rpc + ws parachain
@@ -225,10 +247,57 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.moonbeam.service=moonbeam"
-      - "traefik.http.services.moonbeam.loadbalancer.server.port=9944"
+      - "traefik.http.services.moonbeam.loadbalancer.server.port=9945"
       - "traefik.http.routers.moonbeam.entrypoints=websecure"
       - "traefik.http.routers.moonbeam.tls.certresolver=myresolver"
       - "traefik.http.routers.moonbeam.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.moonbeam.middlewares=ipwhitelist"
 ```
 
+### Monitor logs for errors
+
+```bash
+docker logs moonbeam -f --tail 100
+```
+
+The expected output after successful launch should look like this:
+
+```bash
+2024-12-24 00:50:53 Moonbeam Parachain Collator
+2024-12-24 00:50:53 ✌️  version 0.42.1-1432b45b797
+2024-12-24 00:50:53 ❤️  by PureStake, 2019-2024
+2024-12-24 00:50:53 📋 Chain specification: Moonbeam
+2024-12-24 00:50:53 🏷  Node name: "InfraDAO B"
+2024-12-24 00:50:53 👤 Role: FULL
+2024-12-24 00:50:53 💾 Database: RocksDb at /data/chains/moonbeam/db/full
+2024-12-24 00:50:54 Parachain Account: 5Ec4AhPVjsshXjh8ynp6MwaJTJBnen3pkHiiyDhHfie5VWkN
+2024-12-24 00:50:54 Is collating: no
+2024-12-24 00:53:51 [🌗] Found wasm override. version=moonbeam-3101 (moonbeam-0.tx2.au3) file=/moonbeam/moonbeam-substitutes-tracing/moonbeam-runtime-3101-substitute-tracing.wasm
+2024-12-24 00:53:51 [🌗] Found wasm override. version=moonbeam-2600 (moonbeam-0.tx2.au3) file=/moonbeam/moonbeam-substitutes-tracing/moonbeam-runtime-2600-substitute-tracing.wasm
+```
+
+```bash
+2024-12-24 00:54:38 [🌗] ⚙️  Syncing, target=#8873589 (6 peers), best: #7954971 (0x9ffd…e535), finalized #7954817 (0xbe30…f908), ⬇ 10.1MiB/s ⬆ 13.6kiB/s
+2024-12-24 00:54:43 [Relaychain] ⚙️  Syncing 31.8 bps, target=#23974979 (8 peers), best: #23054735 (0xe5bd…0b0d), finalized #23054486 (0x0b99…0fd6), ⬇ 15.5MiB/s ⬆ 94.4kiB/s
+2024-12-24 00:54:43 [🌗] ⚙️  Syncing 82.2 bps, target=#8873590 (6 peers), best: #7955382 (0x7551…156c), finalized #7954817 (0xbe30…f908), ⬇ 1.8MiB/s ⬆ 1.5kiB/s
+2024-12-24 00:54:48 [Relaychain] ⚙️  Syncing 28.4 bps, target=#23974979 (8 peers), best: #23054877 (0x8c1a…c76c), finalized #23054848 (0x8eac…3a21), ⬇ 2.0MiB/s ⬆ 138.9kiB/s
+```
+
+### Test Moonbeam RPC
+
+You can call the JSON-RPC API methods to confirm the node is running. For example, call [`eth_syncing`](https://besu.hyperledger.org/public-networks/reference/api#eth_syncing) to return the synchronization status. It will return the starting, current, and highest block, or `false` if not synchronizing (or if the head of the chain has been reached)
+
+Replace `https://{YOUR_DOMAIN}` with actual domain name you set an A record for: &#x20;
+
+```bash
+curl https://{YOUR_DOMAIN} \
+        -X POST \
+        -H "Content-Type: application/json" \
+        -d '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
+```
+
+## References
+
+* **Moonbeam Tracing Node Docs**: [https://docs.moonbeam.network/node-operators/networks/tracing-node/](https://docs.moonbeam.network/node-operators/networks/tracing-node/)
+* **Moonbeam Full Node Docs**: [https://docs.moonbeam.network/node-operators/networks/run-a-node/docker/](https://docs.moonbeam.network/node-operators/networks/run-a-node/docker/)
+* **Moonbeam Tracing Node Docker**: [https://hub.docker.com/r/moonbeamfoundation/moonbeam-tracing/tags](https://hub.docker.com/r/moonbeamfoundation/moonbeam-tracing/tags)
