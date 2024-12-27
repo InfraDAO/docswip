@@ -145,11 +145,13 @@ pnpm -v
 ## Build the Nitro Node
 
 ```bash
-git clone --recurse-submodules https://github.com/OffchainLabs/nitro/
+git clone --branch v3.2.1 https://github.com/OffchainLabs/nitro.git
 
 cd nitro
 
-docker build -t nitro .
+git submodule update --init --recursive --force
+
+docker build . --tag nitro-node
 ```
 
 To upgrade `nitro` check for latest version at [https://github.com/OffchainLabs/nitro/releases](https://github.com/OffchainLabs/nitro/releases):
