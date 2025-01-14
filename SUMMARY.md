@@ -45,6 +45,9 @@
     * [💻 Baremetal](docs-in-progress/sepolia/ethereum-sepolia/baremetal.md)
   * [Arbitrum Sepolia](docs-in-progress/sepolia/arbitrum-sepolia/README.md)
     * [💻 Baremetal](docs-in-progress/sepolia/arbitrum-sepolia/baremetal.md)
+* [Polygon Zkevm](docs-in-progress/polygon-zkevm/README.md)
+  * [Bare Metal](docs-in-progress/polygon-zkevm/bare-metal/README.md)
+    * [Erigon](docs-in-progress/polygon-zkevm/bare-metal/erigon.md)
 
 ## Templates
 
