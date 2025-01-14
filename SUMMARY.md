@@ -45,9 +45,12 @@
     * [💻 Baremetal](docs-in-progress/sepolia/ethereum-sepolia/baremetal.md)
   * [Arbitrum Sepolia](docs-in-progress/sepolia/arbitrum-sepolia/README.md)
     * [💻 Baremetal](docs-in-progress/sepolia/arbitrum-sepolia/baremetal.md)
-* [Polygon Zkevm](docs-in-progress/polygon-zkevm/README.md)
-  * [Bare Metal](docs-in-progress/polygon-zkevm/bare-metal/README.md)
-    * [Erigon](docs-in-progress/polygon-zkevm/bare-metal/erigon.md)
+* [🪼 Polygon zkEVM](docs-in-progress/polygon-zkevm/README.md)
+  * [🐉 Erigon](docs-in-progress/polygon-zkevm/erigon/README.md)
+    * [💻 Baremetal](docs-in-progress/polygon-zkevm/erigon/baremetal.md)
+    * [🐳 Docker](docs-in-progress/polygon-zkevm/erigon/docker.md)
+  * [⚡ zk Node](docs-in-progress/polygon-zkevm/zk-node/README.md)
+    * [🐳 Docker](docs-in-progress/polygon-zkevm/zk-node/docker.md)
 
 ## Templates
 

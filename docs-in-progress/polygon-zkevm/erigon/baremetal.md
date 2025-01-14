@@ -2,7 +2,7 @@
 description: 'Author: [ jLeopoldA ]'
 ---
 
-# Erigon
+# 💻 Baremetal
 
 ## System Requirements
 
@@ -11,7 +11,7 @@ description: 'Author: [ jLeopoldA ]'
 | 4 Core | Ubunutu 24.04.1 LTS | 64GB  |      |
 
 {% hint style="info" %}
-The Polygon Zkevm archive node has a size of (SIZE HERE) as of (DATE HERE)
+The Polygon zkEVM archive node has a size of (SIZE HERE) as of (DATE HERE)
 {% endhint %}
 
 ## Pre-Requisites
@@ -110,7 +110,7 @@ go version
 go version go1.23.3 linux/amd64
 ```
 
-## Set up Polygon Zkevm with Erigon
+## Set up Polygon zkEVM with Erigon
 
 ### Clone the Polygon Hermez Repo for Erigon and Build Erigon
 
@@ -227,7 +227,7 @@ sudo systemctl restart erigon.service # Restarts erigon.service
 journalctl -fu erigon.service -xe
 ```
 
-#### Alternatively you can view logs minus server name and time and receive the below
+#### Alternatively, you can view logs minus server name and time and receive the below
 
 ```bash
 journalctl -fu erigon.service -o cat
@@ -235,7 +235,7 @@ journalctl -fu erigon.service -o cat
 
 <figure><img src="../../../.gitbook/assets/Screenshot from 2025-01-13 20-13-35.png" alt=""><figcaption></figcaption></figure>
 
-### Query Polygon Zkevm Node
+### Query Polygon zkEVM Node
 
 {% hint style="info" %}
 CDK-Erigon does take time to process blocks before you can fully query it.
