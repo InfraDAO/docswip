@@ -11,7 +11,7 @@ description: 'Author: [ jleopoldA ]'
 | 8 Core | Ubuntu 24.04.1 LTS | 32 GB  | 7TB SSD |
 
 {% hint style="info" %}
-Ronin has a size of (SIZE HERE) as of (DATE HERE)
+Ronin has a size of 5.8TB as of 1/15/2025.
 {% endhint %}
 
 ## Pre-Requisites
