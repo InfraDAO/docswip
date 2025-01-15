@@ -161,7 +161,7 @@ zkevm.gas-price-factor: 0.0375
 zkevm.l1-rollup-id: 1
 zkevm.l1-block-range: 20000
 zkevm.l1-query-delay: 6000
-zkevm.l1-first-block: 1 # If you place this at 0 - it will throw errors
+zkevm.l1-first-block: 16896700
 zkevm.datastream-version: 2
 
 # debug.timers: true # Uncomment to enable timers
