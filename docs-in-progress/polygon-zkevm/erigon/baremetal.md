@@ -6,12 +6,12 @@ description: 'Author: [ jLeopoldA ]'
 
 ## System Requirements
 
-| CPU    | OS                  | RAM   | DISK |
-| ------ | ------------------- | ----- | ---- |
-| 4 Core | Ubunutu 24.04.1 LTS | 64GB  |      |
+| CPU    | OS                  | RAM   | DISK  |
+| ------ | ------------------- | ----- | ----- |
+| 4 Core | Ubunutu 24.04.1 LTS | 64GB  | 128GB |
 
 {% hint style="info" %}
-The Polygon zkEVM archive node has a size of (SIZE HERE) as of (DATE HERE)
+The Polygon zkEVM archive node has a size of 103GB
 {% endhint %}
 
 ## Pre-Requisites
