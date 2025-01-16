@@ -8,7 +8,7 @@ description: 'Author: [ jLeopoldA ]'
 
 | CPU    | OS                  | RAM   | DISK  |
 | ------ | ------------------- | ----- | ----- |
-| 4 Core | Ubunutu 24.04.1 LTS | 64GB  | 128GB |
+| 4 Core | Ubunutu 24.04.1 LTS | 16GB  | 128GB |
 
 {% hint style="info" %}
 The Polygon zkEVM archive node has a size of 103GB as of 1/15/2025
