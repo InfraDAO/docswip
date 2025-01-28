@@ -11,6 +11,8 @@
 * [🌄 Moonbeam](docs-in-progress/moonbeam/README.md)
   * [💻 Baremetal](docs-in-progress/moonbeam/baremetal.md)
   * [🐳 Docker](docs-in-progress/moonbeam/docker.md)
+* [🌖 Moonriver ](docs-in-progress/moonriver/README.md)
+  * [💻 Baremetal](docs-in-progress/moonriver/baremetal.md)
 * [⚡ Blast](docs-in-progress/blast/README.md)
   * [💻 Baremetal](docs-in-progress/blast/baremetal.md)
   * [🐳 Docker](docs-in-progress/blast/docker.md)
