@@ -7,7 +7,7 @@ Authors: \[ Ankur | Dapplooker]
 <table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>4 vCPU</td><td>Ubuntu 22.04</td><td>64 GB</td><td>1TB (SSD)</td></tr></tbody></table>
 
 {% hint style="info" %}
-_The CDK-Erigon archival node has a size of 246GB on January 16, 2025._
+_The CDK-Erigon archival node has a size of 104GB on January 29, 2025._
 {% endhint %}
 
 ## Pre-requisite
