@@ -97,7 +97,7 @@ docker compose version
 
 ### Create Moonriver directory
 
-The first command, `mkdir moonbeam`, will create a new directory named moonbeam in the current location. The second command, `cd moonbeam`, will change your current working directory to the newly created base directory. Now you are inside the base directory and can start storing docker-compose and related files in it.
+The first command, `mkdir moonriver`, will create a new directory named moonriver in the current location. The second command, `cd moonriver`, will change your current working directory to the newly created base directory. Now you are inside the base directory and can start storing docker-compose and related files in it.
 
 ```bash
 mkdir moonriver && cd moonriver
