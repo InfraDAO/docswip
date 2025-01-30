@@ -11,7 +11,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 | 8 Cores (Fastest per core speed) | Debian 12/Ubuntu 22.04 | 16 GB | 2TB+ (SSD) |
 
 {% hint style="info" %}
-_The Moonriver tracing node has a size of 2TB on January 28, 2025_
+_The Moonriver tracing node has a size of 1.8TB on January 30, 2025_
 {% endhint %}
 
 ## Run a tracing node
