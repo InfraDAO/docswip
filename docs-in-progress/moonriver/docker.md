@@ -11,7 +11,7 @@ description: 'Author: Godwin'
 | 8 Cores (Fastest per core speed) | Debian 12/Ubuntu 22.04 | 16 GB | 2TB+ (SSD or NVME preffered) |
 
 {% hint style="info" %}
-_Moonriver tracing node has a size of 2TB on January 28, 2025_
+_Moonriver tracing node has a size of 1.8TB on January 28, 2025_
 {% endhint %}
 
 ## Run a tracing node
