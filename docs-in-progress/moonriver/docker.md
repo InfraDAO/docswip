@@ -95,6 +95,18 @@ sudo apt-get install docker-compose-plugin
 docker compose version
 ```
 
+## Setting up a domain name to access RPC
+
+Get the IP address of the host machine, you can use the following command in a terminal or command prompt.
+
+```bash
+curl ifconfig.me
+```
+
+Set an A record for a domain, you need to access the domain's DNS settings and create an A record that points to the IP address of the host machine. This configuration allows users to reach your domain by resolving the domain name to the specific IP address associated with your host machine.
+
+{% embed url="https://youtu.be/QcNBLSSn8Vg" %}
+
 ### Create Moonriver directory
 
 The first command, `mkdir moonriver`, will create a new directory named moonriver in the current location. The second command, `cd moonriver`, will change your current working directory to the newly created base directory. Now you are inside the base directory and can start storing docker-compose and related files in it.
@@ -102,6 +114,26 @@ The first command, `mkdir moonriver`, will create a new directory named moonrive
 ```bash
 mkdir moonriver && cd moonriver
 ```
+
+### Create .env file
+
+```bash
+sudo nano .env
+```
+
+Paste the following into the file.
+
+```bash
+EMAIL={YOUR_EMAIL} #Your email to receive SSL renewal emails
+DOMAIN={YOUR_DOMAIN} #Domain should be something like rpc.mywebsite.com, e.g. mooonriver.infradao.org
+WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's IP itself and comma separated list of IP's allowed to connect to RPC (e.g. Indexer)
+```
+
+{% hint style="info" %}
+`Ctrl + x` and `y` to save file
+{% endhint %}
+
+
 
 ### Make Database directory and set necessary permissions
 
@@ -144,10 +176,42 @@ Note that you have to:
 ```bash
 version: '3.9'
 
+
+networks:
+  monitor-net:
+    driver: bridge
+  
 volumes:
+  traefik_letsencrypt: {}
   moonriver-data: {}
 
 services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: always
+    ports:
+      - "443:443"
+    networks:
+      - monitor-net
+    command:
+      - "--api=true"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    volumes:
+      - "traefik_letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.moonriver-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
+
   moonriver:
     image: moonbeamfoundation/moonbeam-tracing:v0.42.1-3401-latest
     user: root
@@ -182,6 +246,15 @@ services:
       - "9945:9945" # rpc + ws relay chain
       - "30333:30333"
       - "30334:30334"
+    networks:
+      - monitor-net
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.moonriver.middlewares=moonbeam-ipallowlist"
+    - "traefik.http.routers.moonriver.rule=Host(`$DOMAIN`)"
+    - "traefik.http.routers.moonriver.entrypoints=websecure"
+    - "traefik.http.routers.moonriver.tls.certresolver=myresolver"
+    - "traefik.http.services.moonriver.loadbalancer.server.port=9944"
 ```
 
 ### Monitor logs for errors
