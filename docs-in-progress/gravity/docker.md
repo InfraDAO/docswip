@@ -7,7 +7,7 @@ Authors: \[ Ankur | Dapplooker]
 <table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>4 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td>500 GB (SSD)</td></tr></tbody></table>
 
 {% hint style="success" %}
-_The Gravity node has a size of  <mark style="color:red;">\<Size></mark> GB on <mark style="color:red;">February , 2025.</mark>_
+_The Gravity node has a size of  209 GB on 06, February , 2025._
 {% endhint %}
 
 ## Pre-requisite
@@ -25,7 +25,7 @@ Before starting, clean the setup then update and upgrade. Install following:
 {% code overflow="wrap" %}
 ```bash
 sudo apt update -y && sudo apt upgrade -y && sudo apt auto-remove -y
-sudo apt install docker.io git ufw -y 
+sudo apt install docker.io git ufw -y jq -y
 ```
 {% endcode %}
 
