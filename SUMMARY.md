@@ -16,6 +16,7 @@
   * [🐳 Docker](docs-in-progress/moonriver/docker.md)
 * [🌖 Gravity](docs-in-progress/gravity/README.md)
   * [💻 Baremetal](docs-in-progress/gravity/baremetal.md)
+  * [🐳 Docker](docs-in-progress/gravity/docker.md)
 * [⚡ Blast](docs-in-progress/blast/README.md)
   * [💻 Baremetal](docs-in-progress/blast/baremetal.md)
   * [🐳 Docker](docs-in-progress/blast/docker.md)
