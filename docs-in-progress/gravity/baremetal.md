@@ -1,5 +1,5 @@
 ---
-description: 'Authors: [man4ela | catapulta.eth]'
+description: 'Authors: Godwin'
 ---
 
 # 💻 Baremetal
