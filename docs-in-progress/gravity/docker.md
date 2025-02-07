@@ -114,8 +114,8 @@ docker run -d --name gravity_alpha_mainnet \
     --node.data-availability.rest-aggregator.urls=https://das-gravity-mainnet-0.t.conduit.xyz \
     --execution.forwarding-target=https://rpc.gravity.xyz \
     --node.feed.input.url=wss://relay-gravity-mainnet-0.t.conduit.xyz \
-    --parent-chain.blob-client.beacon-url=<ethereum_beacon_chain_rpc>
-    --validation.wasm.enable-wasmroots-check=false
+    --parent-chain.blob-client.beacon-url=<ethereum_beacon_chain_rpc> \
+    --validation.wasm.enable-wasmroots-check=false \
 ```
 
 {% hint style="info" %}
