@@ -52,6 +52,7 @@
     * [Docker](docs-in-progress/sepolia/ethereum-sepolia/docker.md)
   * [Arbitrum Sepolia](docs-in-progress/sepolia/arbitrum-sepolia/README.md)
     * [💻 Baremetal](docs-in-progress/sepolia/arbitrum-sepolia/baremetal.md)
+    * [Docker](docs-in-progress/sepolia/arbitrum-sepolia/docker.md)
 * [🪼 Polygon zkEVM](docs-in-progress/polygon-zkevm/README.md)
   * [🐉 Erigon](docs-in-progress/polygon-zkevm/erigon/README.md)
     * [💻 Baremetal](docs-in-progress/polygon-zkevm/erigon/baremetal.md)
