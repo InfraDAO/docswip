@@ -59,7 +59,7 @@ docker run -d --name gravity_alpha_mainnet \
     -v ~/gravity/arbitrum:/home/user/.arbitrum \
     -p 0.0.0.0:8547:8547 \
     -p 0.0.0.0:8548:8548 \
-    offchainlabs/nitro-node:v2.3.3-6a1c1a7 \
+    offchainlabs/nitro-node:v3.2.1-d81324d \
     --parent-chain.connection.url=<ethereum_mainnet_rpc> \
     --chain.id=1625 \
     --chain.name=conduit-orbit-deployer \
@@ -115,7 +115,7 @@ docker run -d --name gravity_alpha_mainnet \
     --execution.forwarding-target=https://rpc.gravity.xyz \
     --node.feed.input.url=wss://relay-gravity-mainnet-0.t.conduit.xyz \
     --parent-chain.blob-client.beacon-url=<ethereum_beacon_chain_rpc> \
-    --validation.wasm.enable-wasmroots-check=false \
+    --validation.wasm.enable-wasmroots-check=false 
 ```
 
 {% hint style="info" %}
