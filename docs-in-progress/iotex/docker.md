@@ -29,6 +29,12 @@ sudo apt install docker.io git ufw -y jq -y
 
 ## Firewall Settings
 
+### Check status & enable UFW&#x20;
+
+<pre class="language-bash"><code class="lang-bash"><strong>sudo ufw enable
+</strong>sudo ufw status verbose
+</code></pre>
+
 ### Set explicit default UFW rules
 
 ```bash
@@ -97,6 +103,6 @@ Response should look like:
 
 ## REFERENCES
 
-* &#x20;[Git hub](https://github.com/iotexproject/iotex-bootstrap?tab=readme-ov-file#join-mainnet) : Repository for Archive Node Setup
+* [Git hub](https://github.com/iotexproject/iotex-bootstrap?tab=readme-ov-file#join-mainnet) : Repository for Archive Node Setup
 * [IoTeX explorer](https://iotexscan.io/) : Block Explorer
 
