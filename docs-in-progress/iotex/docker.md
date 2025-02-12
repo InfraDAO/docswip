@@ -4,10 +4,10 @@ Authors: \[ Ankur | Dapplooker]
 
 ## System Requirements
 
-<table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>4 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td>500 GB (SSD)</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>32 GB</td><td>2 TB  (SSD)</td></tr></tbody></table>
 
 {% hint style="success" %}
-_The IoTeX node has a size of   GB on 00, February , 2025._
+_The IoTeX node has a size of  602 GB on 12, February, 2025._
 {% endhint %}
 
 ## Pre-requisite
@@ -16,8 +16,7 @@ Before starting, clean the setup then update and upgrade. Install following:
 
 * Docker
 * Git
-* Ethereum Mainnet  RPC
-*
+* Go v1.23+
 
 ### **Commands**
 
@@ -43,12 +42,13 @@ sudo ufw default allow outgoing
 sudo ufw allow 22/tcp
 sudo ufw allow 80
 sudo ufw allow 443
+sudo ufw allow 4689/tcp
 ```
 
 ### Allow Remote connection
 
 ```bash
-sudo ufw allow from ${REMOTE.HOST.IP} to any port 8545
+sudo ufw allow from ${REMOTE.HOST.IP} to any port 15014 # Ethereum JSON API
 ```
 
 ## Setup Instructions&#x20;
@@ -77,7 +77,7 @@ Monitor Logs of Docker Container&#x20;
 
 ```bash
 docker ps 
-docker logs  iotex
+docker logs iotex
 ```
 
 ## Sync Status
@@ -97,6 +97,6 @@ Response should look like:
 
 ## REFERENCES
 
-* [Gravity Docs](https://docs.gravity.xyz/network/run-a-gravity-alpha-mainnet-l2-node) : Deployment Guide for&#x20;
-* [Gravity Alpha Mainnet explorer](https://explorer.gravity.xyz/) : Block Explorer
+* &#x20;[Git hub](https://github.com/iotexproject/iotex-bootstrap?tab=readme-ov-file#join-mainnet) : Repository for Archive Node Setup
+* [IoTeX explorer](https://iotexscan.io/) : Block Explorer
 
