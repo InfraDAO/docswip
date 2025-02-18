@@ -61,6 +61,7 @@
     * [🐳 Docker](docs-in-progress/polygon-zkevm/zk-node/docker.md)
 * [🧊 IoTeX](docs-in-progress/iotex/README.md)
   * [🐳 Docker](docs-in-progress/iotex/docker.md)
+  * [Bare Metal](docs-in-progress/iotex/bare-metal.md)
 
 ## Templates
 
