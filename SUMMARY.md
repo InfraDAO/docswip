@@ -50,6 +50,8 @@
   * [Ethereum Sepolia](docs-in-progress/sepolia/ethereum-sepolia/README.md)
     * [💻 Baremetal](docs-in-progress/sepolia/ethereum-sepolia/baremetal.md)
     * [Docker](docs-in-progress/sepolia/ethereum-sepolia/docker.md)
+    * [Geth](docs-in-progress/sepolia/ethereum-sepolia/geth/README.md)
+      * [Docker](docs-in-progress/sepolia/ethereum-sepolia/geth/docker.md)
   * [Arbitrum Sepolia](docs-in-progress/sepolia/arbitrum-sepolia/README.md)
     * [💻 Baremetal](docs-in-progress/sepolia/arbitrum-sepolia/baremetal.md)
     * [Docker](docs-in-progress/sepolia/arbitrum-sepolia/docker.md)

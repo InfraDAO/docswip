@@ -7,7 +7,7 @@ Authors: \[ Ankur | Dapplooker]
 <table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>4 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td>500 GB (SSD)</td></tr></tbody></table>
 
 {% hint style="success" %}
-_The Gravity node has a size of  209 GB on 06, February , 2025._
+_The Gravity node has a size of  407 GB on 20, February , 2025._
 {% endhint %}
 
 ## Pre-requisite
@@ -59,7 +59,7 @@ docker run -d --name gravity_alpha_mainnet \
     -v ~/gravity/arbitrum:/home/user/.arbitrum \
     -p 0.0.0.0:8547:8547 \
     -p 0.0.0.0:8548:8548 \
-    offchainlabs/nitro-node:v3.2.1-d81324d \
+    offchainlabs/nitro-node:v3.5.1-8f247fd \
     --parent-chain.connection.url=<ethereum_mainnet_rpc> \
     --chain.id=1625 \
     --chain.name=conduit-orbit-deployer \
@@ -115,7 +115,8 @@ docker run -d --name gravity_alpha_mainnet \
     --execution.forwarding-target=https://rpc.gravity.xyz \
     --node.feed.input.url=wss://relay-gravity-mainnet-0.t.conduit.xyz \
     --parent-chain.blob-client.beacon-url=<ethereum_beacon_chain_rpc> \
-    --validation.wasm.enable-wasmroots-check=false 
+    --validation.wasm.enable-wasmroots-check=false \
+    --execution.caching.archive	
 ```
 
 {% hint style="info" %}
