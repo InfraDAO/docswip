@@ -70,7 +70,7 @@ sudo ufw allow 22/tcp
 #### Allow RPC Connection with Arbitrum Sepolia&#x20;
 
 ```bash
-sudo ufw allow 8547
+sudo ufw allow 8547 && sudo ufw allow 8548
 ```
 
 #### Allow P2P Connections
@@ -130,5 +130,38 @@ echo "services:
       -  --http.addr=0.0.0.0
       -  --http.vhosts=*
 " > docker-compose.yml
+```
+
+### Run Archive Node
+
+```bash
+# Run the following command form within /root/arbitrum
+docker compose up -d
+```
+
+## Interact with Arbitrum Sepolia Archive Node
+
+#### Check Logs
+
+```bash
+docker compose logs arbitrum
+```
+
+#### Stop Node
+
+```bash
+docker compose stop arbitrum
+```
+
+## Query Arbitrum Sepolia Archive Node
+
+### Check Block Number
+
+```bash
+curl -H "Content-Type: application/json" \
+-X POST --data '{"jsonrpc":"2.0", "method":"eth_blockNumber", "params":[], "id":1}' http://localhost:8547
+
+# Response should have a different "result" value.
+{"jsonrpc":"2.0","id":1,"result":"0x754ee0"}
 ```
 
