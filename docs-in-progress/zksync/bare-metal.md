@@ -279,6 +279,7 @@ WantedBy=multi-user.target" > /etc/systemd/system/zksync.service
 #### Systemctl Commands for Zksync&#x20;
 
 ```bash
+systemctl daemon-reload # Reload systemctl 
 systemctl enable zksync.service # Enable Zksync 
 systemctl start zksync.service # Start Zksync
 systemctl stop zksync.service # Stop Zksync
