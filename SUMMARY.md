@@ -65,6 +65,8 @@
 * [🧊 IoTeX](docs-in-progress/iotex/README.md)
   * [🐳 Docker](docs-in-progress/iotex/docker.md)
   * [Bare Metal](docs-in-progress/iotex/bare-metal.md)
+* [Zksync](docs-in-progress/zksync/README.md)
+  * [Bare Metal](docs-in-progress/zksync/bare-metal.md)
 
 ## Templates
 
