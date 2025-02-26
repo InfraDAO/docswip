@@ -291,7 +291,7 @@ systemctl restart zksync.service # Restart Zksync
 ```bash
 # CHECK STATUS OF SYNC
 curl -H "Content-Type: application/json" \
-> -X POST --data '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' http://localhost:3060
+-X POST --data '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' http://localhost:3060
 
 ##### The response should resemble the below
 {"jsonrpc":"2.0","id":1,"result":{"startingBlock":"0x0","currentBlock":"0x3219750","highestBlock":"0x35fc3d7"}}
