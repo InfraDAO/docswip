@@ -289,6 +289,7 @@ _Response should look like:_
 
 ## REFERENCES
 
-* [Git hub](https://github.com/iotexproject/iotex-bootstrap?tab=readme-ov-file#join-mainnet) : Repository for Archive Node Setup
-* [IoTeX explorer](https://iotexscan.io/) : Block Explorer
+{% embed url="https://github.com/matter-labs/zksync-era.git" %}
+
+{% embed url="https://explorer.zksync.io/" %}
 
