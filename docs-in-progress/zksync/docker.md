@@ -271,7 +271,7 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0", "meth
 </strong><strong>                                            
 </strong><strong>                                            # or
 </strong><strong>                                            
-</strong><strong> {"jsonrpc":"2.0","id":1,"result":false} # If block is synced or less than 11 bock remaining
+</strong><strong> {"jsonrpc":"2.0","id":1,"result":false} # If block is synced or &#x3C; 11 block behind
 </strong></code></pre>
 
 * Run a query to check the **latest synchronized L2 block**:
