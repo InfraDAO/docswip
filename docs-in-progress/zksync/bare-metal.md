@@ -2,7 +2,7 @@
 description: 'Author: [ jLeopoldA ]'
 ---
 
-# Bare Metal
+# 💻 Bare Metal
 
 ## System Requirements
 

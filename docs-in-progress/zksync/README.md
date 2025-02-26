@@ -1,2 +1,2 @@
-# Zksync
+# 🎯 Zksync
 
