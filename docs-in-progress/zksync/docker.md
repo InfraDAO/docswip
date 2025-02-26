@@ -260,7 +260,7 @@ docker logs mainnet-node-external-node-1
 
 ## Sync Status
 
-* Run a query to check the **syncing status**:&#x20;
+* **Syncing status** :&#x20;
 
 ```bash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0", "method":"eth_syncing", "params":[], "id":1}' http://localhost:3060
@@ -275,7 +275,7 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0", "meth
 </strong><strong> {"jsonrpc":"2.0","id":1,"result":false} # If block is synced or &#x3C; 11 block behind
 </strong></code></pre>
 
-* Run a query to check the **latest synchronized L2 block**:
+* **Latest synchronized L2 block** :
 
 ```bash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber", "params":[],"id":1}' http://localhost:3060
