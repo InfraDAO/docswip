@@ -7,7 +7,7 @@ Authors: \[ Ankur | Dapplooker]
 <table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td>10+ TB  (SSD)</td></tr></tbody></table>
 
 {% hint style="success" %}
-_The IoTeX node has a size of  \<size> GB on \<date>, February, 2025._
+_The ZkSync node has a size of  \<size> GB on \<date>, February, 2025._
 {% endhint %}
 
 ## Pre-requisite
@@ -49,6 +49,7 @@ sudo ufw default allow outgoing
 sudo ufw allow 22/tcp
 sudo ufw allow 80
 sudo ufw allow 443
+sudo ufw allow 3322 && sudo ufw allow 3061  # Allow for P2P & Metrics
 ```
 
 ### Allow Remote connection
