@@ -218,7 +218,7 @@ docker exec -it mainnet-node-postgres-1 bash
 zcat /usr/src/en/pg_backups/latest_backup.sql.gz | nohup psql -U postgres -d zksync_local_ext_node & disown
 
 # Check Database Size
-docker exec -it mainnet-node-postgres-1 psql -U postgres -c "SELECT pg_size_pretty(pg_database_size('mainnet'));"
+docker exec -it mainnet-node-postgres-1 psql -U postgres -c "SELECT pg_size_pretty(pg_database_size('zksync_local_ext_node'));"
 ```
 
 {% hint style="warning" %}
