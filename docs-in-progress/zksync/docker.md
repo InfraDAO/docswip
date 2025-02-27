@@ -74,18 +74,19 @@ sudo ufw allow from ${REMOTE.HOST.IP} to any port 3060
 
 {% hint style="info" %}
 To download the Latest Snapshot visit [https://en-backups.matterlabs.dev](https://en-backups.matterlabs.dev) and copy the desired link.\
-Run the below command in `screen` as the download may take hours to day depending upon internet speed & snapshot size.
+Run the below command in `screen` as the download may take hours/day depending upon internet speed & snapshot size.
 {% endhint %}
 
 ```bash
 aria2c -c -x 16 -s 16 --dir=/path/to/download --out=latest_backup.sql.gz --file-allocation=none --timeout=600 --retry-wait=30 --max-tries=0 <snapshot_link>
 # Example download link
+mkdir ~/zksync-era/backup/
 aria2c -c -x 16 -s 16 --dir=~/zksync-era/backup/ --out=latest_backup.sql.gz --file-allocation=none --timeout=600 --retry-wait=30 --max-tries=0 http://37.27.135.10:8080/ipfs/QmVWVRjw5DEuG5noaD7Ltcc4BGGCKEcjvL8CYFw5GcAzWD/external_node_latest.pgdump.sql.gz
 ```
 {% endstep %}
 
 {% step %}
-### **Start a ZkSync Node for Mainnet**
+### **Start ZkSync Node**&#x20;
 
 <pre class="language-bash"><code class="lang-bash"><strong>docker compose --file mainnet-external-node-docker-compose.yml up -d 
 </strong></code></pre>
@@ -243,8 +244,7 @@ nohup ./sqlx migrate run --source /root/FINAL/repo/migrations --database-url pos
 ### Restart the Containers
 
 ```bash
-cd zksync-era/docs/src/guides/external-node/docker-compose-examples/
-docker compose --file mainnet-external-node-docker-compose.yml up -d 
+docker compose --file ~/zksync-era/docs/src/guides/external-node/docker-compose-examples/mainnet-external-node-docker-compose.yml up -d --force-recreate
 ```
 {% endstep %}
 {% endstepper %}
