@@ -250,7 +250,7 @@ Environment=EN_HTTP_PORT=3060
 Environment=EN_WS_PORT=3061
 Environment=EN_HEALTHCHECK_PORT=3081
 Environment=EN_PROMETHEUS_PORT=3322
-Environment=EN_ETH_CLIENT_URL="https://ethereum-rpc.infradao.com"
+Environment=EN_ETH_CLIENT_URL="<YOUR_L1_ETH_URL_HERE"
 Environment=EN_MAIN_NODE_URL="https://zksync2-mainnet.zksync.io"
 Environment=EN_L1_CHAIN_ID=1
 Environment=EN_L2_CHAIN_ID=324
