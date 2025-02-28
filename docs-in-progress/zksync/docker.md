@@ -254,7 +254,7 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0", "meth
 
 &#x20;_Response should look like:_
 
-<pre class="language-json"><code class="lang-json"><strong>{"jsonrpc":"2.0","id":1,"result":{"startingBlock":"0x0","currentBlock":"0x3219750","highestBlock":"0x35fc3d7"}}
+<pre class="language-json"><code class="lang-json"><strong>{"jsonrpc":"2.0","id":1,"result":{"startingBlock":"0x0","currentBlock":"0x349b303","highestBlock":"0x36217dc"}}
 </strong><strong>                                            
 </strong><strong>                                    # or
 </strong><strong>                                            
@@ -270,7 +270,7 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","metho
 _Response should look like:_
 
 ```json
-{"jsonrpc":"2.0","id":83,"result":"0x2112b2d"}
+{"jsonrpc":"2.0","id":83,"result":"0x349b303"}
 ```
 
 ## REFERENCES
