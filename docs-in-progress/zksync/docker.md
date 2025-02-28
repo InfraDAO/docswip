@@ -7,7 +7,7 @@ Authors: \[ Ankur | Dapplooker]
 <table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td>10+ TB  (SSD)</td></tr></tbody></table>
 
 {% hint style="success" %}
-_The ZkSync node has a size of  \<size> GB on \<date>, February, 2025._
+_The ZkSync node has a size of  6.7 TB on 28, February, 2025._
 {% endhint %}
 
 ## Pre-requisite
@@ -17,7 +17,7 @@ Before starting, clean the setup then update and upgrade. Install following:
 * Docker
 * Git
 * Go v1.23+
-* aria2 (optional)
+* aria2 (optional) : Required for parallel download  else nohup
 
 ### **Commands**
 
@@ -222,22 +222,8 @@ docker exec -it mainnet-node-postgres-1 psql -U postgres -c "SELECT pg_size_pret
 ```
 
 {% hint style="warning" %}
-Ensure that your database has finished importing before proceeding to the next step.
+Ensure that your database has finished importing before proceeding to the next step. The DB size \~ 6620 GB (6.6 TB) .
 {% endhint %}
-{% endstep %}
-
-{% step %}
-### Perform Database Migration
-
-```bash
-cd /root/zksync/repo/usr/bin
-
-# Set migration folder as source and specify database
-nohup ./sqlx migrate info --source /root/FINAL/repo/migrations --database-url postgres://postgres:password@localhost/zksync_local_ext_node & disown
-
-# Run Database Migration
-nohup ./sqlx migrate run --source /root/FINAL/repo/migrations --database-url postgres://postgres:password@localhost/zksync_local_ext_node & disown
-```
 {% endstep %}
 
 {% step %}
@@ -270,7 +256,7 @@ curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0", "meth
 
 <pre class="language-json"><code class="lang-json"><strong>{"jsonrpc":"2.0","id":1,"result":{"startingBlock":"0x0","currentBlock":"0x3219750","highestBlock":"0x35fc3d7"}}
 </strong><strong>                                            
-</strong><strong>                                            # or
+</strong><strong>                                    # or
 </strong><strong>                                            
 </strong><strong> {"jsonrpc":"2.0","id":1,"result":false} # If block is synced or &#x3C; 11 block behind
 </strong></code></pre>
