@@ -6,12 +6,12 @@ description: 'Author: [ jLeopoldA ]'
 
 ## System Requirements
 
-| CPU | OS | RAM | DISK |
-| --- | -- | --- | ---- |
-|     |    |     |      |
+| CPU     | OS                 | RAM  | DISK |
+| ------- | ------------------ | ---- | ---- |
+| 4+Cores | Ubuntu 24.04.1 LTS | 32GB | 16TB |
 
 {% hint style="info" %}
-The Zksync Archive Node has a size of \<SIZE HERE> as of \<DATE>
+The Zksync Archive Node has a size of  10TB as of 2/28/2025.
 {% endhint %}
 
 ## Pre-Requisites
