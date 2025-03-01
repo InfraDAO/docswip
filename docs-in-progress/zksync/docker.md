@@ -275,6 +275,8 @@ _Response should look like:_
 
 ## REFERENCES
 
+{% embed url="https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/03_running.html" %}
+
 {% embed url="https://github.com/matter-labs/zksync-era.git" %}
 
 {% embed url="https://explorer.zksync.io/" %}
