@@ -4,7 +4,7 @@ Authors: \[ Ankur | Dapplooker]
 
 ## System Requirements
 
-<table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td>10+ TB  (SSD)</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>32 GB</td><td>16+ TB  (SSD)</td></tr></tbody></table>
 
 {% hint style="success" %}
 _The ZkSync node has a size of  6.7 TB on 28, February, 2025._
@@ -222,7 +222,7 @@ docker exec -it mainnet-node-postgres-1 psql -U postgres -c "SELECT pg_size_pret
 ```
 
 {% hint style="warning" %}
-Ensure that your database has finished importing before proceeding to the next step. The DB size \~ 6620 GB (6.6 TB) .
+Ensure that your database has finished importing before proceeding to the next step. The DB size \~ 6618 GB (6.6 TB) .
 {% endhint %}
 {% endstep %}
 
