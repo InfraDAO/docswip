@@ -11,7 +11,7 @@ description: 'Author: [ jLeopoldA ]'
 | Debian 12/Ubuntu 22.04 | 8+ Cores | 32GB+ | 10TB+ (SSD or NVMe) |
 
 {% hint style="info" %}
-The Iotex Archive Node has a size of \<SIZE\_HERE> as of \<DATE\_HERE>
+The Iotex Archive Node has a size of 5.5TB as of 3/5/2025
 {% endhint %}
 
 {% hint style="warning" %}
