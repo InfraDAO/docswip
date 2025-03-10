@@ -9,7 +9,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 <table><thead><tr><th align="center">CPU</th><th align="center">OS</th><th width="254" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8-Core CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center"><p>1 TB+</p><p> (NVMe)</p></td></tr></tbody></table>
 
 {% hint style="info" %}
-_Base Sepolia archive node has a size of 637GB on March 10th, 2025_
+_Op-Reth Base Sepolia archive node has a size of 637GB on March 10th, 2025_
 {% endhint %}
 
 {% hint style="success" %}
