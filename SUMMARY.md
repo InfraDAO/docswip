@@ -50,6 +50,7 @@
   * [Docker](docs-in-progress/mode/docker.md)
 * [Optimism Sepolia](docs-in-progress/optimism-sepolia/README.md)
   * [Bare Metal](docs-in-progress/optimism-sepolia/bare-metal.md)
+  * [Docker](docs-in-progress/optimism-sepolia/docker.md)
 * [Sepolia](docs-in-progress/sepolia/README.md)
   * [Ethereum Sepolia](docs-in-progress/sepolia/ethereum-sepolia/README.md)
     * [💻 Baremetal](docs-in-progress/sepolia/ethereum-sepolia/baremetal.md)
