@@ -6,9 +6,9 @@ description: 'Author: [ jLeopoldA ]'
 
 ## System Requirements
 
-| CPU | OS | RAM | DISK |
-| --- | -- | --- | ---- |
-|     |    |     |      |
+| CPU      | OS                 | RAM  | DISK |
+| -------- | ------------------ | ---- | ---- |
+| 4+ Cores | Ubuntu 22.04.4 LTS | 16GB | 5TB  |
 
 {% hint style="info" %}
 The Optimism Sepolia Archive Node has a size of 2.3TB as of 3/10/2025.
@@ -26,7 +26,7 @@ sudo apt install -y git gcc make --fix-missing
 #### Install GO
 
 {% hint style="warning" %}
-OP-NODE and OP-GETH specifically require go 1.22.0.\
+OP-NODE and OP-GETH specifically require GO  v1.22.0.\
 OP-NODE requires an L1 and an L1 Beacon.
 {% endhint %}
 
@@ -254,3 +254,13 @@ http://localhost:8545
 # Response should resemble the below.
 {"jsonrpc":"2.0","id":1,"result":"0x17c07de"}
 ```
+
+## References
+
+{% embed url="https://docs.optimism.io/operators/node-operators/tutorials/node-from-source" %}
+
+{% embed url="https://docs.optimism.io/operators/node-operators/tutorials/run-node-from-source" %}
+
+{% embed url="https://github.com/ethereum-optimism/optimism" %}
+
+{% embed url="https://github.com/ethereum-optimism/op-geth" %}
