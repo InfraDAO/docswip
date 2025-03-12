@@ -1,9 +1,8 @@
 ---
-icon: laptop
 description: 'Authors: [man4ela | catapulta.eth]'
 ---
 
-# Baremetal
+# 💻 Baremetal
 
 ## System Requirements
 

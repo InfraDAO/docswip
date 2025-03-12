@@ -66,7 +66,7 @@
       * [Op-Reth](docs-in-progress/sepolia/base-sepolia/docker/op-reth.md)
       * [Op-Erigon](docs-in-progress/sepolia/base-sepolia/docker/op-erigon.md)
 * [Sonic](docs-in-progress/sonic/README.md)
-  * [Bare Metal](docs-in-progress/sonic/bare-metal.md)
+  * [Docker](docs-in-progress/sonic/docker.md)
 * [🪼 Polygon zkEVM](docs-in-progress/polygon-zkevm/README.md)
   * [🐉 Erigon](docs-in-progress/polygon-zkevm/erigon/README.md)
     * [💻 Baremetal](docs-in-progress/polygon-zkevm/erigon/baremetal.md)
