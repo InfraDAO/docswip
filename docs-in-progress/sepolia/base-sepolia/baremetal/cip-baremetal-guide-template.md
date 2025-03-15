@@ -249,7 +249,7 @@ cp /mnt/base-sepolia/data/engine-auth-jwt /mnt/base-sepolia/data-reth/engine-aut
 {% endstep %}
 
 {% step %}
-### Enable service files
+### Enable Services&#x20;
 
 ```bash
 systemctl daemon-reload
@@ -259,7 +259,7 @@ systemctl enable op-reth.service
 {% endstep %}
 
 {% step %}
-### Start Service
+### Start Services
 
 ```bash
 systemctl start op-node.service
