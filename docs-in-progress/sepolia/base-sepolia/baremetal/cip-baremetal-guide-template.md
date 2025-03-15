@@ -271,7 +271,7 @@ systemctl start op-reth.service
 ## Monitoring <a href="#monitor-logs" id="monitor-logs"></a>
 
 {% hint style="warning" %}
-The Sync time is \~24 hours ; might change depending upon L1 RPC, Peers , Disk & Internet speed .
+The Sync time is \~24 hours ; depending upon L1 RPC, Peers , Disk & Internet speed .
 {% endhint %}
 
 * Check is Service file is running and status is <mark style="color:green;">active(running)</mark>
