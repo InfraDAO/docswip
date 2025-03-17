@@ -51,7 +51,7 @@ sudo ufw allow 443
 ### Allow Remote connection
 
 ```bash
-sudo ufw allow from ${REMOTE.HOST.IP} to any port 9944 
+sudo ufw allow from ${REMOTE.HOST.IP} to any port 8575
 ```
 
 ## Setup Instructions&#x20;
