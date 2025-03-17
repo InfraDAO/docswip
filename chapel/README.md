@@ -1,2 +1,2 @@
-# Chapel
+# 📦 Chapel
 

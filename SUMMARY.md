@@ -85,7 +85,8 @@
 
 ***
 
-* [Chapel](chapel/README.md)
+* [📦 Chapel](chapel/README.md)
+  * [🐳 Docker](chapel/docker.md)
   * [💻 Baremetal](chapel/baremetal.md)
 
 ## Templates
