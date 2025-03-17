@@ -83,6 +83,11 @@
   * [🐳 Docker](docs-in-progress/zksync/docker.md)
   * [💻 Bare Metal](docs-in-progress/zksync/bare-metal.md)
 
+***
+
+* [Chapel](chapel/README.md)
+  * [💻 Baremetal](chapel/baremetal.md)
+
 ## Templates
 
 * [CIP Docker Guide Template](templates/cip-docker-guide-template.md)
