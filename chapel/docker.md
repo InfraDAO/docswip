@@ -195,7 +195,7 @@ docker ps
 ```bash
 geth attach http://localhost:8575
 eth.syncing        # Return block number no cervertion needed
-eth.syncing.highestBlock # Return highestblock synced
+eth.syncing.currentBlock # Return current highestblock synced
 ```
 
 _results_
