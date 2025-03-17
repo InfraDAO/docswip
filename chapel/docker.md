@@ -195,7 +195,7 @@ docker ps
 ```bash
 geth attach http://localhost:8575
 eth.syncing        # Return block number no cervertion needed
-eth.syncing.highestBlock # Return highestblock 
+eth.syncing.highestBlock # Return highestblock synced
 ```
 
 _results_
@@ -225,13 +225,13 @@ _results_
 ### Latest Block
 
 ```bash
-curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0", "method":"starknet_blockNumber", "params":[], "id":1}' http://localhost:8575
+curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8575
 ```
 
 _Response should look like:_
 
 ```json
-{"jsonrpc":"2.0","result":0x197fe5,"id":1}
+{"jsonrpc":"2.0","id":1,"result":"0x7f5659"}
 ```
 
 ## REFERENCES
