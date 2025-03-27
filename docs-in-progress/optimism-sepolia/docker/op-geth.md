@@ -1,9 +1,8 @@
 ---
 description: 'Author: [Godwin]'
-icon: docker
 ---
 
-# Docker
+# Op-Geth
 
 ## System Requirements
 
@@ -225,7 +224,7 @@ Use the following login details to access the dashboard:
 * Username: `admin`
 * Password: `optimism`
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ## Query Node
 
