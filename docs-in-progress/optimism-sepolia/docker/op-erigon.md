@@ -273,13 +273,13 @@ services:
       - "9222:9222"      # P2P TCP
       - "9222:9222/udp"  # P2P UDP
     volumes:
-      - /root/data/op-sepolia/op-erigon/jwt.hex:/root/data/op-sepolia/op-erigon/jwt.hex:ro
+      - /root/data/op-sepolia/optimism-erigon/jwt.hex:/root/data/optimism-sepolia/op-erigon/jwt.hex:ro
     environment:
       - OP_GETH_SEQUENCER_HTTP=https://sepolia-sequencer.optimism.io
       - OP_NODE_NETWORK=op-sepolia
       - OP_NODE_L1_ETH_RPC=${LAYER_1_RPC}
       - OP_NODE_L1_BEACON=${LAYER_1_BEACON}
-      - OP_NODE_L2_ENGINE_AUTH=/root/data/op-sepolia/op-erigon/jwt.hex
+      - OP_NODE_L2_ENGINE_AUTH=/root/data/optimism-sepolia/op-erigon/jwt.hex
       - OP_NODE_L2_ENGINE_RPC=http://op-erigon:8551
       - OP_NODE_L2_ENGINE_KIND=erigon
       - OP_NODE_LOG_LEVEL=info
@@ -317,11 +317,11 @@ services:
       - "30303:30309/udp"  # Peers
       - "8551:8551"
     volumes:
-      - /root/data/op-sepolia/op-erigon/jwt.hex:/root/data/op-sepolia/op-erigon/jwt.hex:ro
+      - /root/data/optimism-sepolia/op-erigon/jwt.hex:/root/data/optimism-sepolia/op-erigon/jwt.hex:ro
       - op-erigon_data:/data
     command:
       - --datadir=/data
-      - --authrpc.jwtsecret=/root/data/op-sepolia/op-erigon/jwt.hex
+      - --authrpc.jwtsecret=/root/data/optimism-sepolia/op-erigon/jwt.hex
       - --authrpc.addr=0.0.0.0
       - --authrpc.port=8551
       - --authrpc.vhosts=*
