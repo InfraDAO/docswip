@@ -166,7 +166,7 @@ screen -r erigon #will bring you back to monitor downloading progress
 You'll need to extract the downloaded snapshot and move its contents to the `op-erigon-data` directory, where Docker stores persistent data.
 
 ```bash
-zstd -d https://datadirs.testinprod.io/base-sepolia-db-13833382.zst -c | tar xvf -
+zstd -d base-sepolia-db-13833382.zst -c | tar xvf -
 # replace the archive with an actual name
 ```
 
@@ -190,7 +190,7 @@ ls #to check if archive has moved properly
 </code></pre>
 
 {% hint style="warning" %}
-If you haven't started the node yet, create `op-reth-data directory first:`
+If you haven't started the node yet, create `op-erigon-data directory first:`
 
 ```bash
 docker volume create base-sepolia_op-erigon_data
@@ -259,7 +259,7 @@ services:
   ######################################################################################
 
   opnode:
-    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.11.1
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.12.2
     container_name: opnode
     user: root  # Run as root
     networks:
@@ -301,7 +301,7 @@ services:
   ######################################################################################
 
   op-erigon:
-    image: testinprod/op-erigon:v2.61.3-0.8.3
+    image: testinprod/op-erigon:v2.61.3-0.8.4
     container_name: op-erigon
     user: root  # Run as root
     restart: unless-stopped
