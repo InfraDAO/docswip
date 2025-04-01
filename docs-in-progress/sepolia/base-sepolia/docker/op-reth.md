@@ -317,6 +317,7 @@ services:
       - "30303:30303"      # Peers
       - "30303:30303/udp"  # Peers
       - "8551:8551"
+      - "8545:8545"
     volumes:
       - /root/data/base-sepolia/op-reth/jwt.hex:/root/data/base-sepolia/op-reth/jwt.hex:ro
       - op-reth_data:/data
