@@ -9,7 +9,7 @@ description: 'Authors: [man4ela | catapulta.eth]'
 <table><thead><tr><th align="center">CPU</th><th align="center">OS</th><th width="254" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8-Core CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center"><p>1 TB+</p><p> (NVMe)</p></td></tr></tbody></table>
 
 {% hint style="info" %}
-_Op-Erigon Base Sepolia archive node has a size of ???GB on March 10th, 2025_
+_Op-Erigon Base Sepolia archive node has a size of ???GB on March 31th, 2025_
 {% endhint %}
 
 {% hint style="success" %}
@@ -316,6 +316,7 @@ services:
       - "30303:30309"      # Peers
       - "30303:30309/udp"  # Peers
       - "8551:8551"
+      - "8545:8545"
     volumes:
       - /root/data/base-sepolia/op-erigon/jwt.hex:/root/data/base-sepolia/op-erigon/jwt.hex:ro
       - op-erigon_data:/data
