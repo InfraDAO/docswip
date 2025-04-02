@@ -128,6 +128,10 @@ L1_BEACON={YOUR_L1_BEACON} #Your synced L1 CL (Consensus Layer) Beacon endpoint,
 `Ctrl + x` and `y` to save file
 {% endhint %}
 
+{% hint style="danger" %}
+Make sure `L1_BEACON` endpoint provides full historical blobs data. Otherwise you won't be able to sync
+{% endhint %}
+
 ### Create JWT secret file
 
 ```bash
@@ -205,6 +209,14 @@ ls
 
 ### Launch Base Sepolia
 
+{% hint style="danger" %}
+IMPORTANT: During synchronization you will need to switch versions of op-node and op-erigon in order to escape `Ahead with major recommended protocol version` mismatch issue:
+
+See avaialable images for op-erigon here: [https://hub.docker.com/r/testinprod/op-erigon/tags](https://hub.docker.com/r/testinprod/op-erigon/tags)
+
+for op-node here:  [https://github.com/ethereum-optimism/optimism/releases](https://github.com/ethereum-optimism/optimism/releases)
+{% endhint %}
+
 ```bash
 cd /root/base-sepolia
 
@@ -259,7 +271,7 @@ services:
   ######################################################################################
 
   opnode:
-    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.12.2
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.7.6
     container_name: opnode
     user: root  # Run as root
     networks:
@@ -301,7 +313,7 @@ services:
   ######################################################################################
 
   op-erigon:
-    image: testinprod/op-erigon:v2.61.3-0.8.4
+    image: testinprod/op-erigon:2.60.0-0.6.1-amd64
     container_name: op-erigon
     user: root  # Run as root
     restart: unless-stopped
