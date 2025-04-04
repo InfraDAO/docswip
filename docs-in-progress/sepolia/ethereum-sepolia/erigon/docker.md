@@ -6,12 +6,12 @@ description: 'Author: [ jLeopoldA ]'
 
 ## System Requirements
 
-| CPU | OS | RAM | DISK |
-| --- | -- | --- | ---- |
-|     |    |     |      |
+| CPU     | OS                 | RAM  | DISK  |
+| ------- | ------------------ | ---- | ----- |
+| 8 Cores | Ubuntu 24.04.1 LTS | 32GB | 1.1TB |
 
 {% hint style="info" %}
-The Ethereum Sepolia Archive Node using Erigon has a size of \<SIZE HERE> as of \<DATE HERE>
+The Ethereum Sepolia Archive Node using Erigon has a size of 585GB as of 4/4/2025
 {% endhint %}
 
 ## Pre-Requisites
@@ -123,7 +123,7 @@ echo "services:
       - "--http.api=net,web3,eth,debug"
       - "--http.corsdomain=*"
       - "--http.addr=0.0.0.0"
-      - "--http.port=9545"
+      - "--http.port=8545"
       - "--http.vhosts=*"
     restart: unless-stopped
 volumes:
