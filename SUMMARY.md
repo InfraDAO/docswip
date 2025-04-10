@@ -14,8 +14,6 @@
 * [🌖 Moonriver ](docs-in-progress/moonriver/README.md)
   * [💻 Baremetal](docs-in-progress/moonriver/baremetal.md)
   * [🐳 Docker](docs-in-progress/moonriver/docker.md)
-* [🌟 Madara](docs-in-progress/madara/README.md)
-  * [🐳 Docker](docs-in-progress/madara/docker.md)
 * [🌐 Gravity](docs-in-progress/gravity/README.md)
   * [💻 Baremetal](docs-in-progress/gravity/baremetal.md)
   * [🐳 Docker](docs-in-progress/gravity/docker.md)
@@ -90,6 +88,11 @@
 * [📦 Chapel](chapel/README.md)
   * [🐳 Docker](chapel/docker.md)
   * [💻 Baremetal](chapel/baremetal.md)
+* [✨ Starknet](starknet/README.md)
+  * [🌟 Madara](starknet/madara/README.md)
+    * [🐳 Docker](starknet/madara/docker.md)
+  * [🪶 Pathfinder](starknet/pathfinder/README.md)
+    * [🐳 Docker](starknet/pathfinder/docker.md)
 
 ## Templates
 
