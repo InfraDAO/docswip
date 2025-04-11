@@ -109,7 +109,7 @@ mkdir -p /root/sepolia && cd /root/sepolia
 ```bash
 echo "services:
   erigon:
-    image: "erigontech/erigon:latest"
+    image: "erigontech/erigon:v3.0.0"
     container_name: erigon-sepolia
     ports:
       - "30303:30303"
@@ -125,6 +125,7 @@ echo "services:
       - "--http.addr=0.0.0.0"
       - "--http.port=8545"
       - "--http.vhosts=*"
+      - "--prune.mode=archive"
     restart: unless-stopped
 volumes:
   erigon_data:" > docker-compose.yml
