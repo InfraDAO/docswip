@@ -93,6 +93,8 @@
     * [🐳 Docker](starknet/madara/docker.md)
   * [🪶 Pathfinder](starknet/pathfinder/README.md)
     * [🐳 Docker](starknet/pathfinder/docker.md)
+  * [🚒 Firehose](starknet/firehose/README.md)
+    * [🐳 Docker](starknet/firehose/docker.md)
 
 ## Templates
 
