@@ -210,9 +210,9 @@ ls
 ### Launch Base Sepolia
 
 {% hint style="danger" %}
-IMPORTANT: During synchronization you will need to switch versions of op-node and op-erigon in order to escape `Ahead with major recommended protocol version` mismatch issue:
+IMPORTANT:&#x20;
 
-See avaialable images for op-erigon here: [https://hub.docker.com/r/testinprod/op-erigon/tags](https://hub.docker.com/r/testinprod/op-erigon/tags)
+See avaialable up-to-date images for op-erigon here: [https://hub.docker.com/r/testinprod/op-erigon/tags](https://hub.docker.com/r/testinprod/op-erigon/tags)
 
 for op-node here:  [https://github.com/ethereum-optimism/optimism/releases](https://github.com/ethereum-optimism/optimism/releases)
 {% endhint %}
@@ -271,7 +271,7 @@ services:
   ######################################################################################
 
   opnode:
-    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.7.6
+    image: us-docker.pkg.dev/oplabs-tools-artifacts/images/op-node:v1.13.0
     container_name: opnode
     user: root  # Run as root
     networks:
@@ -313,7 +313,7 @@ services:
   ######################################################################################
 
   op-erigon:
-    image: testinprod/op-erigon:2.60.0-0.6.1-amd64
+    image: testinprod/op-erigon:v2.61.3-0.9.0
     container_name: op-erigon
     user: root  # Run as root
     restart: unless-stopped
