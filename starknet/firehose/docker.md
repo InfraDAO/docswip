@@ -15,11 +15,16 @@ _Firehose poller for Starknet has a size of 60GB on April 14th, 2025_
 {% hint style="success" %}
 The Firehose instrumentation service is added to a node for efficient capture and simple storage of blockchain data.&#x20;
 
-Firehose extracts, transforms and saves blockchain data in a highly performant file-based strategy. Blockchain developers can then access data extracted by Firehose through binary data streams
+Firehose extracts, transforms and saves blockchain data in a highly performant file-based strategy. Blockchain developers can then access data extracted by Firehose through binary data streams.
+
+This guide shows how to set up the **Firehose** poller for Starknet with **Substreams** support. We use two components:
+
+**`firehose-core (`**&#x72;eader, relayer, merger, firehos&#x65;**`)`**\
+&#xNAN;**`firehose-starknet (`**&#x53;tarknet-specific fetche&#x72;**`)`**
 {% endhint %}
 
 {% hint style="warning" %}
-## This method of setting up Firehose for Starknet assumes that you have a your own synced Starknet mainnet full (or archive) node.
+## This method of setting up Firehose for Starknet assumes that you have a your own synced Starknet mainnet full (or archive) node (URL endpoint available) and Ethereum Mainnet L1 endpoint ready. In this guide, you'll be able to configure and run the entire Firehose stack with a single `docker run` command
 {% endhint %}
 
 ### Pre-Requisites <a href="#pre-requisties" id="pre-requisties"></a>
@@ -110,3 +115,30 @@ Set an A record for a domain, you need to access the domain's DNS settings and c
 ```bash
 mkdir firehose && cd firehose
 ```
+
+### Create Dockerfile.firehose-reader
+
+```bash
+sudo nano Dockerfile.firehose-reader
+```
+
+Paste and save:
+
+```bash
+FROM ghcr.io/streamingfast/firehose-core:v1.9.5 as core
+FROM ghcr.io/streamingfast/firehose-starknet:6141dea as firestarknet
+
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates curl vim jq tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=core /app/firecore /usr/local/bin/firecore
+COPY --from=firestarknet /app/firestarknet /usr/local/bin/firestarknet
+
+ENTRYPOINT ["firecore"]
+```
+
+Create .env file
+
