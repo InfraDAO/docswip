@@ -140,5 +140,235 @@ COPY --from=firestarknet /app/firestarknet /usr/local/bin/firestarknet
 ENTRYPOINT ["firecore"]
 ```
 
-Create .env file
+#### Create .env file <a href="#create-.env-file" id="create-.env-file"></a>
 
+```bash
+sudo nano .env
+```
+
+Paste and save:
+
+```bash
+DOMAIN={YOUR_DOMAIN} #Domain should be something like rpc.mywebsite.com, e.g. firehose.infradao.org
+EMAIL={YOUR_EMAIL} #Your email to receive SSL renewal emails
+WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's own IP and comma separated list of IP's allowed to connect to RPC (e.g. Indexer)/0
+STARKNET_RPC_URL={YOUR_STARKNET_RPC} # your synced Starknet Mainnet full node endpoint
+L1_ETH_RPC_URL={YOUR_L1_RPC} #Your ready synced L1 Ethereum Mainnet node RPC endpoint
+```
+
+### Launch Firehose:
+
+```bash
+sudo nano docker-compose.yml
+```
+
+Paste the following into the `docker-compose.yml:`&#x20;
+
+```bash
+networks:
+  monitor-net:
+    driver: bridge
+
+volumes:
+  traefik_letsencrypt: {}
+
+services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: always
+    ports:
+      - "443:443"
+    networks:
+      - monitor-net
+    command:
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    volumes:
+      - "traefik_letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  reader:
+    build:
+      context: .
+      dockerfile: Dockerfile.firehose-reader
+    container_name: firehose-reader
+    command:
+      - "--config-file"
+      - ""
+      - start
+      - reader-node
+      - --common-one-block-store-url=file:///data/storage/one-blocks
+      - --reader-node-path=firestarknet
+      - --reader-node-arguments=fetch 0 --state-dir=/data/storage/reader-state --block-fetch-batch-size=1 --interval-between-fetch=1s --latest-block-retry-interval=10s --starknet-endpoints=${STARKNET_RPC_URL} --eth-endpoints=${L1_ETH_RPC_URL}
+    environment:
+      - STARKNET_RPC_URL=${STARKNET_RPC_URL}
+      - L1_ETH_RPC_URL=${L1_ETH_RPC_URL}
+    volumes:
+      - ./firehose-data:/data
+    networks:
+      - monitor-net
+
+  merger:
+    image: ghcr.io/streamingfast/firehose-core:v1.9.5
+    container_name: firehose-merger
+    command:
+      - "--config-file"
+      - ""
+      - start
+      - merger
+      - --common-one-block-store-url=file:///data/storage/one-blocks
+      - --common-merged-blocks-store-url=file:///data/storage/merged-blocks
+      - --common-forked-blocks-store-url=file:///data/storage/forked-blocks
+    volumes:
+      - ./firehose-data:/data
+    networks:
+      - monitor-net
+
+  relayer:
+    image: ghcr.io/streamingfast/firehose-core:v1.9.5
+    container_name: firehose-relayer
+    command:
+      - "--config-file"
+      - ""
+      - start
+      - relayer
+      - --common-one-block-store-url=file:///data/storage/one-blocks
+      - --relayer-source=reader:10010
+    volumes:
+      - ./firehose-data:/data
+    networks:
+      - monitor-net
+
+  firehose:
+    image: ghcr.io/streamingfast/firehose-core:v1.9.5
+    container_name: firehose
+    command:
+      - "--config-file"
+      - ""
+      - start
+      - firehose
+      - --common-one-block-store-url=file:///data/storage/one-blocks
+      - --common-merged-blocks-store-url=file:///data/storage/merged-blocks
+      - --common-forked-blocks-store-url=file:///data/storage/forked-blocks
+      - --common-live-blocks-addr=relayer:10014
+      - --common-first-streamable-block=0
+      - --advertise-chain-name=starknet-mainnet
+      - --firehose-grpc-listen-addr=:10015
+      - --substreams-tier1-grpc-listen-addr=:10016
+    ports:
+      - "10015:10015"
+      - "10016:10016"
+    volumes:
+      - ./firehose-data:/data
+    networks:
+      - monitor-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.substreams.rule=Host(`${DOMAIN}`) && PathPrefix(`/substreams`)"
+      - "traefik.http.routers.substreams.entrypoints=websecure"
+      - "traefik.http.routers.substreams.tls.certresolver=myresolver"
+      - "traefik.http.services.substreams.loadbalancer.server.port=10016"
+      - "traefik.http.middlewares.substreams-stripprefix.stripprefix.prefixes=/substreams"
+      - "traefik.http.routers.substreams.middlewares=substreams-stripprefix"
+      - "traefik.http.middlewares.substreams-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
+      - "traefik.http.routers.substreams.middlewares=substreams-ipallowlist,substreams-stripprefix"
+```
+
+#### Save and run"
+
+```bash
+sudo docker compose build reader
+sudo docker compose up -d
+```
+
+### Monitor Logs
+
+Use `docker logs` to monitor if all your Firehose components run as expected. The `-f` flag ensures you are following the log output
+
+```bash
+docker compose logs -f reader -n 100
+
+docker compose logs -f merger -n 100
+
+docker compose logs -f relayer -n 100
+
+docker compose logs -f firehose -n 100
+```
+
+#### Once your Firehose starts syncing, the logs from `reader` are expected to look like this:
+
+```log
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:44.163567417Z","logger":"firestarknet","message":"saved cursor","filepath":"/data/storage/reader-state/cursor.json","last_fired_block":"1317766 (0x3b94a9045d5f192a21610c232eddf1714e8451c156f32fda5d1fec63cf66450)","lib":"1317765 (0x20e3f57c2c60e2fe90a1f84dd5c52d57bf8296d9e6ab0e67fa421be16519ba8)","block_count":3,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:44.16361648Z","logger":"firestarknet","message":"about to fetch block","block_to_fetch":1317767,"delay":0,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:44.163624815Z","logger":"firestarknet","message":"requesting block","block_num":1317767,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:44.163682214Z","logger":"firestarknet","message":"fetching block","block_num":1317767,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:44.164810011Z","logger":"firestarknet","message":"got latest block num","latest_block_num":1317766,"requested_block_num":1317767,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:55.076626475Z","logger":"firestarknet","message":"fetching block","block_num":1317767,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:55.07811861Z","logger":"firestarknet","message":"got latest block num","latest_block_num":1317766,"requested_block_num":1317767,"logging.googleapis.com/labels":{}}
+firehose-reader  | {"severity":"INFO","timestamp":"2025-04-15T06:20:59.566063635Z","logger":"reader-node","message":"console reader stats","block_rate":"0.033 blocks/s (37625 total)","last_block":"#1317766 (0x3b94a9045d5f192a21610c232eddf1714e8451c156f32fda5d1fec63cf66450) @ 15 Apr 25 06:19 +0000","last_parent_block":"#1317765 (0x20e3f57c2c60e2fe90a1f84dd5c52d57bf8296d9e6ab0e67fa421be16519ba8)","lib":1317765,"logging.googleapis.com/labels":{}}
+```
+
+### The Best way to test if substreams work is to run an actual substream&#x20;
+
+`Install the Substreams CLI:`
+
+```bash
+wget https://github.com/streamingfast/substreams/releases/download/v1.15.0/substreams_linux_x86_64.tar.gz
+tar -xzf substreams_linux_x86_64.tar.gz
+chmod +x substreams
+sudo mv substreams /usr/local/bin/
+```
+
+`Then run the sample clock substream:`
+
+```bash
+substreams run \
+  -e localhost:10016 \
+  https://github.com/pinax-network/substreams/releases/download/blocks-v0.1.0/blocks-v0.1.0.spkg \
+  map_blocks \
+  -s -100 \
+  --plaintext
+```
+
+#### The expected output:
+
+```log
+----------- BLOCK #47,500 (0x359f792ad8da03eef623004e4b7986cacc547054c425fb96de6bc10b405ff73) age=16790h2m41.168753013s ---------------
+{
+  "@module": "map_blocks",
+  "@block": 47500,
+  "@type": "sf.substreams.v1.Clock",
+  "@data": {
+    "id": "0x359f792ad8da03eef623004e4b7986cacc547054c425fb96de6bc10b405ff73",
+    "number": "47500",
+    "timestamp": "2023-05-01T16:06:35Z"
+  }
+}
+
+----------- BLOCK #47,501 (0x36a51372e1b22af6d7640e14c78ce7300863e1101d008147a5c1d0097a02ce5) age=16789h59m6.211169907s ---------------
+{
+  "@module": "map_blocks",
+  "@block": 47501,
+  "@type": "sf.substreams.v1.Clock",
+  "@data": {
+    "id": "0x36a51372e1b22af6d7640e14c78ce7300863e1101d008147a5c1d0097a02ce5",
+    "number": "47501",
+    "timestamp": "2023-05-01T16:10:10Z"
+  }
+}
+```
+
+### Referenes:
+
+{% embed url="https://firehose.streamingfast.io/introduction/firehose-overview" %}
+
+{% embed url="https://github.com/streamingfast/firehose-starknet" %}
+
+{% embed url="https://github.com/streamingfast/firehose-core" %}
