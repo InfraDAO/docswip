@@ -148,13 +148,13 @@ sudo nano .env
 
 Paste and save:
 
-```bash
-DOMAIN={YOUR_DOMAIN} #Domain should be something like rpc.mywebsite.com, e.g. firehose.infradao.org
-EMAIL={YOUR_EMAIL} #Your email to receive SSL renewal emails
-WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's own IP and comma separated list of IP's allowed to connect to RPC (e.g. Indexer)/0
+<pre class="language-bash"><code class="lang-bash">FIREHOSE_DOMAIN={YOUR_DOMAIN} #Set domain for Firehose Starknet endpoint e.g. firehose-starknet.infradao.org
+SUBSTREAMS_DOMAIN={YOUR_DOMAIN} #Set domain for substreams e.g. firehose-substreams.infradao.org
+<strong>EMAIL={YOUR_EMAIL} #Your email to receive SSL renewal emails
+</strong>WHITELIST={YOUR_REMOTE_MACHINE_IP} #the server's own IP and comma separated list of IP's allowed to connect to RPC (e.g. Indexer)/0
 STARKNET_RPC_URL={YOUR_STARKNET_RPC} # your synced Starknet Mainnet full node endpoint
 L1_ETH_RPC_URL={YOUR_L1_RPC} #Your ready synced L1 Ethereum Mainnet node RPC endpoint
-```
+</code></pre>
 
 ### Launch Firehose:
 
@@ -173,27 +173,6 @@ volumes:
   traefik_letsencrypt: {}
 
 services:
-  traefik:
-    image: traefik:latest
-    container_name: traefik
-    restart: always
-    ports:
-      - "443:443"
-    networks:
-      - monitor-net
-    command:
-      - "--api.dashboard=true"
-      - "--log.level=DEBUG"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-    volumes:
-      - "traefik_letsencrypt:/letsencrypt"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
   reader:
     build:
       context: .
@@ -216,7 +195,7 @@ services:
       - monitor-net
 
   merger:
-    image: ghcr.io/streamingfast/firehose-core:v1.9.5
+    image: ghcr.io/streamingfast/firehose-core:v1.9.7
     container_name: firehose-merger
     command:
       - "--config-file"
@@ -232,7 +211,7 @@ services:
       - monitor-net
 
   relayer:
-    image: ghcr.io/streamingfast/firehose-core:v1.9.5
+    image: ghcr.io/streamingfast/firehose-core:v1.9.7
     container_name: firehose-relayer
     command:
       - "--config-file"
@@ -247,13 +226,14 @@ services:
       - monitor-net
 
   firehose:
-    image: ghcr.io/streamingfast/firehose-core:v1.9.5
+    image: ghcr.io/streamingfast/firehose-core:v1.9.7
     container_name: firehose
     command:
       - "--config-file"
       - ""
       - start
       - firehose
+      - substreams-tier1
       - --common-one-block-store-url=file:///data/storage/one-blocks
       - --common-merged-blocks-store-url=file:///data/storage/merged-blocks
       - --common-forked-blocks-store-url=file:///data/storage/forked-blocks
@@ -271,14 +251,27 @@ services:
       - monitor-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.substreams.rule=Host(`${DOMAIN}`) && PathPrefix(`/substreams`)"
-      - "traefik.http.routers.substreams.entrypoints=websecure"
-      - "traefik.http.routers.substreams.tls.certresolver=myresolver"
-      - "traefik.http.services.substreams.loadbalancer.server.port=10016"
-      - "traefik.http.middlewares.substreams-stripprefix.stripprefix.prefixes=/substreams"
-      - "traefik.http.routers.substreams.middlewares=substreams-stripprefix"
-      - "traefik.http.middlewares.substreams-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
-      - "traefik.http.routers.substreams.middlewares=substreams-ipallowlist,substreams-stripprefix"
+
+  # Firehose (gRPC endpoint)
+- "traefik.enable=true"
+- "traefik.http.routers.firehose.rule=Host(`${FIREHOSE_DOMAIN}`)"
+- "traefik.http.routers.firehose.entrypoints=websecure"
+- "traefik.http.routers.firehose.tls.certresolver=myresolver"
+- "traefik.http.routers.firehose.service=firehose"
+- "traefik.http.services.firehose.loadbalancer.server.port=10015"
+- "traefik.http.services.firehose.loadbalancer.server.scheme=h2c"
+- "traefik.http.middlewares.firehose-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
+- "traefik.http.routers.firehose.middlewares=firehose-ipallowlist"
+
+# Substreams Tier1 (gRPC endpoint)
+- "traefik.http.routers.substreams.rule=Host(`${SUBSTREAMS_DOMAIN}`)"
+- "traefik.http.routers.substreams.entrypoints=websecure"
+- "traefik.http.routers.substreams.tls.certresolver=myresolver"
+- "traefik.http.routers.substreams.service=substreams"
+- "traefik.http.services.substreams.loadbalancer.server.port=10016"
+- "traefik.http.services.substreams.loadbalancer.server.scheme=h2c"
+- "traefik.http.middlewares.substreams-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
+- "traefik.http.routers.substreams.middlewares=substreams-ipallowlist"
 ```
 
 #### Save and run"
