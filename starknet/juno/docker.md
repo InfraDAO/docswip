@@ -170,7 +170,7 @@ Use `docker logs` to monitor your starknet node. The `-f` flag ensures you are f
 docker logs juno -f --tail 100
 ```
 
-Once your Pathfinder Starknet node starts syncing, the logs are expected to look like this:
+Once your Juno Starknet node starts syncing, the logs are expected to look like this:
 
 ```log
 09:28:47.686 02/04/2025 +00:00  INFO    migration/migration.go:110      Applying database migration     {"stage": "17/18"}
