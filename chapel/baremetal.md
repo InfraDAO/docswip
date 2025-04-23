@@ -108,7 +108,7 @@ cd ..
 
 mkdir -p /root/data/bsc-erigon/
 
-openssl rand -hex 32 | tr -d "\n" > /root/data/bsc-erigon/
+openssl rand -hex 32 | tr -d "\n" > /root/data/bsc-erigon/jwt.hex
 ```
 
 #### Create Systemd service for BSC Erigon
