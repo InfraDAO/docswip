@@ -97,6 +97,7 @@
     * [🐳 Docker](starknet/firehose/docker.md)
   * [🥋 Juno](starknet/juno/README.md)
     * [🐳 Docker](starknet/juno/docker.md)
+    * [Bare Metal](starknet/juno/bare-metal.md)
 
 ## Templates
 
