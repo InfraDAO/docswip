@@ -95,6 +95,7 @@
     * [🐳 Docker](starknet/pathfinder/docker.md)
   * [🚒 Firehose](starknet/firehose/README.md)
     * [🐳 Docker](starknet/firehose/docker.md)
+    * [🎏 Substreams and Graph Node](starknet/firehose/substreams-and-graph-node.md)
   * [🥋 Juno](starknet/juno/README.md)
     * [🐳 Docker](starknet/juno/docker.md)
     * [Bare Metal](starknet/juno/bare-metal.md)

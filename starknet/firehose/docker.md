@@ -173,6 +173,29 @@ volumes:
   traefik_letsencrypt: {}
 
 services:
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: always
+    ports:
+      - "443:443"
+    networks:
+      - monitor-net
+    command:
+      - "--api=true"
+      - "--api.dashboard=true"
+      - "--log.level=DEBUG"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.grpc.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=${EMAIL}"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    volumes:
+      - traefik_letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
   reader:
     build:
       context: .
@@ -234,6 +257,7 @@ services:
       - start
       - firehose
       - substreams-tier1
+      - substreams-tier2
       - --common-one-block-store-url=file:///data/storage/one-blocks
       - --common-merged-blocks-store-url=file:///data/storage/merged-blocks
       - --common-forked-blocks-store-url=file:///data/storage/forked-blocks
@@ -242,36 +266,30 @@ services:
       - --advertise-chain-name=starknet-mainnet
       - --firehose-grpc-listen-addr=:10015
       - --substreams-tier1-grpc-listen-addr=:10016
+      - --substreams-tier2-grpc-listen-addr=:10017
     ports:
       - "10015:10015"
       - "10016:10016"
+      - "10017:10017"
     volumes:
       - ./firehose-data:/data
     networks:
       - monitor-net
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.firehose.rule=Host(`firehose-starknet.infradao.net`)"
+      - "traefik.http.routers.firehose.entrypoints=websecure"
+      - "traefik.http.routers.firehose.tls.certresolver=myresolver"
+      - "traefik.http.routers.firehose.service=firehose"
+      - "traefik.http.services.firehose.loadbalancer.server.port=10015"
+      - "traefik.http.services.firehose.loadbalancer.server.scheme=h2c"
+      - "traefik.http.routers.substreams.rule=Host(`firehose-substreams.infradao.net`)"
+      - "traefik.http.routers.substreams.entrypoints=grpc"
+      - "traefik.http.routers.substreams.tls.certresolver=myresolver"
+      - "traefik.http.routers.substreams.service=substreams"
+      - "traefik.http.services.substreams.loadbalancer.server.port=10016"
+      - "traefik.http.services.substreams.loadbalancer.server.scheme=h2c"
 
-  # Firehose (gRPC endpoint)
-- "traefik.enable=true"
-- "traefik.http.routers.firehose.rule=Host(`${FIREHOSE_DOMAIN}`)"
-- "traefik.http.routers.firehose.entrypoints=websecure"
-- "traefik.http.routers.firehose.tls.certresolver=myresolver"
-- "traefik.http.routers.firehose.service=firehose"
-- "traefik.http.services.firehose.loadbalancer.server.port=10015"
-- "traefik.http.services.firehose.loadbalancer.server.scheme=h2c"
-- "traefik.http.middlewares.firehose-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
-- "traefik.http.routers.firehose.middlewares=firehose-ipallowlist"
-
-# Substreams Tier1 (gRPC endpoint)
-- "traefik.http.routers.substreams.rule=Host(`${SUBSTREAMS_DOMAIN}`)"
-- "traefik.http.routers.substreams.entrypoints=websecure"
-- "traefik.http.routers.substreams.tls.certresolver=myresolver"
-- "traefik.http.routers.substreams.service=substreams"
-- "traefik.http.services.substreams.loadbalancer.server.port=10016"
-- "traefik.http.services.substreams.loadbalancer.server.scheme=h2c"
-- "traefik.http.middlewares.substreams-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
-- "traefik.http.routers.substreams.middlewares=substreams-ipallowlist"
 ```
 
 #### Save and run"
