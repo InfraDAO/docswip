@@ -195,7 +195,9 @@ services:
     volumes:
       - traefik_letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
-
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.starknet-ipallowlist.ipallowlist.sourcerange=${WHITELIST}"
   reader:
     build:
       context: .
@@ -277,13 +279,13 @@ services:
       - monitor-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.firehose.rule=Host(`firehose-starknet.infradao.net`)"
-      - "traefik.http.routers.firehose.entrypoints=websecure"
+      - "traefik.http.routers.firehose.rule=Host(${FIREHOSE_DOMAIN})"
+      - "traefik.http.routers.firehose.entrypoints=grpc"
       - "traefik.http.routers.firehose.tls.certresolver=myresolver"
       - "traefik.http.routers.firehose.service=firehose"
       - "traefik.http.services.firehose.loadbalancer.server.port=10015"
       - "traefik.http.services.firehose.loadbalancer.server.scheme=h2c"
-      - "traefik.http.routers.substreams.rule=Host(`firehose-substreams.infradao.net`)"
+      - "traefik.http.routers.substreams.rule=Host(${SUBSTREAMS_DOMAIN})"
       - "traefik.http.routers.substreams.entrypoints=grpc"
       - "traefik.http.routers.substreams.tls.certresolver=myresolver"
       - "traefik.http.routers.substreams.service=substreams"
