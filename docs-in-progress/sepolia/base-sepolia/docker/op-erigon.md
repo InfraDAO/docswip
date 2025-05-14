@@ -304,7 +304,7 @@ services:
       - OP_NODE_P2P_LISTEN_IP=0.0.0.0
       - OP_NODE_P2P_LISTEN_TCP_PORT=9222
       - OP_NODE_P2P_LISTEN_UDP_PORT=9222
-      - OP_NODE_ROLLUP_LOAD_PROTOCOL_VERSIONS=true
+      - OP_NODE_ROLLUP_LOAD_PROTOCOL_VERSIONS=false
       - OP_NODE_RPC_ADDR=0.0.0.0
       - OP_NODE_RPC_PORT=7545
       - OP_NODE_SNAPSHOT_LOG=/tmp/op-node-snapshot-log
@@ -317,7 +317,7 @@ services:
   ######################################################################################
 
   op-erigon:
-    image: testinprod/op-erigon:v2.61.3-0.9.0
+    image: testinprod/op-erigon:v2.61.3-0.9.1
     container_name: op-erigon
     user: root  # Run as root
     restart: unless-stopped
