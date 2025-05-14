@@ -6,10 +6,10 @@ description: 'Authors: [man4ela | catapulta.eth]'
 
 ## System Requirements
 
-<table><thead><tr><th align="center">CPU</th><th align="center">OS</th><th width="254" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8-Core CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center"><p>1 TB+</p><p> (NVMe)</p></td></tr></tbody></table>
+<table><thead><tr><th align="center">CPU</th><th align="center">OS</th><th width="254" align="center">RAM</th><th align="center">DISK</th></tr></thead><tbody><tr><td align="center">8-Core CPU</td><td align="center">Debian 12/Ubuntu 22.04</td><td align="center">=> 16 GB RAM</td><td align="center"><p>2 TB+</p><p> (NVMe)</p></td></tr></tbody></table>
 
 {% hint style="info" %}
-_Op-Erigon Base Sepolia archive node has a size of ???GB on March 31th, 2025_
+_Op-Erigon Base Sepolia archive node has a size of 1,5TB on March 31th, 2025_
 {% endhint %}
 
 {% hint style="success" %}
@@ -147,6 +147,10 @@ This is an optional step based on whether you want to sync the node from scratch
 {% endhint %}
 
 To sync from a snapshot, visit Testinprod-io Node Snapshots page to find a latest Base Sepolia archive for Op-Erigon: [https://snapshot.testinprod.io/](https://snapshot.testinprod.io/).
+
+{% hint style="warning" %}
+Testinprod doesn't update Base Sepolia snapshot regularly so expect about 3 weeks to sync a node from the most recent snapshot available
+{% endhint %}
 
 As downloading a snapshot takes some time it is good idea to run it in a screen session
 
