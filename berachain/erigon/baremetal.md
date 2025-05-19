@@ -82,7 +82,7 @@ export PATH=$PATH:/usr/local/go/bin
 
 ### Build Erigon
 
-Berachain node requires reth v1.1.x for mainnet. With Rust and the dependencies installed, you're ready to build Reth. First, clone the repository:
+Berachain node requires erigon v1.26.x for mainnet. With Rust and the dependencies installed, you're ready to build Erigon. First, clone the repository:
 
 ```bash
 git clone https://github.com/erigontech/erigon.git
@@ -142,7 +142,7 @@ You should verify these constants:
 * **LOG\_DIR**: This directory stores log files.
 * **BEACOND\_BIN**: Set this to the full path where you installed `beacond`. The expression provided finds it in your $PATH.
 * **BEACOND\_DATA**: Set this to where the consensus data and config should be kept. BEACOND\_CONFIG must be under BEACOND\_PATH as shown. Don't change it.
-* **RETH\_BIN** or other chain client: Set this to the full path where you installed `reth`. The expression provided finds it in your $PATH.
+* **ERIGON\_BIN** or other chain client: Set this to the full path where you installed `erigon`. The expression provided finds it in your $PATH.
 
 ### Fetch Mainnet Parameters
 
@@ -185,7 +185,7 @@ Genesis validator root: 0xdf609e3b062842c6425ff716aec2d2092c46455d9b2e1a2c9e32c6
 
 The provided scripts `setup-reth`, `setup-geth` and `setup-nether` create a runtime directory and configuration for those respective chain clients. The node is configured with pruning settings according to the `EL_ARCHIVE_NODE` setting in `config.sh`.
 
-Here's an example of `setup-reth`:
+Here's an example of `setup-erigon`:
 
 ```bash
 # ./setup-erigon.sh 
