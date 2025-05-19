@@ -99,6 +99,11 @@
   * [🥋 Juno](starknet/juno/README.md)
     * [🐳 Docker](starknet/juno/docker.md)
     * [Bare Metal](starknet/juno/bare-metal.md)
+* [✨ Berachain](berachain/README.md)
+  * [🌟 Reth](berachain/reth/README.md)
+    * [🐳 Baremetal](berachain/reth/baremetal.md)
+  * [🌟 Erigon](berachain/erigon/README.md)
+    * [🐳 Baremetal](berachain/erigon/baremetal.md)
 
 ## Templates
 
