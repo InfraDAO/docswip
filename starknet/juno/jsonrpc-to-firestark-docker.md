@@ -2,9 +2,15 @@
 description: 'Author: [ jLeopoldA ]'
 ---
 
-# Bare Metal
+# Jsonrpc-To-Firestark Docker
 
-## System Requirements
+{% hint style="info" %}
+jsonrpc-to-firestark is a community implementation. It does require a fully synced Starknet node - which for the sake of completeness, this guide covers. If you already have a fully synced Starknet node, proceed past the Starknet node set up. The Starknet node used here is Juno.
+{% endhint %}
+
+## Setting up Juno Starknet Node
+
+## System Requirements for Juno Starknet Node
 
 | CPU    | OS                 | RAM     | DISK  |
 | ------ | ------------------ | ------- | ----- |
@@ -199,3 +205,73 @@ http://localhost:6060
 ## References
 
 {% embed url="https://github.com/NethermindEth/juno" %}
+
+## Setting Up Jsonrpc-To-Firestark
+
+{% hint style="info" %}
+This set up Jsonrpc-To-Firestark requires Docker and Docker-Compose.
+{% endhint %}
+
+### Create Directories
+
+```bash
+mkdir -p /root/jsonrpc-to-firestark/firestark-data
+cd /root/jsonrpc-firestark
+```
+
+### Pull Latest Docker Image
+
+```bash
+docker pull starknet/jsonrpc-to-firestark
+
+# Additionally if you would like to check which parameters are available.
+docker run --rm -it starknet/jsonrpc-to-firestark --help
+```
+
+### Create Docker-Compose.yml
+
+```bash
+echo "
+services:
+  jsonrpc-to-firestark:
+    image: starknet/jsonrpc-to-firestark
+    container_name: jsonrpc-to-firestark
+    network_mode: "host"
+    restart: unless-stopped
+
+    volumes:
+      - ./firestark-data:/data
+
+    command:
+      - "--jsonrpc"
+      - "{STARKNET_NODE_URL || http://localhost:6060}"
+      - "--checkpoint"
+      - "/data/checkpoint.json"
+" > docker-compose.yml
+```
+
+### Start jsonrpc-to-firestark&#x20;
+
+```bash
+docker compose up -d
+```
+
+### Check Logs
+
+```bash
+docker logs jsonrpc-to-firestark --tail 50
+```
+
+### Stop jsonrpc-to-firestark
+
+```bash
+# Stop jsonrpc-to-firestark
+docker stop jsonrpc-to-firestark
+
+# Remove jsonrpc-to-firestark
+docker stop jsonrpc-to-firestark && docker rm jsonrpc-to-firestark
+```
+
+### References
+
+{% embed url="https://github.com/starknet-graph/jsonrpc-to-firestark" %}

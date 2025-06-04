@@ -98,7 +98,7 @@
     * [🎏 Substreams and Graph Node](starknet/firehose/substreams-and-graph-node.md)
   * [🥋 Juno](starknet/juno/README.md)
     * [🐳 Docker](starknet/juno/docker.md)
-    * [Bare Metal](starknet/juno/bare-metal.md)
+    * [Jsonrpc-To-Firestark Docker](starknet/juno/jsonrpc-to-firestark-docker.md)
 * [✨ Berachain](berachain/README.md)
   * [🌟 Reth](berachain/reth/README.md)
     * [🐳 Baremetal](berachain/reth/baremetal.md)
