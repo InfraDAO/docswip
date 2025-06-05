@@ -1,2 +1,2 @@
-# ✨ Berachain
+# 🐻 Berachain
 
