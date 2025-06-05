@@ -56,6 +56,8 @@ sudo ufw allow 443
 sudo ufw allow from ${REMOTE.HOST.IP} to any port 25445
 ```
 
+## Setup Instructions
+
 {% stepper %}
 {% step %}
 ### Setup Project Directory
