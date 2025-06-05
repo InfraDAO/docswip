@@ -333,7 +333,7 @@ networks:
 {% endstep %}
 
 {% step %}
-### Setup Node Configuration
+### &#x20;Execute Node Configuration
 
 ```bash
 ./setup-node.sh 
