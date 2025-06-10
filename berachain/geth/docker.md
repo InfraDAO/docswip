@@ -7,7 +7,7 @@ Authors: \[ Ankur | Dapplooker]
 <table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>48 GB</td><td> 2 TB</td></tr></tbody></table>
 
 {% hint style="success" %}
-_The Berachain node has a size of  \<size > GB on  , June, 2025._
+_The Berachain node has a size of  1.6 TiB on  10, June, 2025._
 {% endhint %}
 
 ## Pre-requisite
@@ -253,13 +253,10 @@ services:
     networks:
       - berachain
     ports:
-      # P2P networking
-      - "25403:25403/tcp"
+      - "25403:25403/tcp" # P2P networking
       - "25403:25403/udp"
-      # JSON-RPC (localhost only for security)
-      - "127.0.0.1:25445:8545"
-      # WebSocket (localhost only for security)
-      - "127.0.0.1:25446:8546"
+      - "25445:8545" # JSON-RPC
+      - "25446:8546" # WebSocket
     volumes:
       - ./data/geth:/data
       - ./data/jwtsecret:/jwtsecret:ro
@@ -312,10 +309,8 @@ services:
       # P2P networking
       - "25456:25456/tcp"
       - "25456:25456/udp"
-      # RPC (localhost only for security)
-      - "127.0.0.1:25457:26657"
-      # Beacon API (localhost only for security)
-      - "127.0.0.1:25430:3500"
+      - "25457:26657" # RPC
+      - "25430:3500" # Beacon API
     volumes:
       - ./data/beacond:/beacond
       - ./data/jwtsecret:/jwtsecret:ro
@@ -388,7 +383,7 @@ docker logs bera-beacond
 _Response should look like:_
 
 ```json
-{"jsonrpc":"2.0","id":1,"result":"0x5b4118"}
+{"jsonrpc":"2.0","id":1,"result":"0x5e7ac2"}
 ```
 
 ## REFERENCES
