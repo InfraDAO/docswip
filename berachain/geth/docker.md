@@ -4,7 +4,7 @@ Authors: \[ Ankur | Dapplooker]
 
 ## System Requirements
 
-<table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>48 GB</td><td> 2 TB</td></tr></tbody></table>
+<table data-full-width="false"><thead><tr><th>CPU</th><th>OS</th><th>RAM</th><th>DISK</th></tr></thead><tbody><tr><td>8 vCPU</td><td>Ubuntu 22.04</td><td>16 GB</td><td> 2 TB</td></tr></tbody></table>
 
 {% hint style="success" %}
 _The Berachain node has a size of  1.6 TiB on  10, June, 2025._
