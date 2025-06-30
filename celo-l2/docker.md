@@ -51,88 +51,86 @@ sudo ufw allow 443
 ### Allow Remote connection
 
 ```bash
-sudo ufw allow from ${REMOTE.HOST.IP} to any port 8545
+sudo ufw allow from ${REMOTE.HOST.IP} to any port 9993
 ```
+
+
 
 ## Setup Instructions&#x20;
 
 {% stepper %}
 {% step %}
-### Pull Docker Image
+### Download Celo-L1 Data&#x20;
 
-Pull the image from the GitHub container registry (ghr):
+{% hint style="info" %}
+You can skip this step if you have already running L1 node&#x20;
+{% endhint %}
+
+#### Setup Director
 
 ```bash
-docker pull ghcr.io/node-real/bsc-erigon:v1.3.2-beta2
+mkdir -p /root/celo-data/celo
+mkdir -p /root/celo-data/celo-l2
+```
+
+#### Download Data
+
+```bash
+screen -S nodeConfiguration
+wget https://storage.googleapis.com/cel2-rollup-files/celo/celo-mainnet-migrated-chaindata.tar.zst
+```
+
+#### Extract File
+
+```bash
+tar --zstd -xvf celo-mainnet-migrated-chaindata.tar.zst -C /root/celo-data/celo/ 
+```
+
+{% hint style="info" %}
+Use ctrl + A + D to go back to your main terminal session.
+
+`screen -r nodeConfiguration` to return to the screen window.
+{% endhint %}
+{% endstep %}
+
+{% step %}
+### Migrate L1 Data&#x20;
+
+```bash
+git clone https://github.com/celo-org/celo-l2-node-docker-compose.git
+cd celo-l2-node-docker-compose
+```
+
+#### Migrate L1 Data to L2 Data&#x20;
+
+{% hint style="info" %}
+Run it in background or in screen will take few hours to complete.
+{% endhint %}
+
+```bash
+./migrate.sh pre mainnet /root/celo-data/ /root/celo-data/celo-l2/
 ```
 {% endstep %}
 
 {% step %}
-### Create docker compose file
-
-Create project directory
+### Configure Environment file
 
 ```bash
-mkdir /mnt/erigon-bsc/
+cd celo-l2-node-docker-compose
+cp mainnet.env .env
 ```
 
-Create _docker-compose.yml_ file
+#### Edit .env file&#x20;
 
-```yaml
-version: '3.8'
+Find & update .env file with the following configuration.
 
-services:
-  bsc-erigon:
-    container_name: bsc-erigon
-    image: ghcr.io/node-real/bsc-erigon:v1.3.2-beta2
-    restart: on-failure
-    user: root
-    volumes:
-      - /mnt/erigon-bsc:/root/data/bsc-erigon
-    ports:
-      - "8545:8545"   # HTTP RPC
-      - "8546:8546"   # WebSocket
-      - "30303:30303" # P2P TCP
-      - "30303:30303/udp" # P2P UDP
-      - "42069:42069" # Torrent Port
-      - "6060:6060"   # Metrics
-      - "6061:6061"   # PProf Debugging
-      - "9090:9090"   # Private API
-      - "8551:8551"   # Auth RPC
-    command:
-      - --private.api.addr=127.0.0.1:9090
-      - --chain=chapel
-      - --prune.mode=archive
-      - --torrent.download.rate=1g
-      - --torrent.download.slots=400
-      - --batchSize=2g
-      - --bsc.blobSidecars.no-pruning=true
-      - --txpool.disable
-      - --metrics
-      - --metrics.addr=0.0.0.0
-      - --metrics.port=6060
-      - --pprof
-      - --pprof.addr=0.0.0.0
-      - --pprof.port=6061
-      - --authrpc.jwtsecret=/root/data/bsc-erigon/jwt.hex
-      - --authrpc.port=8551
-      - --datadir=/root/data/bsc-erigon/
-      - --http.addr=0.0.0.0
-      - --http.port=8545
-      - --http.api=eth,debug,net,trace,web3,erigon,bsc,admin
-      - --http.vhosts=any
-      - --http.corsdomain=*
-      - --ws
-      - --ws.port=8546
-      - --torrent.port=42069
-      - --nat=extip:157.90.180.249
-      - --db.pagesize=16k
-      - --db.size.limit=3t
-      - --port=30303
-    ulimits:
-      nofile:
-        soft: 500000
-        hard: 500000
+```bash
+nano .env
+
+NODE_TYPE=archive
+OP_GETH__SYNCMODE=full
+HISTORICAL_RPC_DATADIR_PATH==/root/celo-data/
+DATADIR_PATH==/root/celo-data/celo-l2/
 ```
 {% endstep %}
 
@@ -140,7 +138,7 @@ services:
 ### Start the Node
 
 ```bash
-docker compose up -d 
+docker compose up -d --build
 ```
 {% endstep %}
 {% endstepper %}
@@ -151,11 +149,11 @@ docker compose up -d
 
 ```bash
 docker ps 
-docker logs bsc-erigon
+docker compose logs 
 ```
 
 {% hint style="warning" %}
-Might need to restart the container if snapshot download stuck for a longer duration. Total time required to sync is \~28 hr
+Might need to restart the container if snapshot download stuck for a longer duration. Total time required to sync is \~72 hr
 {% endhint %}
 
 ## Sync Status
