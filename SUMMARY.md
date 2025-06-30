@@ -107,8 +107,9 @@
     * [🐳 Baremetal](berachain/reth/baremetal.md)
   * [🌟 Erigon](berachain/erigon/README.md)
     * [🐳 Baremetal](berachain/erigon/baremetal.md)
-* [🌐 Celo l2](celo-l2/README.md)
+* [⚙️ Celo L2](celo-l2/README.md)
   * [💻 Baremetal](celo-l2/baremetal.md)
+  * [🐳 Docker](celo-l2/docker.md)
 
 ## Templates
 
