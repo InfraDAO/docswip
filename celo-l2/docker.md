@@ -66,7 +66,7 @@ sudo ufw allow from ${REMOTE.HOST.IP} to any port 9993
 You can skip this step if you have already running L1 node&#x20;
 {% endhint %}
 
-#### Setup Director
+#### Setup Directory
 
 ```bash
 mkdir -p /root/celo-data/celo
@@ -104,7 +104,7 @@ cd celo-l2-node-docker-compose
 #### Migrate L1 Data to L2 Data&#x20;
 
 {% hint style="info" %}
-Run it in background or in screen will take few hours to complete.
+Run it in background or screen will take few hours to complete.
 {% endhint %}
 
 ```bash
