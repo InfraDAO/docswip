@@ -127,8 +127,8 @@ Update `.env` file with the following configuration.
 ```bash
 NODE_TYPE=archive
 OP_GETH__SYNCMODE=full
-HISTORICAL_RPC_DATADIR_PATH==/root/celo-data/
-DATADIR_PATH==/root/celo-data/celo-l2/
+HISTORICAL_RPC_DATADIR_PATH=/root/celo-data/
+DATADIR_PATH=/root/celo-data/celo-l2/
 ```
 
 Example `.env` file&#x20;
