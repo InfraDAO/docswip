@@ -1,2 +1,2 @@
-# ⚙️ Celo L2
+# ☁️ Celo L2
 
