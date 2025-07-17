@@ -110,6 +110,8 @@
 * [☁️ Celo L2](celo-l2/README.md)
   * [💻 Baremetal](celo-l2/baremetal.md)
   * [🐳 Docker](celo-l2/docker.md)
+* [🗒️ Execution Client Notes](execution-client-notes/README.md)
+  * [✅ Ethereum JSON‑RPC Schema Changes & Execution Client Compatibility](execution-client-notes/ethereum-json-rpc-schema-changes-and-execution-client-compatibility.md)
 
 ## Templates
 
