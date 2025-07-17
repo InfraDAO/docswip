@@ -16,9 +16,10 @@ Full schema details are available in the [Ethereum Execution APIs documentation]
 
 ### Execution Client Compatibility
 
-| **Erigon v3**  | Not returned                    | `"0x0"`  |  Usually present | Strict spec compliance, [noted here](https://github.com/erigontech/erigon/issues/13012)                                       |
-| -------------- | ------------------------------- | -------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Geth**       | Returned                        | Non-zero |  Returned        | Maintains legacy behavior, [noted here](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbyhash)            |
-| **Nethermind** | Returned                        | Non-zero |  Returned        | Maintains legacy behavior, [noted here](https://docs.nethermind.io/interacting/json-rpc-ns/eth#eth_getblockbynumber)          |
-| **Besu**       | Returns  `0` for an uncle block | Non-zero |  Returned        | Returns deprecated fields with valid values, [noted here](https://besu.hyperledger.org/public-networks/reference/api/objects) |
-| **Reth**       | Not returned                    | `"0x0"`  | Returned         | Highly spec-compliant, aligns with post-Merge schema                                                                          |
+| Client         | totalDifficulty                 | difficulty | size             | Notes                                                                                                                         |
+| -------------- | ------------------------------- | ---------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Erigon v3**  | Not returned                    | `"0x0"`    |  Usually present | Strict spec compliance, [noted here](https://github.com/erigontech/erigon/issues/13012)                                       |
+| **Geth**       | Returned                        | Non-zero   |  Returned        | Maintains legacy behavior, [noted here](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_getblockbyhash)            |
+| **Nethermind** | Returned                        | Non-zero   |  Returned        | Maintains legacy behavior, [noted here](https://docs.nethermind.io/interacting/json-rpc-ns/eth#eth_getblockbynumber)          |
+| **Besu**       | Returns  `0` for an uncle block | Non-zero   |  Returned        | Returns deprecated fields with valid values, [noted here](https://besu.hyperledger.org/public-networks/reference/api/objects) |
+| **Reth**       | Not returned                    | `"0x0"`    | Returned         | Highly spec-compliant, aligns with post-Merge schema                                                                          |
