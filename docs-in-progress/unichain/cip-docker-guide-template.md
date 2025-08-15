@@ -157,11 +157,9 @@ Create a `.env.mainnet` file in the project directory
 # op-node configuration
 
 # [required] replace with your preferred L1 (Ethereum, not Unichain) node RPC URL:
-#OP_NODE_L1_ETH_RPC=https://evm-loadbalancer.infradao.tech/ethereum
 OP_NODE_L1_ETH_RPC=https://ethereum-rpc.publicnode.com
 
 # [required] replace with your preferred L1 CL beacon endpoint:
-#OP_NODE_L1_BEACON=https://lighthouse-eth.infradao.tech/
 OP_NODE_L1_BEACON=https://ethereum-beacon-api.publicnode.com
 
 
