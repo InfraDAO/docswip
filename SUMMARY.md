@@ -42,6 +42,7 @@
   * [Bare Metal](docs-in-progress/ronin/bare-metal.md)
 * [Unichain](docs-in-progress/unichain/README.md)
   * [🐳 Docker](docs-in-progress/unichain/cip-docker-guide-template.md)
+  * [💻 Baremetal](docs-in-progress/unichain/baremetal.md)
 * [🟣 Zora](docs-in-progress/zora/README.md)
   * [💻 Baremetal](docs-in-progress/zora/baremetal.md)
   * [Docker](docs-in-progress/zora/docker.md)
