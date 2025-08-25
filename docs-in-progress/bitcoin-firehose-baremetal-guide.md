@@ -2,20 +2,6 @@
 cover: >-
   https://images.unsplash.com/flagged/photo-1554386690-8627e1041100?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxOTcwMjR8MHwxfHNlYXJjaHwxMHx8Yml0Y29pbnxlbnwwfHx8fDE3MDU4NjM1OTN8MA&ixlib=rb-4.0.3&q=85
 coverY: 0
-layout:
-  cover:
-    visible: true
-    size: full
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
 ---
 
 # Bitcoin Firehose Baremetal Guide
