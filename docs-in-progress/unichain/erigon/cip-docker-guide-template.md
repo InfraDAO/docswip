@@ -169,7 +169,7 @@ services:
       - "OP_NODE_P2P_LISTEN_TCP_PORT=15415"
       - "OP_NODE_P2P_LISTEN_UDP_PORT=15415"
       - "OP_NODE_RPC_ADDR=0.0.0.0"
-      - "OP_NODE_P2P_ADVERTISE_IP=157.90.67.201"
+      - "OP_NODE_P2P_ADVERTISE_IP=your-node-ip"
       - "OP_NODE_RPC_PORT=4345"
       - "OP_NODE_SNAPSHOT_LOG=/tmp/op-node-snapshot-log"
       - "OP_NODE_VERIFIER_L1_CONFS=4"
